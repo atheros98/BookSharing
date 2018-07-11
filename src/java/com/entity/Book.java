@@ -10,5 +10,12 @@ package com.entity;
  * @author Administrator
  */
 public class Book {
+    // a vd 2 thuộc tính
+    private int id;
+    private String name;
+
+    
+    
+    
     
 }

@@ -35,10 +35,10 @@ public class ConnectionDB {
 
     public ConnectionDB() {
         /* ====================== Edit here ====================== */
-        serverName = "JMT";
+        serverName = "Localhost";
         port = "1433";
         username = "sa";
-        pwd = "sa";
+        pwd = "123456";
         dbName = "BookShareProject";
         imgFolder = "img/";
     }
@@ -119,7 +119,7 @@ public class ConnectionDB {
     }
 
     // Cập nhật dữ liệu DB
-    public boolean updateData(String storeName, Vector vector) { // storeName: Tên Stored Procedure, vector: dữ liệu update
+    public boolean updateData(String storeName, Vector vector) { 
         CallableStatement cs = null;
         String callStore = createCommandStoredProcedure(storeName, vector.size());
         try {
