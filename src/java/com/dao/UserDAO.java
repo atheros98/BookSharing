@@ -16,10 +16,10 @@ import java.util.logging.Logger;
  */
 public class UserDAO {
 
-    ConnectionDB db = new ConnectionDB();
+    private final ConnectionDB db;
 
-    public UserDAO() {
-        db.initialize();
+    public UserDAO() throws Exception {
+        db = new ConnectionDB();
     }
 
     // code here

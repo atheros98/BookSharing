@@ -13,10 +13,10 @@ import com.connect.ConnectionDB;
  */
 public class TradingDAO {
 
-    ConnectionDB db = new ConnectionDB();
+    private final ConnectionDB db;
 
-    public TradingDAO() {
-        db.initialize();
+    public TradingDAO() throws Exception {
+        db = new ConnectionDB();
     }
 
     // code here

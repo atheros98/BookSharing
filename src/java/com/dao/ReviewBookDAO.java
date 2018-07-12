@@ -13,10 +13,10 @@ import com.connect.ConnectionDB;
  */
 public class ReviewBookDAO {
 
-    ConnectionDB db = new ConnectionDB();
+    private final ConnectionDB db;
 
-    public ReviewBookDAO() {
-        db.initialize();
+    public ReviewBookDAO() throws Exception {
+        db = new ConnectionDB();
     }
 
     // code here
