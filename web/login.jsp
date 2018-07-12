@@ -15,7 +15,7 @@
     <body>
         <div class="login-page">
             <div class="form">
-                <form  class="login-form" action="Login" autocomplete="on" method="post"> 
+                <form  class="login-form" action="LoginController" autocomplete="on" method="post"> 
                     <input type="text" name="username" required="required" placeholder="User name"/>
                     <input type="password" name="password" required="required" placeholder="Password" /> 
                     <%

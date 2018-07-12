@@ -6,6 +6,7 @@
 package com.connect;
 
 import com.dao.Close;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.CallableStatement;
@@ -26,24 +27,28 @@ import java.util.logging.Logger;
  */
 public class ConnectionDB {
 
-    private String serverName;
-    private String port;
-    private String username;
-    private String pwd;
-    private String dbName;
-    private String imgFolder;
+//    private String serverName;
+//    private String port;
+//    private String username;
+//    private String pwd;
+//    private String dbName;
+//    private String imgFolder;
+    private final String serverName = "JMT";
+    private final String dbName = "BookShareProject";
+    private final String port = "1433";
+    private final String username = "sa";
+    private final String pwd = "sa";
+    private final String imgFolder = "img/";
 
     public ConnectionDB() throws Exception {
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        InputStream is = loader.getResourceAsStream("properties/dbConfig.properties");
-        Properties prop = new Properties();
-        prop.load(is);
-        serverName = prop.getProperty("serverName");
-        dbName = prop.getProperty("dbName");
-        port = prop.getProperty("portNumber");
-        username = prop.getProperty("userID");
-        pwd = prop.getProperty("password");
-        imgFolder = prop.getProperty("imgFolder");
+//        Properties prop = new Properties();
+//        prop.load(new FileInputStream("com/connect/dbConfig.properties"));
+//        serverName = prop.getProperty("serverName");
+//        dbName = prop.getProperty("dbName");
+//        port = prop.getProperty("portNumber");
+//        username = prop.getProperty("userID");
+//        pwd = prop.getProperty("password");
+//        imgFolder = prop.getProperty("imgFolder");
     }
 
     public Connection getConnection() throws Exception {

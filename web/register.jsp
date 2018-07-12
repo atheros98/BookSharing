@@ -15,12 +15,12 @@
     <body>
         <div class="login-page">
             <div class="form">
-                <form  id="registered" action="Login" autocomplete="on"  method="post"> 
-                    <input id="name" type="text" name="name" required="required" placeholder="Name"  autocomplete="off"/>
+                <form  id="registered" action="LoginController" autocomplete="on"  method="post"> 
+                    <input id="name" type="text" name="fullname" required="required" placeholder="Name"  autocomplete="off"/>
                     <input id="username" type="text" name="username" required="required" placeholder="Username" autocomplete="off"/>
                     <input id="email" type="email" name="email" required="required" placeholder="Email" autocomplete="off"/> 
                     <input type="date" name="bod" required="" placeholder="Date of birth"/>
-                    <input id="pass" type="password" name="pass" required="required" placeholder="Password" />
+                    <input id="pass" type="password" name="password" required="required" placeholder="Password" />
                     <input id="re-pass" type="password" name="re-pass" required="required" placeholder="Re-password" onkeyup='check()' />
                     <span id='message'></span>
                     <%
@@ -28,7 +28,7 @@
                             out.print("<span style=\"color: red;\">" + request.getAttribute("error") + "</span>");
                         }
                     %>
-                    <input type="hidden" value="registered" name="command">
+                    <input type="hidden" value="register" name="command">
                     <button type="submit"> Sign up </button>
                 </form>
                 <p class="message">Already registered? <a href="login.jsp">Sign In</a></p>
