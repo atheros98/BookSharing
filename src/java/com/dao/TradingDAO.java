@@ -52,6 +52,7 @@ public class TradingDAO {
             close.closePreparedStatement(ps);
         }
         return true;
+        
     }
 
     public int getStatusBook(int idTrading) {
