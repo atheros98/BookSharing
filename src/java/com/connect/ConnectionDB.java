@@ -33,10 +33,10 @@ public class ConnectionDB {
 //    private String pwd;
 //    private String dbName;
 //    private String imgFolder;
-    private final String serverName = "JMT";
+    private final String serverName = "localhost";
     private final String dbName = "BookShareProject";
     private final String port = "1433";
-    private final String username = "sa";
+    private final String username = "sa";   
     private final String pwd = "123456";
     private final String imgFolder = "img/";
 

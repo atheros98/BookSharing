@@ -169,7 +169,7 @@ body {
 /* ====================== For main content ========================= */
 
 .content {
-    width: 70%;
+    width: 80%;
     height: 1000px;
     display: flex;
     align-items: stretch;
@@ -246,7 +246,7 @@ body {
 /* content-CENTER */
 
 .content-center {
-    flex-grow: 1;
+    flex-grow: 3;
 }
 
 .content-center h3 {
