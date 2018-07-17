@@ -34,35 +34,54 @@ public class SearchBookController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           String query = request.getParameter("query");
-           String filter = request.getParameter("filter");
+            String query = request.getParameter("query");
+            String filter = request.getParameter("filter");
+            String pageStr = request.getParameter("pageID");
+            if (pageStr == null || pageStr.trim().isEmpty()) {
+                pageStr = "1";
+            }
+            int page = 1;
+            try {
+                page = Integer.parseInt(pageStr);
+            } catch (NumberFormatException e) {
+
+            }
             BookDAO b = new BookDAO();
+            int numberPages = 0;
             List<Book> books = new ArrayList<>();
-           if (filter == null || filter.trim().isEmpty()){
-               books = b.getBook(query);
-           } else {
-               switch (filter){
-                   case "title":
-                       books = b.getBooksByName(query);
-                       break;
-                   case "author":
-                       books = b.getBooksByAuthor(query);
-                       break;
-                   case "ISBN":
-                       books = b.getBooksByISBN(query);
-                       break;
-                   case "tag":
-                       books = b.getBooksByTag(query);
-                       break;
-               }
-           }
-           request.setAttribute("books", books);
+            if (filter == null || filter.trim().isEmpty()) {
+                numberPages = b.getPages("all", query);
+                if (page > numberPages) {
+                    page = numberPages;
+                }
+                books = b.getBook(query, page);
+            } else {
+                numberPages = b.getPages(filter, query);
+                if (page > numberPages) {
+                    page = numberPages;
+                }
+                switch (filter) {
+                    case "title":
+                        books = b.getBooksByName(query, page);
+                        break;
+                    case "author":
+                        books = b.getBooksByAuthor(query, page);
+                        break;
+                    case "ISBN":
+                        books = b.getBooksByISBN(query, page);
+                        break;
+                    case "tag":
+                        books = b.getBooksByTag(query, page);
+                        break;
+                }
+            }
+            request.setAttribute("books", books);
+            request.setAttribute("pages", numberPages);
             RequestDispatcher rd = request.getRequestDispatcher("Search.jsp");
             rd.forward(request, response);
         }

@@ -20,6 +20,7 @@ import java.util.List;
 public class BookDAO {
 
     private final ConnectionDB db;
+    private final int pageSize = 15;
 
     public BookDAO() throws Exception {
         db = new ConnectionDB();
@@ -75,52 +76,110 @@ public class BookDAO {
         return result;
     }
 
-    public List<Book> getBooksByName(String name) throws Exception{
-        String query = "select * from Book where title LIKE '%" + name + "%'";
+    public List<Book> getLastedBook(int page) throws Exception {
+        int from = (page - 1) * pageSize + 1;
+        int to = page * pageSize;
+        String query = "select * from"
+                + " (select *, row_number as row from Book"
+                + " over (order by id DESC) result"
+                + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
-    
-    public List<Book> getBooksByISBN(String ISBN) throws Exception{
-        String query = "select * from Book where ISBN='" + ISBN + "'";
+
+    public List<Book> getBooksByName(String name, int page) throws Exception {
+        int from = (page - 1) * pageSize + 1;
+        int to = page * pageSize;
+        String query = "select * from "
+                + "(select *, row_number() as row from Book over (order by id DESC)"
+                + " where title LIKE '%" + name + "%') result"
+                + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
-    
-    public List<Book> getBooksByAuthor(String author) throws Exception{
-        String query = "select * from Book where author LIKE '%" + author + "%'";
+
+    public List<Book> getBooksByISBN(String ISBN, int page) throws Exception {
+        int from = (page - 1) * pageSize + 1;
+        int to = page * pageSize;
+        String query = "select * from "
+                + "(select *, row_number() as row from Book over (order by id DESC)"
+                + " where title LIKE '%" + ISBN + "%') result"
+                + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
-    
-    public List<Book> getBooksByTag(String tag) throws Exception{
-        String query = "select * from Book where tag LIKE '%" + tag + "%'";
+
+    public List<Book> getBooksByAuthor(String author, int page) throws Exception {
+        int from = (page - 1) * pageSize + 1;
+        int to = page * pageSize;
+        String query = "select * from "
+                + "(select *, row_number() as row from Book over (order by id DESC)"
+                + " where title LIKE '%" + author + "%') result"
+                + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
-    
-    public List<Book> getBook(String queryStr) throws Exception{
-        String query = "select distinct * from ("
+
+    public List<Book> getBooksByTag(String tag, int page) throws Exception {
+        int from = (page - 1) * pageSize + 1;
+        int to = page * pageSize;
+        String query = "select * from "
+                + "(select *, row_number() as row from Book over (order by id DESC)"
+                + " where title LIKE '%" + tag + "%') result"
+                + " where result.row between " + from + " and " + to;
+        return getBooksByStatement(query);
+    }
+
+    public List<Book> getBook(String queryStr, int page) throws Exception {
+        int from = (page - 1) * pageSize + 1;
+        int to = page * pageSize;
+        String query = "select * from "
                 + "select * from Book where title LIKE '%" + queryStr + "%'"
                 + " union select * from Book where ISBN='" + queryStr + "'"
                 + " union select * from Book where author LIKE '%" + queryStr + "%'"
-                + " union select * from Book where tag LIKE '%" + queryStr + "%') result";
+                + " union select * from Book where tag LIKE '%" + queryStr + "%') result"
+                + " over (order by id DESC)) final_result"
+                + " where final_result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
-    
-    
-    
-    public List<List<Book>> getBooksByInfo(String info) throws Exception {
-        List<List<Book>> bookList = new ArrayList<>();
-        List<Book> searchByName, searchByAuthor, searchByISBN, searchByTag;
 
-        searchByISBN = getBooksByStatement("select * from Book where ISBN='" + info + "'");
-        searchByName = getBooksByStatement("select * from Book where title LIKE '%" + info + "%'");
-        searchByAuthor = getBooksByStatement("select * from Book where author LIKE '%" + info + "%'");
-        searchByTag = getBooksByStatement("select * from Book where tag LIKE '%" + info + "%'");
+    public int getRowCount(String type, String queryStr) throws Exception {
+        String query = "";
+        switch (type) {
+            case "lasted":
+                query = "select count(*) from Book";
+                break;
+            case "all":
+                query = "(select count (distinct *) from ("
+                        + "select * from Book where title LIKE '%" + queryStr + "%'"
+                        + " union select * from Book where ISBN='" + queryStr + "'"
+                        + " union select * from Book where author LIKE '%" + queryStr + "%'"
+                        + " union select * from Book where tag LIKE '%" + queryStr + "%') result";
+                break;
+            case "title":
+                query = "select count (*) from Book where title LIKE '%" + queryStr + "%'";
+                break;
+            case "author":
+                query = "select count (*) from Book where author LIKE '%" + queryStr + "%'";
+                break;
+            case "ISBN":
+                query = "select count (*) from Book where ISBN LIKE '%" + queryStr + "%'";
+                break;
+            case "tag":
+                query = "select count (*) from Book where tag LIKE '%" + queryStr + "%'";
+                break;
+        }
 
-        
-        bookList.add(searchByISBN);
-        bookList.add(searchByName);
-        bookList.add(searchByAuthor);
-        bookList.add(searchByTag);
-        return bookList;
+        Connection conn = db.getConnection();
+        ResultSet rs = conn.prepareStatement(query).executeQuery();
+        int pages = 0;
+        if (rs.next()) {
+            pages = rs.getInt(1);
+        }
+        rs.close();
+        conn.close();
+        return pages;
+    }
+
+    public int getPages(String type, String queryStr) throws Exception {
+        int rows = getRowCount(type, queryStr);
+        return rows / (pageSize) + ((rows % pageSize) != 0 ? 1 : 0);
     }
 
 }
