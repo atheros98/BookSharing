@@ -80,8 +80,8 @@ public class BookDAO {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
         String query = "select * from"
-                + " (select *, row_number as row from Book"
-                + " over (order by id DESC) result"
+                + " (select *, row_number() over (order by id DESC)"
+                + " as row from Book) result"
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
@@ -90,7 +90,7 @@ public class BookDAO {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
         String query = "select * from "
-                + "(select *, row_number() as row from Book over (order by id DESC)"
+                + "(select *, row_number() over (order by id DESC) as row from Book"
                 + " where title LIKE '%" + name + "%') result"
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
@@ -100,7 +100,7 @@ public class BookDAO {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
         String query = "select * from "
-                + "(select *, row_number() as row from Book over (order by id DESC)"
+                + "(select *, row_number()  over (order by id DESC) as row from Book"
                 + " where title LIKE '%" + ISBN + "%') result"
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
@@ -110,7 +110,7 @@ public class BookDAO {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
         String query = "select * from "
-                + "(select *, row_number() as row from Book over (order by id DESC)"
+                + "(select *, row_number() over (order by id DESC) as row from Book"
                 + " where title LIKE '%" + author + "%') result"
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
@@ -120,7 +120,7 @@ public class BookDAO {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
         String query = "select * from "
-                + "(select *, row_number() as row from Book over (order by id DESC)"
+                + "(select *, row_number() over (order by id DESC) as row from Book"
                 + " where title LIKE '%" + tag + "%') result"
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
@@ -129,12 +129,12 @@ public class BookDAO {
     public List<Book> getBook(String queryStr, int page) throws Exception {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
-        String query = "select * from "
-                + "select * from Book where title LIKE '%" + queryStr + "%'"
-                + " union select * from Book where ISBN='" + queryStr + "'"
+        String query = "select * from"
+                + " (select distinct * , ROW_NUMBER() over (order by id DESC) as row from"
+                + " (select * from Book where title LIKE '%" + queryStr + "%'"
+                + " union select * from Book where ISBN like '%" + queryStr + "%'"
                 + " union select * from Book where author LIKE '%" + queryStr + "%'"
-                + " union select * from Book where tag LIKE '%" + queryStr + "%') result"
-                + " over (order by id DESC)) final_result"
+                + " union select * from Book where tag LIKE '%" + queryStr + "%') result) final_result"
                 + " where final_result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
@@ -146,11 +146,11 @@ public class BookDAO {
                 query = "select count(*) from Book";
                 break;
             case "all":
-                query = "(select count (distinct *) from ("
-                        + "select * from Book where title LIKE '%" + queryStr + "%'"
-                        + " union select * from Book where ISBN='" + queryStr + "'"
-                        + " union select * from Book where author LIKE '%" + queryStr + "%'"
-                        + " union select * from Book where tag LIKE '%" + queryStr + "%') result";
+                query = "select count (distinct id) from"
+                        + " (select * from Book where title like '%" + queryStr + "%'"
+                        + " union select * from Book where ISBN like '%" + queryStr + "%'"
+                        + " union select * from Book where author like '%" + queryStr + "%'"
+                        + " union select * from Book where tag like '%" + queryStr + "%') result";
                 break;
             case "title":
                 query = "select count (*) from Book where title LIKE '%" + queryStr + "%'";

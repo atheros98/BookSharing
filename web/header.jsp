@@ -24,8 +24,8 @@
         </div>
         <div class="search">
             <div class="search-container">
-                <form action="/action_page.php">
-                    <input type="text" placeholder="Search.." name="search" autocomplete="off">
+                <form action="SearchBookController">
+                    <input type="text" placeholder="Search.." name="query" autocomplete="off">
                     <button type="submit">
                         <i class="fa fa-search"></i>
                     </button>

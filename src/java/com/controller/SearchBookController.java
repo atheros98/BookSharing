@@ -40,6 +40,10 @@ public class SearchBookController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String query = request.getParameter("query");
+            if (query == null || query.trim().isEmpty()) {
+                response.sendRedirect("index.jsp");
+                return;
+            }
             String filter = request.getParameter("filter");
             String pageStr = request.getParameter("pageID");
             if (pageStr == null || pageStr.trim().isEmpty()) {
