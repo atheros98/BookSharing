@@ -125,6 +125,11 @@
     float: left;
 }
 
+#star{
+    float: right;
+    margin-left: 5px;
+}
+
 .borrow-book a{
     float: right;
     text-decoration: none;
@@ -173,15 +178,15 @@
     border-bottom: 1px solid gray;
 }
 
-.content-review > article > b{
+#content-article > article > b{
     float: left;
 }
 
-.content-review > article > p{
+#content-article > article > p{
     float: right;
 }
 
-.content-review > article > textarea{
+#content-article > article > textarea{
     clear: both;
     width: 100%;
     height: auto;

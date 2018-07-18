@@ -45,8 +45,9 @@ public class BookDAO {
             String description = rs.getString(6);
             String tag = rs.getString(7);
             boolean status = rs.getBoolean(8);
+            int idUser = rs.getInt(9);
 
-            Book tmp = new Book(id, title, author, ISBN, language, description, tag, status);
+            Book tmp = new Book(id, title, author, ISBN, language, description, tag, status, idUser);
 
             bookList.add(tmp);
         }
@@ -61,7 +62,21 @@ public class BookDAO {
         try {
             List<Book> bookList = getBooksByStatement("Select * from Book where ISBN = '" + xISBN + "'");
             if (!bookList.isEmpty()) {
-                System.out.println("x");
+                result = bookList.get(0);
+            }
+        } catch (Exception ex) {
+            return result;
+        }
+        //If any exceptions occur, return null.
+        return result;
+    }
+
+    public Book getBookById(String idBook) {
+        //Main function is in try block.
+        Book result = null;
+        try {
+            List<Book> bookList = getBooksByStatement("Select * from Book where id = " + idBook);
+            if (!bookList.isEmpty()) {
                 result = bookList.get(0);
             }
         } catch (Exception ex) {

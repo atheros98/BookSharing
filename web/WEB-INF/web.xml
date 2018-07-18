@@ -4,10 +4,10 @@
         <filter-name>Authenticate</filter-name>
         <filter-class>com.filter.Authenticate</filter-class>
     </filter>
-    <!--    <filter-mapping>
+    <filter-mapping>
         <filter-name>Authenticate</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>-->
+    </filter-mapping>
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>com.controller.LoginController</servlet-class>
@@ -24,6 +24,18 @@
         <servlet-name>CheckBookExist</servlet-name>
         <servlet-class>com.controller.CheckBookExist</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReviewBookController</servlet-name>
+        <servlet-class>com.controller.ReviewBookController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailsBookController</servlet-name>
+        <servlet-class>com.controller.DetailsBookController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RateBookController</servlet-name>
+        <servlet-class>com.controller.RateBookController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -39,6 +51,18 @@
     <servlet-mapping>
         <servlet-name>CheckBookExist</servlet-name>
         <url-pattern>/CheckBookExist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReviewBookController</servlet-name>
+        <url-pattern>/ReviewBookController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailsBookController</servlet-name>
+        <url-pattern>/DetailsBookController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RateBookController</servlet-name>
+        <url-pattern>/RateBookController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

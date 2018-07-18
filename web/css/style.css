@@ -169,7 +169,7 @@ body {
 /* ====================== For main content ========================= */
 
 .content {
-    width: 70%;
+    width: 90%;
     height: 100%;
     display: flex;
     align-items: stretch;
@@ -180,7 +180,7 @@ body {
 /* content-left */
 
 .content-left {
-    flex-grow: 0;
+    width: 15%;
     padding-right: 15px;
 }
 
@@ -247,7 +247,7 @@ body {
 /* content-CENTER */
 
 .content-center {
-    flex-grow: 1;
+    width: 70%;
 }
 
 .content-center h3 {
@@ -288,7 +288,7 @@ body {
 /* content-right */
 
 .content-right {
-    flex-grow: 0;
+    width: 15%;
 }
 
 .heading {

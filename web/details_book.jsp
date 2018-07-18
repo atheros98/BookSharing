@@ -23,137 +23,144 @@
                 <!--Đây là đoạn code nội dung cho page-->
                 <div class="content-center">
                     <div class="title-upload">
-                        <i class="fas fa-user"><b><a href="#">jmthuong97</a></b></i>
-                        <p>18/07/2018</p>
-                    </div>
-                    <h2>Dac Nhan Tam</h2>
-                    <div class="borrow-book">
-                        <div class="rate">
+                        <i class="fas fa-user"><b><a href="#">${userOwner.getUserName()}</a></b></i>
+                    <p>${tradingdate}</p>
+                </div>
+                <h2>${book.getTitle()}</h2>
+                <div class="borrow-book">
+                    <div class="rate">
+                        <select id="rate" onchange="getSelectRate()">
+                            <option value="1">1 Star</option>
+                            <option value="2">2 Star</option>
+                            <option value="3">3 Star</option>
+                            <option value="4">4 Star</option>
+                            <option value="5">5 Star</option>
+                        </select>
+                        <div id="star">
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star"></span>
                             <span class="fa fa-star"></span>
                         </div>
-                        <a href="#">Borrow</a>
                     </div>
-                    <div class="title-upload" style="background: #F9F7F4;">
-                        <i class="fas fa-info"><b>Information of lender</b></i>
-                        <div style="clear: both;"></div>
-                        <div class="info-book">
-                            <div class="elements">
-                                <div class="title"><i class="fas fa-envelope"></i>Email</div>
-                                <div class="input"><input type="email" name="email" placeholder="Email" readonly="true"></div>
-                            </div>
-                            <div class="elements">
-                                <div class="title"><i class="fas fa-address-card"></i>Address</div>
-                                <div class="input"><input type="text" name="address" placeholder="Address" readonly="true"></div>
-                            </div>
-                            <div class="elements">
-                                <div class="title"><i class="fas fa-phone-square"></i>Phone number</div>
-                                <div class="input"><input type="text" name="phonenumber" placeholder="Phone Number" readonly="true"></div>
-                            </div>
-                            <div class="elements">
-                                <div class="title"><i class="fab fa-facebook"></i>Facebook</div>
-                                <div class="input"><input type="text" name="linkFacebook" placeholder="Link Facebook" readonly="true"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cover-book">
-                        <img src="img/dac-nhan-tam.png" alt="cover1">
-                        <img src="img/empty.jpg" alt="cover2">
-                        <img src="img/empty.jpg" alt="cover3">
-                        <img src="img/empty.jpg" alt="cover4">
-                        <img src="img/empty.jpg" alt="cover5">
-                    </div>
+                    <a href="#">Borrow</a>
+                </div>
+                <div class="title-upload" style="background: #F9F7F4;">
+                    <i class="fas fa-info"><b>Information of lender</b></i>
+                    <div style="clear: both;"></div>
                     <div class="info-book">
                         <div class="elements">
-                            <div class="title"><i class="fas fa-barcode"></i>ISBN</div>
-                            <div class="input"><input id="isbn" type="number" name="isbn" placeholder="ISBN Book" readonly="true"></div>
-                        </div>
-                        <div class="elements">
-                            <div class="title"><i class="fas fa-file-signature"></i>Title</div>
+                            <div class="title"><i class="fas fa-envelope"></i>Email</div>
                             <div class="input">
-                                <input id="title" type="text" name="title-book" placeholder="Title Book" readonly="true">
+                                <input type="email" name="email" value="${userOwner.getEmail()}" readonly="">
                             </div>
                         </div>
                         <div class="elements">
-                            <div class="title"><i class="fas fa-user-tie"></i>Author</div>
+                            <div class="title"><i class="fas fa-address-card"></i>Address</div>
                             <div class="input">
-                                <input id="author" type="text" name="author" placeholder="Author Book" readonly="true">
+                                <input type="text" value="${userOwner.getAddress()}" readonly="">
                             </div>
                         </div>
                         <div class="elements">
-                            <div class="title"><i class="fas fa-tags"></i>Tag</div>
+                            <div class="title"><i class="fas fa-phone-square"></i>Phone number</div>
                             <div class="input">
-                                <input id="tag" type="text" name="tag" placeholder="Tag Book" readonly="true">
+                                <input type="text" value="${userOwner.getPhoneNumber()}" readonly="">
                             </div>
                         </div>
                         <div class="elements">
-                            <div class="title"><i class="fas fa-language"></i>Language</div>
+                            <div class="title"><i class="fab fa-facebook"></i>Facebook</div>
                             <div class="input">
-                                <input id="language" type="text" name="language" placeholder="Language Book" readonly="true">
-                            </div>
-                        </div>
-                        <div class="elements">
-                            <div class="title"><i class="fas fa-pen"></i>Description</div>
-                            <div class="input">
-                                <textarea id="description" rows="6" cols="50" name="description" placeholder="Description Book" readonly="true" style="border: none;"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-book">
-                        <select>
-                            <option value="10">Top 10 reviews</option>
-                            <option value="20">Top 20 reviews</option>
-                            <option value="30">Top 30 reviews</option>
-                            <option value="40">Top 40 reviews</option>
-                        </select>
-                        <div class="content-review">
-                            <article>
-                                <b>nguyenchi1</b>
-                                <p>18/07/2018</p>
-                                <textarea name="content-review" readonly="true">asdhiashudad</textarea>
-                            </article>
-                            <article>
-                                <b>jmthuong97</b>
-                                <p>18/07/2018</p>
-                                <textarea name="content-review" readonly="true">hayasdopj aspdoj adojsadpasdoasdosado</textarea>
-                            </article>
-                            <article>
-                                <b>dungdt</b>
-                                <p>18/07/2018</p>
-                                <textarea name="content-review" readonly="true">x</textarea>
-                            </article>
-                            <div class="title-upload">
-                                <i class="fas fa-user"><b><a href="#">jmthuong97</a></b></i>
-                                <p>18/07/2018</p>
-                                <form id="sendReivew">
-                                    <textarea name="content-review" placeholder="Write reivew here..." required=""></textarea>
-                                    <input type="submit" value="Send - Click here">
-                                </form>
+                                <input type="text" value="${userOwner.getLinkFacebook()}" readonly="">
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--Kết thúc-->
+                <div class="cover-book">
+                    <img src="img/dac-nhan-tam.png" alt="cover1">
+                    <img src="img/empty.jpg" alt="cover2">
+                    <img src="img/empty.jpg" alt="cover3">
+                    <img src="img/empty.jpg" alt="cover4">
+                    <img src="img/empty.jpg" alt="cover5">
+                </div>
+                <div class="info-book">
+                    <div class="scrollhere"></div>
+                    <input type="hidden" id="idBook" value="3">
+                    <div class="elements">
+                        <div class="title"><i class="fas fa-barcode"></i>ISBN</div>
+                        <div class="input"><input type="number" value="${book.getiSBN()}"  readonly="true"></div>
+                    </div>
+                    <div class="elements">
+                        <div class="title"><i class="fas fa-file-signature"></i>Title</div>
+                        <div class="input">
+                            <input id="title" type="text" value="${book.getTitle()}" readonly="true">
+                        </div>
+                    </div>
+                    <div class="elements">
+                        <div class="title"><i class="fas fa-user-tie"></i>Author</div>
+                        <div class="input">
+                            <input id="author" type="text" value="${book.getAuthor()}" readonly="true">
+                        </div>
+                    </div>
+                    <div class="elements">
+                        <div class="title"><i class="fas fa-tags"></i>Tag</div>
+                        <div class="input">
+                            <input id="tag" type="text" value="${book.getTag()}" readonly="true">
+                        </div>
+                    </div>
+                    <div class="elements">
+                        <div class="title"><i class="fas fa-language"></i>Language</div>
+                        <div class="input">
+                            <input id="language" type="text" value="${book.getLanguage()}" readonly="true">
+                        </div>
+                    </div>
+                    <div class="elements">
+                        <div class="title"><i class="fas fa-pen"></i>Description</div>
+                        <div class="input">
+                            <textarea id="description" readonly="true" style="border: none;">${book.getDescription()}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-book">
+                    <select id="select-top" onchange="getSelectTop()">
+                        <option value="10">Top 10 reviews</option>
+                        <option value="20">Top 20 reviews</option>
+                        <option value="30">Top 30 reviews</option>
+                        <option value="40">Top 40 reviews</option>
+                    </select>
+                    <div class="content-review">
+                        <div id="content-article"></div>
+                        <div class="title-upload">
+                            <i class="fas fa-user"><b><a href="#">${username}</a></b></i>
+                            <p>${currentDate}</p>
+                            <form id="sendReivew">
+                                <textarea id="content-review" placeholder="Write reivew here..." required=""></textarea>
+                                <input type="submit" value="Send - Click here">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Kết thúc-->
             <jsp:include page="content-right.jsp"></jsp:include>
         </div>
+        <script src="js/review_book.js"></script>
+        <script src="js/rate_book.js"></script>
         <script>
-            window.onscroll = function () {
-                myFunction();
-            };
+                        window.onscroll = function () {
+                            myFunction();
+                        };
 
-            var header = document.getElementById("myheader");
-            var sticky = header.offsetTop;
+                        var header = document.getElementById("myheader");
+                        var sticky = header.offsetTop;
 
-            function myFunction() {
-                if (window.pageYOffset > sticky) {
-                    header.classList.add("sticky");
-                } else {
-                    header.classList.remove("sticky");
-                }
-            }
+                        function myFunction() {
+                            if (window.pageYOffset > sticky) {
+                                header.classList.add("sticky");
+                            } else {
+                                header.classList.remove("sticky");
+                            }
+                        }
         </script>
     </body>
 </html>

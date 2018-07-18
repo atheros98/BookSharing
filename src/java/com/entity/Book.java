@@ -11,7 +11,7 @@ package com.entity;
  */
 public class Book {
 
-    private int iD;
+    private int iD, idUser;
     private String title, author, iSBN, language, description, tag;
     private boolean status;
 
@@ -27,14 +27,15 @@ public class Book {
         this.description = description;
     }
 
-    public Book(String title, String author, String iSBN, String language, String description, String tag, boolean status) {
+    public Book(String title, String author, String iSBN, String language, String description, String tag, boolean status, int idUser) {
         this(title, author, iSBN, language, description);
         this.tag = tag;
         this.status = status;
+        this.idUser = idUser;
     }
 
-    public Book(int iD, String title, String author, String iSBN, String language, String description, String tag, boolean status) {
-        this(title, author, iSBN, language, description, tag, status);
+    public Book(int iD, String title, String author, String iSBN, String language, String description, String tag, boolean status, int idUser) {
+        this(title, author, iSBN, language, description, tag, status, idUser);
         this.iD = iD;
     }
 
@@ -100,6 +101,14 @@ public class Book {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     @Override
