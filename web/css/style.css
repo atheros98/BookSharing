@@ -361,6 +361,18 @@ body {
     border-bottom: 2px solid #0092ff;   
 }
 
+.book-item:before,
+.book-item:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.book-item {
+    margin: 10px 10px 0px 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .29);
+}
+
 .book-item a {
     text-decoration: none !important;
 }
@@ -368,7 +380,6 @@ body {
 .book-item .img {
     background: transparent;
     width: 7vw;
-    height: 10vw;
     float: left;
     margin: 3px;
     padding: 3px;
@@ -438,3 +449,5 @@ body {
 .page a:hover {
     background: #c1e7ff;
 }
+
+
