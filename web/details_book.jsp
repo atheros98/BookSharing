@@ -37,6 +37,28 @@
                         </div>
                         <a href="#">Borrow</a>
                     </div>
+                    <div class="title-upload" style="background: #F9F7F4;">
+                        <i class="fas fa-info"><b>Information of lender</b></i>
+                        <div style="clear: both;"></div>
+                        <div class="info-book">
+                            <div class="elements">
+                                <div class="title"><i class="fas fa-envelope"></i>Email</div>
+                                <div class="input"><input type="email" name="email" placeholder="Email" readonly="true"></div>
+                            </div>
+                            <div class="elements">
+                                <div class="title"><i class="fas fa-address-card"></i>Address</div>
+                                <div class="input"><input type="text" name="address" placeholder="Address" readonly="true"></div>
+                            </div>
+                            <div class="elements">
+                                <div class="title"><i class="fas fa-phone-square"></i>Phone number</div>
+                                <div class="input"><input type="text" name="phonenumber" placeholder="Phone Number" readonly="true"></div>
+                            </div>
+                            <div class="elements">
+                                <div class="title"><i class="fab fa-facebook"></i>Facebook</div>
+                                <div class="input"><input type="text" name="linkFacebook" placeholder="Link Facebook" readonly="true"></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="cover-book">
                         <img src="img/dac-nhan-tam.png" alt="cover1">
                         <img src="img/empty.jpg" alt="cover2">
@@ -47,36 +69,36 @@
                     <div class="info-book">
                         <div class="elements">
                             <div class="title"><i class="fas fa-barcode"></i>ISBN</div>
-                            <div class="input"><input id="isbn" type="number" name="isbn" placeholder="ISBN Book" required=""></div>
+                            <div class="input"><input id="isbn" type="number" name="isbn" placeholder="ISBN Book" readonly="true"></div>
                         </div>
                         <div class="elements">
                             <div class="title"><i class="fas fa-file-signature"></i>Title</div>
                             <div class="input">
-                                <input id="title" type="text" name="title-book" placeholder="Title Book" required="">
+                                <input id="title" type="text" name="title-book" placeholder="Title Book" readonly="true">
                             </div>
                         </div>
                         <div class="elements">
                             <div class="title"><i class="fas fa-user-tie"></i>Author</div>
                             <div class="input">
-                                <input id="author" type="text" name="author" placeholder="Author Book" required="">
+                                <input id="author" type="text" name="author" placeholder="Author Book" readonly="true">
                             </div>
                         </div>
                         <div class="elements">
                             <div class="title"><i class="fas fa-tags"></i>Tag</div>
                             <div class="input">
-                                <input id="tag" type="text" name="tag" placeholder="Tag Book" required="">
+                                <input id="tag" type="text" name="tag" placeholder="Tag Book" readonly="true">
                             </div>
                         </div>
                         <div class="elements">
                             <div class="title"><i class="fas fa-language"></i>Language</div>
                             <div class="input">
-                                <input id="language" type="text" name="language" placeholder="Language Book" required="">
+                                <input id="language" type="text" name="language" placeholder="Language Book" readonly="true">
                             </div>
                         </div>
                         <div class="elements">
                             <div class="title"><i class="fas fa-pen"></i>Description</div>
                             <div class="input">
-                                <textarea id="description" rows="6" cols="50" name="description" placeholder="Description Book" required="" style="border: none;"></textarea>
+                                <textarea id="description" rows="6" cols="50" name="description" placeholder="Description Book" readonly="true" style="border: none;"></textarea>
                             </div>
                         </div>
                     </div>
