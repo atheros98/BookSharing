@@ -62,7 +62,7 @@
                     </c:forEach>
                 </section>
                 <div class="page">
-                    <c:if test="${pages > 0}">
+                    <c:if test="${pages > 1}">
                         <c:forEach var="p" begin="1" end="${pages}" step="1">
                             <c:url var="SearchByPage" value="SearchBookController">
                                 <c:param name="query" value="${param.query}"/>
