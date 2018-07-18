@@ -25,7 +25,7 @@
         <div class="search">
             <div class="search-container">
                 <form action="SearchBookController">
-                    <input type="text" placeholder="Search.." name="query" autocomplete="off">
+                    <input type="text" placeholder="Search.." name="query" autocomplete="off" value="${param.query}">
                     <button type="submit">
                         <i class="fa fa-search"></i>
                     </button>

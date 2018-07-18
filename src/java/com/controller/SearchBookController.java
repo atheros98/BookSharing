@@ -41,7 +41,7 @@ public class SearchBookController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String query = request.getParameter("query");
             if (query == null || query.trim().isEmpty()) {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect(".");
                 return;
             }
             String filter = request.getParameter("filter");
@@ -59,34 +59,33 @@ public class SearchBookController extends HttpServlet {
             int numberPages = 0;
             List<Book> books = new ArrayList<>();
             if (filter == null || filter.trim().isEmpty()) {
-                numberPages = b.getPages("all", query);
-                if (page > numberPages) {
-                    page = numberPages;
-                }
-                books = b.getBook(query, page);
-            } else {
-                numberPages = b.getPages(filter, query);
-                if (page > numberPages) {
-                    page = numberPages;
-                }
-                switch (filter) {
-                    case "title":
-                        books = b.getBooksByName(query, page);
-                        break;
-                    case "author":
-                        books = b.getBooksByAuthor(query, page);
-                        break;
-                    case "ISBN":
-                        books = b.getBooksByISBN(query, page);
-                        break;
-                    case "tag":
-                        books = b.getBooksByTag(query, page);
-                        break;
-                }
+                filter = "All";
             }
+            numberPages = b.getPages(filter, query);
+            if (page > numberPages) {
+                page = numberPages;
+            }
+            switch (filter) {
+                case "All":
+                    books = b.getBook(query, page);
+                    break;
+                case "Title":
+                    books = b.getBooksByName(query, page);
+                    break;
+                case "Author":
+                    books = b.getBooksByAuthor(query, page);
+                    break;
+                case "ISBN":
+                    books = b.getBooksByISBN(query, page);
+                    break;
+                case "Tag":
+                    books = b.getBooksByTag(query, page);
+                    break;
+            }
+
             request.setAttribute("books", books);
             request.setAttribute("pages", numberPages);
-            RequestDispatcher rd = request.getRequestDispatcher("Search.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
             rd.forward(request, response);
         }
     }

@@ -5,17 +5,18 @@
  */
 package com.entity;
 
+import com.dao.ImageBookDAO;
+
 /**
  *
  * @author Administrator
  */
 public class Book {
-    private int iD, iDImage;
+    private int id;
     private String title, author, iSBN, language, description, tag;
     private boolean status;
 
-    public Book(int iDImage, String title, String author, String iSBN, String language, String description) {
-        this.iDImage = iDImage;
+    public Book(String title, String author, String iSBN, String language, String description) {
         this.title = title;
         this.author = author;
         this.iSBN = iSBN;
@@ -23,32 +24,31 @@ public class Book {
         this.description = description;
     }
     
-    public Book(int iDImage, String title, String author, String iSBN, String language, String description, String tag, boolean status) {
-        this(iDImage, title, author, iSBN, language, description);
+    
+    public Book(String title, String author, String iSBN, String language, String description, String tag, boolean status) {
+        this(title, author, iSBN, language, description);
         this.tag = tag;
         this.status = status;
     }
 
-    public Book(int iD, int iDImage, String title, String author, String iSBN, String language, String description, String tag, boolean status) {
-        this(iDImage, title, author, iSBN, language, description, tag, status);
-        this.iD = iD;
+    public Book(int iD, String title, String author, String iSBN, String language, String description, String tag, boolean status) {
+        this(title, author, iSBN, language, description, tag, status);
+        this.id = iD;
     }
 
-    public int getiD() {
-        return iD;
+    public String getImage() throws Exception{
+        return new ImageBookDAO().getImageByBookID(String.valueOf(id));
+    }
+    
+    public int getId() {
+        return id;
     }
 
-    public void setiD(int iD) {
-        this.iD = iD;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getiDImage() {
-        return iDImage;
-    }
 
-    public void setiDImage(int iDImage) {
-        this.iDImage = iDImage;
-    }
 
     public String getTitle() {
         return title;
@@ -108,7 +108,7 @@ public class Book {
 
     @Override
     public int hashCode() {
-        return this.iD; //To change body of generated methods, choose Tools | Templates.
+        return this.id; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

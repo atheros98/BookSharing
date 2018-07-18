@@ -36,16 +36,15 @@ public class BookDAO {
 
         while (rs.next()) {
             int id = rs.getInt(1);
-            int idImage = rs.getInt(2);
-            String title = rs.getString(3);
-            String author = rs.getString(4);
-            String ISBN = rs.getString(5);
-            String language = rs.getString(6);
-            String description = rs.getString(7);
-            String tag = rs.getString(8);
-            boolean status = rs.getBoolean(9);
+            String title = rs.getString(2);
+            String author = rs.getString(3);
+            String ISBN = rs.getString(4);
+            String language = rs.getString(5);
+            String description = rs.getString(6);
+            String tag = rs.getString(7);
+            boolean status = rs.getBoolean(8);
 
-            Book tmp = new Book(id, idImage, title, author, ISBN, language, description, tag, status);
+            Book tmp = new Book(id, title, author, ISBN, language, description, tag, status);
 
             bookList.add(tmp);
         }
@@ -101,7 +100,7 @@ public class BookDAO {
         int to = page * pageSize;
         String query = "select * from "
                 + "(select *, row_number()  over (order by id DESC) as row from Book"
-                + " where title LIKE '%" + ISBN + "%') result"
+                + " where ISBN LIKE '%" + ISBN + "%') result"
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
@@ -111,7 +110,7 @@ public class BookDAO {
         int to = page * pageSize;
         String query = "select * from "
                 + "(select *, row_number() over (order by id DESC) as row from Book"
-                + " where title LIKE '%" + author + "%') result"
+                + " where author LIKE '%" + author + "%') result"
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
@@ -121,7 +120,7 @@ public class BookDAO {
         int to = page * pageSize;
         String query = "select * from "
                 + "(select *, row_number() over (order by id DESC) as row from Book"
-                + " where title LIKE '%" + tag + "%') result"
+                + " where tag LIKE '%" + tag + "%') result"
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
@@ -145,23 +144,23 @@ public class BookDAO {
             case "lasted":
                 query = "select count(*) from Book";
                 break;
-            case "all":
+            case "All":
                 query = "select count (distinct id) from"
                         + " (select * from Book where title like '%" + queryStr + "%'"
                         + " union select * from Book where ISBN like '%" + queryStr + "%'"
                         + " union select * from Book where author like '%" + queryStr + "%'"
                         + " union select * from Book where tag like '%" + queryStr + "%') result";
                 break;
-            case "title":
+            case "Title":
                 query = "select count (*) from Book where title LIKE '%" + queryStr + "%'";
                 break;
-            case "author":
+            case "Author":
                 query = "select count (*) from Book where author LIKE '%" + queryStr + "%'";
                 break;
             case "ISBN":
                 query = "select count (*) from Book where ISBN LIKE '%" + queryStr + "%'";
                 break;
-            case "tag":
+            case "Tag":
                 query = "select count (*) from Book where tag LIKE '%" + queryStr + "%'";
                 break;
         }
