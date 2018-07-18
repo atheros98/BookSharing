@@ -349,11 +349,18 @@ body {
 
 .type-list a {
     text-decoration: none !important;
-    color: #4a4a4a;
     font-size: 14px;
     padding: 9px 10px 11px;
     display: inline-block;
     font-weight: 400;
+}
+.type-list .unseleted-type {
+    color: #4a4a4a;
+}
+
+.type-list .seleted-type {
+    color: #009cff;
+    border-bottom: 2px solid #0092ff;  
 }
 
 .type-list a:hover {

@@ -39,7 +39,14 @@
                                     <c:param name="query" value="${param.query}"/>
                                     <c:param name="filter" value="${l}"/>
                                 </c:url> 
-                                <a href="${SearchByFilter}">${l}</a>
+                                <c:if test='${(param.filter == null && l == "All")
+                                              || (param.filter == l)}'>
+                                      <a class="seleted-type" href="${SearchByFilter}">${l}</a>
+                                </c:if>
+                                <c:if test='${(param.filter == null && l != "All")
+                                              ||(param.filter != null && param.filter != l)}'>
+                                    <a class="unseleted-type" href="${SearchByFilter}">${l}</a>
+                                </c:if>
                             </li>
                         </c:forEach>
                     </ul>
@@ -75,7 +82,8 @@
                                           || (param.page == p)}">
                                   <span class="selected-page">${p}</span>
                             </c:if>
-                            <c:if test="${param.page != p} && param.page != null">
+                            <c:if test="${(param.page == null && p != 1) 
+                                  || param.page != p && param.page != null}">
                                 <a class="next-page" href="${SearchByPage}">${p}</a>
                             </c:if>
 
