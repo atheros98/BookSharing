@@ -1,6 +1,6 @@
 
 .title-upload{
-    display: flex;
+    display: flow-root;
     background: #F7F7F7;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -11,6 +11,8 @@
 
 .title-upload i{
     float: left;
+    width: 80%;
+    text-align: left;
 }
 
 .title-upload>i>b{
@@ -92,6 +94,107 @@
     background: #372213;
     color: #fff;
     font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+/* =================================== for details book ===================================*/ 
+.title-upload p{
+    float: right;
+    width: 20%;
+    text-align: right;
+}
+
+.title-upload textarea{
+    clear: both;
+    width: 100%;
+    height: 70px;
+    margin-top: 5px;
+}
+
+.borrow-book{
+    display: flow-root;
+    margin-top: 5px;
+}
+
+.borrow-book .rate{
+    margin-top: 7px;
+    float: left;
+}
+
+.borrow-book a{
+    float: right;
+    text-decoration: none;
+    padding: 6px 30px;
+    text-align: center;
+    background: #372213;
+    color: #fff;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.cover-book{
+    display: flex;
+    background: #EFF9FE;
+    margin-top: 15px;
+    padding: 15px 15px;
+    flex-flow: row;
+    justify-content: center;
+    border: 2px dashed #0099E2;
+    overflow: scroll;
+}
+
+.cover-book img{
+    width: 19%;
+    height: 6%;
+    margin: 0 5px;
+    border: 1px solid black;
+}
+
+/* =================================== for review book =================================== */
+
+.review-book{
+    display: block;
+    margin-top: 15px;
+}
+
+.content-review{
+    margin-top: 10px;
+    padding: 5px 5px;
+    border: 1px dashed gray;
+}
+
+.content-review article{
+    margin-bottom: 10px;
+    border-bottom: 1px solid gray;
+}
+
+.content-review > article > b{
+    float: left;
+}
+
+.content-review > article > p{
+    float: right;
+}
+
+.content-review > article > textarea{
+    clear: both;
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+    background: #F9F7F4;
+    border: none;
+}
+
+#sendReivew input[type='submit']{
+    float: left;
+    padding: 4px 6px;
+    margin-top: 5px;
+    margin-bottom: 0;
+    color: #fff;
+    background-color: #cd0d18;
+    border-radius: 18px;
     border: none;
     cursor: pointer;
 }

@@ -5,7 +5,12 @@
  */
 package com.controller;
 
+import com.dao.BookDAO;
+import com.entity.Book;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,10 +34,21 @@ public class CheckBookExist extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String isbn = request.getParameter("ISBN");
-        System.out.println(isbn);
-        if (isbn.equals("1997")) {
-            response.getWriter().write("message");
+        try {
+            String isbn = request.getParameter("isbn");
+            ObjectMapper mapperObj = new ObjectMapper();
+            BookDAO dao = new BookDAO();
+            if (dao.isBookExisted(isbn)) {
+                Book book = dao.getBookByISBN(isbn);
+                // convert book to json
+                String bookJson = mapperObj.writeValueAsString(book);
+                System.out.println(bookJson);
+                response.getWriter().write(bookJson);
+            } else {
+                response.getWriter().write(mapperObj.writeValueAsString("{}"));
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CheckBookExist.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
