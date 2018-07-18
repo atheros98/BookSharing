@@ -1,0 +1,97 @@
+
+.title-upload{
+    display: flex;
+    background: #F7F7F7;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-top: 1px solid #E2E2E2;
+    border-bottom: 1px solid #E2E2E2;
+    padding: 10px 10px;
+}
+
+.title-upload i{
+    float: left;
+}
+
+.title-upload>i>b{
+    margin-left: 10px;
+}
+
+.upload-image{
+    display: block;
+    font-family: sans-serif;
+    height: 160px;
+    padding: 25px 0;
+    background: #EFF9FE;
+    margin-bottom: 10px;
+    text-align: center;
+    border: 2px dashed #0099E2;
+}
+
+.upload-image input{
+    margin-bottom: 5px;
+}
+
+.info-book{
+    width: 100%;
+}
+
+.elements{
+    display: flex;
+    padding-top: 7px;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.elements> .title{
+    float: left;
+    width: 20%;
+    margin-top: 6px;
+}
+
+.elements> .title > i{
+    margin-right: 5px;
+}
+
+.elements> .input{
+    float: right;
+    width: 80%;
+}
+
+.elements input{
+    width: 100%;
+    background: #F9F7F4;
+    padding: 9px 0;
+    border: none;
+}
+
+.elements textarea{
+    width: 100%;
+    background: #F9F7F4;
+}
+
+.check-rules{
+    text-align: left;
+    margin-top: 5px;
+}
+
+.check-rules input{
+    float: left;
+    width: 10%;
+}
+
+.uploadBtn{
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.uploadBtn input{
+    padding: 6px 30px;
+    text-align: center;
+    background: #372213;
+    color: #fff;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
