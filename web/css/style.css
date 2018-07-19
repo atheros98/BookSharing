@@ -462,6 +462,12 @@ body {
     text-overflow: ellipsis;
 }
 
+.not-found-book {
+    color: #000;
+    font-size: 20px;
+    padding: 10px 10px 10px 10px;
+}
+
 .page {
     margin: 10px;
     float: right;

@@ -67,6 +67,11 @@
                             </a>
                         </div>
                     </c:forEach>
+                    <c:if test="${empty books}">
+                        <div class="not-found-book">
+                            Book not found
+                        </div>
+                    </c:if>
                 </section>
                 <div class="page">
                     <c:if test="${pages > 1}">
