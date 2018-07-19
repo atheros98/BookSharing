@@ -296,6 +296,10 @@ body {
 
 .section-center-header .user p {
     margin-top: 15px;
+    color: #365899;
+    font-size: 14px;
+    font-family: Roboto,sans-serif;
+    font-weight: bold; 
 }
 .section-center .new-book {
     margin: 10px 10px 10px 10px;
