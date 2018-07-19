@@ -56,14 +56,14 @@
                         <c:url var="BookDetail" value="BookDetailController">
                             <c:param name="id" value="${b.id}"/>
                         </c:url> 
-                        <div class="book-item">
+                        <div class="book-item" id="search">
                             <a href="${BookDetail}" class="book-link">
                                 <div class="img">
                                     <img src="${b.image}" alt=""/>
                                 </div>
                                 <div class="title">${b.title}</div>
                                 <div class="author">${b.author}</div>
-                                <!--<div class="description">${b.description}</div>-->
+                                <div class="description">${b.description}</div>
                             </a>
                         </div>
                     </c:forEach>

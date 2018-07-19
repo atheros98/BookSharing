@@ -12,7 +12,7 @@
         <div class="menu">
             <ul>
                 <li>
-                    <a href="#">Home</a>
+                    <a href="HomeController">Home</a>
                 </li>
                 <li>
                     <a href="#">Manage Book</a>

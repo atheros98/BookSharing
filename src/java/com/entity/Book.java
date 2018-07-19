@@ -12,9 +12,13 @@ import com.dao.ImageBookDAO;
  * @author Administrator
  */
 public class Book {
+
     private int id;
     private String title, author, iSBN, language, description, tag;
     private boolean status;
+
+    public Book() {
+    }
 
     public Book(String title, String author, String iSBN, String language, String description) {
         this.title = title;
@@ -23,8 +27,7 @@ public class Book {
         this.language = language;
         this.description = description;
     }
-    
-    
+
     public Book(String title, String author, String iSBN, String language, String description, String tag, boolean status) {
         this(title, author, iSBN, language, description);
         this.tag = tag;
@@ -36,10 +39,10 @@ public class Book {
         this.id = iD;
     }
 
-    public String getImage() throws Exception{
+    public String getImage() throws Exception {
         return new ImageBookDAO().getImageByBookID(String.valueOf(id));
     }
-    
+
     public int getId() {
         return id;
     }
@@ -47,8 +50,6 @@ public class Book {
     public void setId(int id) {
         this.id = id;
     }
-
-
 
     public String getTitle() {
         return title;
@@ -113,9 +114,8 @@ public class Book {
 
     @Override
     public boolean equals(Object obj) {
-        Book anotherBook = (Book)obj;
+        Book anotherBook = (Book) obj;
         return iSBN.equals(anotherBook.getiSBN()); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }

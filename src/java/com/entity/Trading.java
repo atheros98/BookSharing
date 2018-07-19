@@ -5,7 +5,10 @@
  */
 package com.entity;
 
+import com.dao.BookDAO;
+import com.dao.UserDAO;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -38,6 +41,14 @@ public class Trading {
         this.completeDate = completeDate;
     }
 
+    public Book getBook() throws Exception{
+        return new BookDAO().getBookByBookID(String.valueOf(idBook));
+    }
+    
+    public User getUser() throws Exception{
+        return new UserDAO().searchUserByID(idOwner);
+    }
+    
     public int getID() {
         return ID;
     }
@@ -86,8 +97,9 @@ public class Trading {
         this.statusComplete = statusComplete;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public String getCreateDate() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(createDate);
     }
 
     public void setCreateDate(Date createDate) {

@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +26,7 @@ public class TradingDAO {
 
     private final ConnectionDB db;
     private final Close close;
+    private final int pageSize = 10;
 
     public TradingDAO() throws Exception {
         db = new ConnectionDB();
@@ -33,9 +35,61 @@ public class TradingDAO {
 
     /**
      *
-     * @param trading
+     * @param page
      * @return
      */
+    public List<Trading> getLastedTrading(int page) throws Exception {
+        int from = (page - 1) * pageSize + 1;
+        int to = page * pageSize;
+        List<Trading> tradings = new ArrayList<>();
+
+        String query = "select * from"
+                + " (select *, row_number() over (order by createDate DESC)"
+                + " as row from Trading) result"
+                + " where result.row between " + from + " and " + to;
+        Connection conn = db.getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int id = rs.getInt(1);
+            int idOwn = rs.getInt(2);
+            int idBorrower = rs.getInt(3);
+            int idBook = rs.getInt(4);
+            boolean sb = false;
+            if (rs.getInt(5) == 1) {
+                sb = true;
+            }
+            boolean sc = false;
+            if (rs.getInt(6) == 1) {
+                sc = true;
+            };
+            Date create = rs.getDate(7);
+            Date complete = rs.getDate(8);
+            tradings.add(new Trading(id, idOwn, idBorrower, idBook, sb, sc, create, complete));
+        }
+        rs.close();
+        conn.close();
+        return tradings;
+    }
+
+     public int getRowCount() throws Exception {
+        String query = "select count(*) from Trading";
+        Connection conn = db.getConnection();
+        ResultSet rs = conn.prepareStatement(query).executeQuery();
+        int pages = 0;
+        if (rs.next()) {
+            pages = rs.getInt(1);
+        }
+        rs.close();
+        conn.close();
+        return pages;
+    }
+    public int getPages() throws Exception {
+        int rows = getRowCount();
+        return rows / (pageSize) + ((rows % pageSize) != 0 ? 1 : 0);
+    }
+
     public boolean insertTrading(Trading trading) {
         String sql = "INSERT INTO Trading (idOwner, idBorrower, idBook, statusBook, statusComplete, createDate, completeDate)\n"
                 + "VALUES (?, ?, ?, ?, ?, ?, ?);";
@@ -224,9 +278,9 @@ public class TradingDAO {
     }
 
     /**
-     * 
+     *
      * @param idBorrowe
-     * @return 
+     * @return
      */
     public ArrayList<Trading> getAllTradingByBorrowerID(int idBorrowe) {
         ArrayList<Trading> list = new ArrayList<>();

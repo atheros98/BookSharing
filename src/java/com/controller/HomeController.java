@@ -5,8 +5,8 @@
  */
 package com.controller;
 
-import com.dao.BookDAO;
-import com.entity.Book;
+import com.dao.TradingDAO;
+import com.entity.Trading;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -37,7 +37,7 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String pageStr = request.getParameter("pageID");
+            String pageStr = request.getParameter("page");
             if (pageStr == null || pageStr.trim().isEmpty()) {
                 pageStr = "1";
             }
@@ -47,14 +47,16 @@ public class HomeController extends HttpServlet {
             } catch (NumberFormatException e){
                 
             }
-            BookDAO b = new BookDAO();
-            int numberPages = b.getPages("lasted", null);
+            TradingDAO t = new TradingDAO();
+            int numberPages = t.getPages();
             if (page > numberPages){
                 page = numberPages;
             }
-            List<Book> books = b.getLastedBook(page);
+            List<Trading> tradings = t.getLastedTrading(page);
+            System.out.println(tradings.get(0).getIdBook());
+            System.out.print(numberPages);
             request.setAttribute("pages", numberPages);
-            request.setAttribute("books", books);
+            request.setAttribute("tradings", tradings);
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }

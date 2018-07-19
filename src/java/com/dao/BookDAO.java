@@ -85,6 +85,30 @@ public class BookDAO {
         return getBooksByStatement(query);
     }
 
+    public Book getBookByBookID(String idBook) throws Exception {
+        Book book = null;
+        String query = "select * from Book where id='" + idBook + "'";
+        Connection conn = db.getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            int id = rs.getInt(1);
+            String title = rs.getString(2);
+            String author = rs.getString(3);
+            String ISBN = rs.getString(4);
+            String language = rs.getString(5);
+            String description = rs.getString(6);
+            String tag = rs.getString(7);
+            boolean status = rs.getBoolean(8);
+
+            book = new Book(id, title, author, ISBN, language, description, tag, status);
+        }
+        rs.close();
+        conn.close();
+        return book;
+    }
+
     public List<Book> getBooksByName(String name, int page) throws Exception {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
