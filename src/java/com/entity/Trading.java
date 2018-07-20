@@ -24,7 +24,7 @@ public class Trading {
     private boolean statusComplete;
     private Date createDate;
     private Date completeDate;
-
+    
     public Trading() {
         statusBook = true;
         statusComplete = true;

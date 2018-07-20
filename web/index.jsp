@@ -45,9 +45,12 @@
                                     <div class="img">
                                         <img src="${t.book.image}" alt=""/>
                                     </div>
-                                    <div class="title">${t.book.title}</div>
-                                    <div class="author">${t.book.author}</div>
-                                    <div class="description">${t.book.description}</div>
+                                    <div class="book-content">
+                                        <h2>${t.book.title}</h2>
+                                        <author>${t.book.author}</author>
+                                        <p>${t.book.description}</p>
+                                    </div>
+
                                 </a>
                             </div>
                         </div>

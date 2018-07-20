@@ -37,22 +37,24 @@ public class DetailsBookController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String idTrading = request.getParameter("idTrading");
-            TradingDAO tradingdao = new TradingDAO();
-            BookDAO bookdao = new BookDAO();
-            UserDAO userdao = new UserDAO();
-            //
-            Trading trading = tradingdao.getTradingById(idTrading);
-            Book book = bookdao.getBookByBookID(trading.getIdBook() + "");
-            //
-            request.setAttribute("userOwner", userdao.getUserById(trading.getIdOwner() + ""));
-            request.setAttribute("tradingdate", trading.getCreateDate());
-            request.setAttribute("currentDate", new getDate().getCurrentDate());
-            request.setAttribute("book", book);
-            request.getRequestDispatcher("/details_book.jsp").forward(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(DetailsBookController.class.getName()).log(Level.SEVERE, null, ex);
+        String idTrading = request.getParameter("idTrading");
+        if (idTrading != null) {
+            try {
+                TradingDAO tradingdao = new TradingDAO();
+                BookDAO bookdao = new BookDAO();
+                UserDAO userdao = new UserDAO();
+                //
+                Trading trading = tradingdao.getTradingById(idTrading);
+                Book book = bookdao.getBookByBookID(trading.getIdBook() + "");
+                //
+                request.setAttribute("userOwner", userdao.getUserById(trading.getIdOwner() + ""));
+                request.setAttribute("tradingdate", trading.getCreateDate());
+                request.setAttribute("currentDate", new getDate().getCurrentDate());
+                request.setAttribute("book", book);
+                request.getRequestDispatcher("/details_book.jsp").forward(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(DetailsBookController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -67,7 +69,7 @@ public class DetailsBookController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
-    
+
 }

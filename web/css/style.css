@@ -296,6 +296,11 @@ body {
     margin-right: 10px;
 }
 
+.book-content {
+    float: right;
+}
+
+
 .section-center-header .user p {
     margin-top: 15px;
     color: #365899;
@@ -421,7 +426,7 @@ body {
 
 .book-item .img {
     background: transparent;
-    width: 7vw;
+    width: 20%;
     float: left !important;
     margin: 3px;
     padding: 3px;
@@ -433,16 +438,19 @@ body {
     height: auto;
 }
 
-.book-item .title:before,
-.book-item .title:after{
+.book-content .title:before,
+.book-content .title:after{
     content: "";
     display: table;
     clear: both;
 }
 
-.book-item .title {
+.book-content {
+    width: 78%;
+}
+
+.book-content > h2 {
     font-family: Roboto, Helvetica, Arial, sans-serif;
-    display: inline-block;
     color: #000;
     font-size: 25px;
     max-width: 35vw;
@@ -450,8 +458,7 @@ body {
     padding: 10px;
     padding-bottom: 5px;
 }
-.book-item .author {
-    display: inline-block;
+.book-content > author {
     font-style: italic;
     color: #000;
     font-size: 14px;
@@ -461,7 +468,7 @@ body {
     padding-top: 0px;
 }
 
-.book-item .description {
+.book-content > p {
     color: #000;
     font-size: 12px;
     max-width: 35vw;

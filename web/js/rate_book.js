@@ -17,6 +17,7 @@ $(document).ready(function () {
             setTotalRate(result.totalRate);
         },
         error: function () {
+            console.log("set user rate");
             alert('eror');
         }
     });
@@ -66,6 +67,7 @@ function getSelectRate() {
             }
         },
         error: function () {
+            console.log("get select rate");
             alert('error');
         }
     });
