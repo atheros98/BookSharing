@@ -13,14 +13,6 @@
             <p>What books do you want
                 <br> to find?</p>
         </div>
-        <div class="search-container">
-            <form action="/action_page.php">
-                <input type="text" placeholder="Search books" name="search" autocomplete="off">
-                <button type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
-            </form>
-        </div>
     </section>
     <section class="section-left">
         <h3>YOUR BOOK UPLOAD</h3>

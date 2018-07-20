@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
  */
 public class Trading {
 
-    private int ID;
+    private int id;
     private int idOwner;
     private int idBorrower;
     private int idBook;
@@ -31,7 +31,7 @@ public class Trading {
     }
 
     public Trading(int ID, int idOwner, int idBorrower, int idBook, boolean statusBook, boolean statusComplete, Date createDate, Date completeDate) {
-        this.ID = ID;
+        this.id = ID;
         this.idOwner = idOwner;
         this.idBorrower = idBorrower;
         this.idBook = idBook;
@@ -46,16 +46,18 @@ public class Trading {
     }
     
     public User getUser() throws Exception{
-        return new UserDAO().searchUserByID(idOwner);
-    }
-    
-    public int getID() {
-        return ID;
+        return new UserDAO().getUserById(String.valueOf(idOwner));
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+  
 
     public int getIdOwner() {
         return idOwner;
@@ -97,9 +99,12 @@ public class Trading {
         this.statusComplete = statusComplete;
     }
 
-    public String getCreateDate() {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        return format.format(createDate);
+    public Date getCreateDate() {
+        return createDate;
+    }
+    
+    public String getDateString(){
+        return new SimpleDateFormat("dd/MM/yyyy").format(createDate);
     }
 
     public void setCreateDate(Date createDate) {
@@ -116,12 +121,12 @@ public class Trading {
 
     @Override
     public String toString() {
-        return "Tradding{" + "ID=" + ID + ", idOwner=" + idOwner + ", idBorrower=" + idBorrower + ", idBook=" + idBook + ", statusBook=" + statusBook + ", statusComplete=" + statusComplete + ", createDate=" + createDate + ", completeDate=" + completeDate + '}';
+        return "Tradding{" + "ID=" + id + ", idOwner=" + idOwner + ", idBorrower=" + idBorrower + ", idBook=" + idBook + ", statusBook=" + statusBook + ", statusComplete=" + statusComplete + ", createDate=" + createDate + ", completeDate=" + completeDate + '}';
     }
 
     public Object[] toObject() {
         return new Object[]{
-            ID,
+            id,
             idOwner,
             idBorrower,
             idBook,

@@ -20,6 +20,30 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>com.controller.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckBookCover</servlet-name>
+        <servlet-class>com.controller.CheckBookCover</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UploadBookController</servlet-name>
+        <servlet-class>com.controller.UploadBookController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckBookExist</servlet-name>
+        <servlet-class>com.controller.CheckBookExist</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReviewBookController</servlet-name>
+        <servlet-class>com.controller.ReviewBookController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailsBookController</servlet-name>
+        <servlet-class>com.controller.DetailsBookController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RateBookController</servlet-name>
+        <servlet-class>com.controller.RateBookController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -31,6 +55,30 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckBookCover</servlet-name>
+        <url-pattern>/CheckBookCover</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadBookController</servlet-name>
+        <url-pattern>/UploadBookController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckBookExist</servlet-name>
+        <url-pattern>/CheckBookExist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReviewBookController</servlet-name>
+        <url-pattern>/ReviewBookController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailsBookController</servlet-name>
+        <url-pattern>/DetailsBookController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RateBookController</servlet-name>
+        <url-pattern>/RateBookController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

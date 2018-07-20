@@ -34,12 +34,12 @@
                                     </a>
                                 </div>
                                 <div class="time">
-                                    ${t.createDate}
+                                    ${t.dateString}
                                 </div>
                             </div>
                             <div class="book-item">
-                                <c:url var="BookDetail" value="BookDetailController">
-                                    <c:param name="id" value="${t.idBook}"/>
+                                <c:url var="BookDetail" value="DetailsBookController">
+                                    <c:param name="idTrading" value="${t.id}"/>
                                 </c:url> 
                                 <a href="${BookDetail}" class="book-link">
                                     <div class="img">

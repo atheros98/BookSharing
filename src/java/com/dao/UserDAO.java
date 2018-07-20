@@ -163,15 +163,16 @@ public class UserDAO {
         return users;
     }
 
-    public User searchUserByID(int idUser) {
-        String sqlCommand = "SELECT * FROM [User] WHERE id = " + idUser;
+    public User getUserById(String idUser) {
+        User user = new User();
+        String sqlCommand = "SELECT * FROM [User] where id = ?";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        User user = new User();
         try {
             conn = db.getConnection();
             ps = conn.prepareStatement(sqlCommand);
+            ps.setString(1, idUser);
             rs = ps.executeQuery();
             while (rs.next()) {
                 user.setId(rs.getInt(1));

@@ -170,16 +170,17 @@ body {
 
 .content {
     width: 80%;
-    height: 1000px;
+    height: 100%;
     display: flex;
     align-items: stretch;
     margin: auto;
+    margin-bottom: 50px;
 }
 
 /* content-left */
 
 .content-left {
-    flex-grow: 0;
+    width: 25%;
     padding-right: 15px;
 }
 
@@ -246,7 +247,7 @@ body {
 /* content-CENTER */
 
 .content-center {
-    flex-grow: 3;
+    width: 70%;
 }
 
 .content-center h3 {
@@ -318,7 +319,7 @@ body {
 /* content-right */
 
 .content-right {
-    flex-grow: 0;
+    width: 30%;
 }
 
 .heading {
@@ -430,6 +431,13 @@ body {
     border: 1px solid #fff;
     max-width: 100%;
     height: auto;
+}
+
+.book-item .title:before,
+.book-item .title:after{
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .book-item .title {

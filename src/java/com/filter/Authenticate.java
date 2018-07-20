@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Administrator
  */
-@WebFilter(urlPatterns = {"/*"})
+//@WebFilter(urlPatterns = {"/*"})
 public class Authenticate implements Filter {
 
     @Override
