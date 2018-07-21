@@ -8,7 +8,10 @@
 <div class="header" id="myheader">
     <div class="main-header">
         <div class="logo">
-            <b>Book</b>Share</div>
+            <!--<a href="HomeController">-->
+                <b>Book</b>Share
+            <!--</a>-->
+        </div> 
         <div class="menu">
             <ul>
                 <li>

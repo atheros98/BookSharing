@@ -45,7 +45,7 @@
                                 </c:if>
                                 <c:if test='${(param.filter == null && l != "All")
                                               ||(param.filter != null && param.filter != l)}'>
-                                    <a class="unseleted-type" href="${SearchByFilter}">${l}</a>
+                                      <a class="unseleted-type" href="${SearchByFilter}">${l}</a>
                                 </c:if>
                             </li>
                         </c:forEach>
@@ -61,9 +61,11 @@
                                 <div class="img">
                                     <img src="${b.image}" alt=""/>
                                 </div>
-                                <div class="title">${b.title}</div>
-                                <div class="author">${b.author}</div>
-                                <div class="description">${b.description}</div>
+                                <div class="book-content">
+                                    <h2>${b.title}</h2>
+                                    <author>${b.author}</author>
+                                    <p>${b.description}</p>
+                                </div>
                             </a>
                         </div>
                     </c:forEach>
@@ -88,8 +90,8 @@
                                   <span class="selected-page">${p}</span>
                             </c:if>
                             <c:if test="${(param.page == null && p != 1) 
-                                  || param.page != p && param.page != null}">
-                                <a class="next-page" href="${SearchByPage}">${p}</a>
+                                          || param.page != p && param.page != null}">
+                                  <a class="next-page" href="${SearchByPage}">${p}</a>
                             </c:if>
 
                         </c:forEach>

@@ -50,7 +50,6 @@
                                         <author>${t.book.author}</author>
                                         <p>${t.book.description}</p>
                                     </div>
-
                                 </a>
                             </div>
                         </div>
