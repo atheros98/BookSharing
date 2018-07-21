@@ -5,46 +5,51 @@
  */
 package com.entity;
 
+import com.dao.ImageBookDAO;
+
 /**
  *
  * @author Administrator
  */
 public class Book {
 
-    private int iD, idUser;
+    private int id, idUser;
     private String title, author, iSBN, language, description, tag;
     private boolean status;
 
     public Book() {
-
     }
 
-    public Book(String title, String author, String iSBN, String language, String description) {
+    public Book(int id, int idUser, String title, String author, String iSBN, String language, String description, String tag, boolean status) {
+        this.id = id;
+        this.idUser = idUser;
         this.title = title;
         this.author = author;
         this.iSBN = iSBN;
         this.language = language;
         this.description = description;
-    }
-
-    public Book(String title, String author, String iSBN, String language, String description, String tag, boolean status, int idUser) {
-        this(title, author, iSBN, language, description);
         this.tag = tag;
         this.status = status;
+    }
+
+    public String getImage() throws Exception {
+        return new ImageBookDAO().getImageByBookID(String.valueOf(id));
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
-    }
-
-    public Book(int iD, String title, String author, String iSBN, String language, String description, String tag, boolean status, int idUser) {
-        this(title, author, iSBN, language, description, tag, status, idUser);
-        this.iD = iD;
-    }
-
-    public int getiD() {
-        return iD;
-    }
-
-    public void setiD(int iD) {
-        this.iD = iD;
     }
 
     public String getTitle() {
@@ -103,17 +108,9 @@ public class Book {
         this.status = status;
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
     @Override
     public int hashCode() {
-        return this.iD; //To change body of generated methods, choose Tools | Templates.
+        return this.id; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -121,4 +118,5 @@ public class Book {
         Book anotherBook = (Book) obj;
         return iSBN.equals(anotherBook.getiSBN()); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

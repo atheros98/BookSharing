@@ -13,6 +13,14 @@
         <servlet-class>com.controller.LoginController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SearchBookController</servlet-name>
+        <servlet-class>com.controller.SearchBookController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>com.controller.HomeController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CheckBookCover</servlet-name>
         <servlet-class>com.controller.CheckBookCover</servlet-class>
     </servlet>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBookController</servlet-name>
+        <url-pattern>/SearchBookController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/HomeController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CheckBookCover</servlet-name>

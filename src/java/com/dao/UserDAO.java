@@ -197,8 +197,4 @@ public class UserDAO {
         }
         return user;
     }
-
-    public String getUsernameById(int id) {
-        return getUserById(id + "").getUserName();
-    }
 }

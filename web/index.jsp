@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,20 +24,57 @@
                 <div class="content-center">
                     <h3>NEWEST BOOK UPLOAD</h3>
                     <section class="section-center">
-                        <div class="section-center-header">
-                            <div class="user">
-                                <a href="#">
-                                    <img src="img/admin.jpg" alt="admin">
-                                    <p>admin</p>
+                    <c:forEach items="${tradings}" var="t">
+                        <div class="new-book">
+                            <div class="section-center-header">
+                                <div class="user">
+                                    <a href="#">
+                                        <img src="${t.user.avatar}">
+                                        <p>${t.user.fullName}</p>
+                                    </a>
+                                </div>
+                                <div class="time">
+                                    ${t.dateString}
+                                </div>
+                            </div>
+                            <div class="book-item">
+                                <c:url var="BookDetail" value="DetailsBookController">
+                                    <c:param name="idTrading" value="${t.id}"/>
+                                </c:url> 
+                                <a href="${BookDetail}" class="book-link">
+                                    <div class="img">
+                                        <img src="${t.book.image}" alt=""/>
+                                    </div>
+                                    <div class="book-content">
+                                        <h2>${t.book.title}</h2>
+                                        <author>${t.book.author}</author>
+                                        <p>${t.book.description}</p>
+                                    </div>
                                 </a>
                             </div>
-                            <div class="time">
-                                11/07/2018
-                            </div>
                         </div>
-                    </section>
+                    </c:forEach>
+                </section>
+                <div class="page">
+                    <c:if test="${pages > 1}">
+                        <c:forEach var="p" begin="1" end="${pages}" step="1">
+                            <c:url var="HomeByPage" value="HomeController">
+                                <c:param name="page" value="${p}"/>
+                            </c:url> 
+                            <c:if test="${(param.page == null && p == 1) 
+                                          || (param.page == p)}">
+                                  <span class="selected-page">${p}</span>
+                            </c:if>
+                            <c:if test="${(param.page == null && p != 1) 
+                                          || param.page != p && param.page != null}">
+                                  <a class="next-page" href="${HomeByPage}">${p}</a>
+                            </c:if>
+
+                        </c:forEach>
+                    </c:if>
                 </div>
-                <!--Kết thúc-->
+            </div>
+            <!--Kết thúc-->
             <jsp:include page="content-right.jsp"></jsp:include>
         </div>
         <script>

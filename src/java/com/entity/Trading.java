@@ -5,11 +5,14 @@
  */
 package com.entity;
 
-import java.util.Date;
+import com.dao.BookDAO;
+import com.dao.UserDAO;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
- * @author Administrator
+ * @author vip
  */
 public class Trading {
 
@@ -21,13 +24,14 @@ public class Trading {
     private boolean statusComplete;
     private Date createDate;
     private Date completeDate;
-
+    
     public Trading() {
-
+        statusBook = true;
+        statusComplete = true;
     }
 
-    public Trading(int id, int idOwner, int idBorrower, int idBook, boolean statusBook, boolean statusComplete, Date createDate, Date completeDate) {
-        this.id = id;
+    public Trading(int ID, int idOwner, int idBorrower, int idBook, boolean statusBook, boolean statusComplete, Date createDate, Date completeDate) {
+        this.id = ID;
         this.idOwner = idOwner;
         this.idBorrower = idBorrower;
         this.idBook = idBook;
@@ -37,6 +41,14 @@ public class Trading {
         this.completeDate = completeDate;
     }
 
+    public Book getBook() throws Exception{
+        return new BookDAO().getBookByBookID(String.valueOf(idBook));
+    }
+    
+    public User getUser() throws Exception{
+        return new UserDAO().getUserById(String.valueOf(idOwner));
+    }
+
     public int getId() {
         return id;
     }
@@ -44,6 +56,8 @@ public class Trading {
     public void setId(int id) {
         this.id = id;
     }
+    
+  
 
     public int getIdOwner() {
         return idOwner;
@@ -88,6 +102,10 @@ public class Trading {
     public Date getCreateDate() {
         return createDate;
     }
+    
+    public String getDateString(){
+        return new SimpleDateFormat("dd/MM/yyyy").format(createDate);
+    }
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
@@ -99,6 +117,24 @@ public class Trading {
 
     public void setCompleteDate(Date completeDate) {
         this.completeDate = completeDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Tradding{" + "ID=" + id + ", idOwner=" + idOwner + ", idBorrower=" + idBorrower + ", idBook=" + idBook + ", statusBook=" + statusBook + ", statusComplete=" + statusComplete + ", createDate=" + createDate + ", completeDate=" + completeDate + '}';
+    }
+
+    public Object[] toObject() {
+        return new Object[]{
+            id,
+            idOwner,
+            idBorrower,
+            idBook,
+            statusBook,
+            statusComplete,
+            createDate,
+            completeDate
+        };
     }
 
 }

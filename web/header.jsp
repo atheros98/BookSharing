@@ -8,11 +8,14 @@
 <div class="header" id="myheader">
     <div class="main-header">
         <div class="logo">
-            <b>Book</b>Share</div>
+            <!--<a href="HomeController">-->
+                <b>Book</b>Share
+            <!--</a>-->
+        </div> 
         <div class="menu">
             <ul>
                 <li>
-                    <a href="#">Home</a>
+                    <a href="HomeController">Home</a>
                 </li>
                 <li>
                     <a href="#">Manage Book</a>
@@ -24,8 +27,8 @@
         </div>
         <div class="search">
             <div class="search-container">
-                <form action="/action_page.php">
-                    <input type="text" placeholder="Search.." name="search" autocomplete="off">
+                <form action="SearchBookController">
+                    <input type="text" placeholder="Search.." name="query" autocomplete="off" value="${param.query}">
                     <button type="submit">
                         <i class="fa fa-search"></i>
                     </button>
