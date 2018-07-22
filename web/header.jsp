@@ -45,9 +45,9 @@
                 <i class="fas fa-user"></i>
             </button>
             <div class="dropdown-content">
-                <a href="#">Profile</a>
+                <a href="UpdateProfileController">Profile</a>
                 <a href="#">Settings</a>
-                <a href="#">Logout</a>
+                <a href="LogoutController">Logout</a>
             </div>
         </div>
     </div>

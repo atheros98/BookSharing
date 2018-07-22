@@ -5,22 +5,19 @@
  */
 package com.controller;
 
-import com.dao.BookDAO;
-import com.entity.Book;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Administrator
+ * @author Chi Nguyen
  */
-public class CheckBookExist extends HttpServlet {
+public class LogoutController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -34,23 +31,9 @@ public class CheckBookExist extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String isbn = request.getParameter("isbn");
-            ObjectMapper mapperObj = new ObjectMapper();
-            BookDAO dao = new BookDAO();
-            if (dao.isBookExisted(isbn)) {
-                Book book = dao.getBookByISBN(isbn);
-                // convert book to json
-                String bookJson = mapperObj.writeValueAsString(book);
-                System.out.println(book);
-                System.out.println(bookJson);
-                response.getWriter().write(bookJson);
-            } else {
-                response.getWriter().write(mapperObj.writeValueAsString("{}"));
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(CheckBookExist.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        HttpSession session = request.getSession();
+        session.invalidate();
+        response.sendRedirect("./LoginController");
     }
 
     /**
@@ -64,7 +47,6 @@ public class CheckBookExist extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
 }

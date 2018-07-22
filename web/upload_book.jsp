@@ -25,19 +25,20 @@
                     <div class="title-upload">
                         <i class="fas fa-plus-square"><b>Upload Book</b></i>
                     </div>
-                    <form action="UploadBookController" method="post">
+                    <form action="UploadBookController" method="POST" enctype="multipart/form-data">
                         <div class="upload-image">
                             <p>Upload images (Book cover) here:</p><br>
-                            Cover 1: <input id="cover1" type="file"accept="image/png, image/jpeg" required=""><br>
-                            Cover 2: <input id="cover2" type="file" accept="image/png, image/jpeg"><br>
-                            Cover 3: <input id="cover3" type="file" accept="image/png, image/jpeg"><br>
-                            Cover 4: <input id="cover4" type="file" accept="image/png, image/jpeg"><br>
-                            Cover 5: <input id="cover5" type="file" accept="image/png, image/jpeg">
+                            Cover 1: <input id="cover1" type="file" name="cover1" accept="image/png, image/jpeg" required=""><br>
+                            Cover 2: <input id="cover2" type="file" name="cover2" accept="image/png, image/jpeg"><br>
+                            Cover 3: <input id="cover3" type="file" name="cover3" accept="image/png, image/jpeg"><br>
+                            Cover 4: <input id="cover4" type="file" name="cover4" accept="image/png, image/jpeg"><br>
+                            Cover 5: <input id="cover5" type="file" name="cover5" accept="image/png, image/jpeg">
                         </div>
                         <div class="info-book">
                             <div class="elements">
                                 <div class="title"><i class="fas fa-barcode"></i>ISBN</div>
                                 <div class="input"><input id="isbn" type="number" name="isbn" placeholder="ISBN Book" required=""></div>
+                                <input id="idBook" type="hidden" name="idBook" value="empty">
                             </div>
                             <div class="elements">
                                 <div class="title"><i class="fas fa-file-signature"></i>Title</div>

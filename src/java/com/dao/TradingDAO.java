@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -108,49 +109,32 @@ public class TradingDAO {
         return rows / (pageSize) + ((rows % pageSize) != 0 ? 1 : 0);
     }
 
-    public boolean createTrading(Trading user) {
-        String sqlCommand = "INSERT INTO [Trading](fullName, birthday, username, password, email, createDate) values(?, ?, ?, ?, ?, ?)";
+    public int insertTrading(Trading trading) {
+        int idTrading = -1;
+        String sql = "INSERT INTO Trading (idOwner, idBook, createDate)\n"
+                + "VALUES (?, ?, ?);";
         Connection conn = null;
         PreparedStatement ps = null;
         try {
             conn = db.getConnection();
-            ps = conn.prepareCall(sqlCommand);
-
-            ps.executeUpdate();
-        } catch (Exception ex) {
-            Logger.getLogger(TradingDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        } finally {
-            close.closeConnection(conn);
-            close.closePreparedStatement(ps);
-        }
-        return true;
-    }
-
-    public boolean insertTrading(Trading trading) {
-        String sql = "INSERT INTO Trading (idOwner, idBorrower, idBook, statusBook, statusComplete, createDate, completeDate)\n"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?);";
-        Connection conn = null;
-        PreparedStatement ps = null;
-        try {
-            conn = db.getConnection();
-            ps = conn.prepareCall(sql);
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, trading.getIdOwner());
-            ps.setInt(2, trading.getIdBorrower());
-            ps.setInt(3, trading.getIdBook());
-            ps.setBoolean(4, trading.isStatusBook());
-            ps.setBoolean(5, trading.isStatusComplete());
-            ps.setString(6, new getDate().getCurrentDate());
-            ps.setString(7, "null");
-            ps.executeUpdate();
+            ps.setInt(2, trading.getIdBook());
+            ps.setString(3, new getDate().getCurrentDate());
+            int row = ps.executeUpdate();
+            if (row != 0) {
+                ResultSet generatedKeys = ps.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    idTrading = generatedKeys.getInt(1);
+                }
+            }
         } catch (Exception ex) {
             System.out.println(ex);
-            return false;
         } finally {
             close.closeConnection(conn);
             close.closePreparedStatement(ps);
         }
-        return true;
+        return idTrading;
     }
 
     /**

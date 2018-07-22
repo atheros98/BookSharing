@@ -20,12 +20,13 @@ public class ConnectionDB {
 //    private String pwd;
 //    private String dbName;
 //    private String imgFolder;
-    private final String serverName = "JMT";
+    private final String serverName = "CHI-NGUYEN";
     private final String dbName = "BookShareProject";
     private final String port = "1433";
-    private final String username = "sa";   
+    private final String username = "sa";
     private final String pwd = "sa";
-    private final String imgFolder = "img/";
+    private final String coverBookFolder = "/uploadBook/";
+    private final String avatarFolder = "/avatar/";
 
     public ConnectionDB() throws Exception {
 //        Properties prop = new Properties();
@@ -43,8 +44,12 @@ public class ConnectionDB {
         return DriverManager.getConnection("jdbc:sqlserver://" + serverName + ":" + port + ";databaseName=" + dbName, username, pwd);
     }
 
-    public String getResource() throws Exception {
-        return imgFolder;
+    public String getCoverBookFolder() throws Exception {
+        return coverBookFolder;
+    }
+
+    public String getAvatarFolder() throws Exception {
+        return avatarFolder;
     }
 
 }

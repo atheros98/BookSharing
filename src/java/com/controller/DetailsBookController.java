@@ -6,6 +6,7 @@
 package com.controller;
 
 import com.dao.BookDAO;
+import com.dao.ImageBookDAO;
 import com.dao.TradingDAO;
 import com.dao.UserDAO;
 import com.entity.Book;
@@ -38,17 +39,22 @@ public class DetailsBookController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idTrading = request.getParameter("idTrading");
+        System.out.println(idTrading);
         if (idTrading != null) {
             try {
                 TradingDAO tradingdao = new TradingDAO();
                 BookDAO bookdao = new BookDAO();
                 UserDAO userdao = new UserDAO();
+                ImageBookDAO ibdao = new ImageBookDAO();
                 //
                 Trading trading = tradingdao.getTradingById(idTrading);
+                System.out.println(trading.toString());
                 Book book = bookdao.getBookByBookID(trading.getIdBook() + "");
+                System.out.println(book.toString());
                 //
                 request.setAttribute("userOwner", userdao.getUserById(trading.getIdOwner() + ""));
                 request.setAttribute("tradingdate", trading.getCreateDate());
+                request.setAttribute("coverBooks", ibdao.getCoverBooks(trading.getIdBook()));
                 request.setAttribute("currentDate", new getDate().getCurrentDate());
                 request.setAttribute("book", book);
                 request.getRequestDispatcher("/details_book.jsp").forward(request, response);

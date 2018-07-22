@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : details_book
     Created on : Jul 18, 2018, 12:35:46 PM
@@ -77,15 +78,13 @@
                     </div>
                 </div>
                 <div class="cover-book">
-                    <img src="img/dac-nhan-tam.png" alt="cover1">
-                    <img src="img/empty.jpg" alt="cover2">
-                    <img src="img/empty.jpg" alt="cover3">
-                    <img src="img/empty.jpg" alt="cover4">
-                    <img src="img/empty.jpg" alt="cover5">
+                    <c:forEach var="cover" items="${coverBooks}">
+                        <img src="<%=request.getContextPath()%>${cover.getUrlImage()}" alt="${cover}">
+                    </c:forEach>
                 </div>
                 <div class="info-book">
                     <div class="scrollhere"></div>
-                    <input type="hidden" id="idBook" value="3">
+                    <input type="hidden" id="idBook" value="${book.getId()}">
                     <div class="elements">
                         <div class="title"><i class="fas fa-barcode"></i>ISBN</div>
                         <div class="input"><input type="number" value="${book.getiSBN()}"  readonly="true"></div>
@@ -144,8 +143,7 @@
             <!--Kết thúc-->
             <jsp:include page="content-right.jsp"></jsp:include>
         </div>
-        <script src="js/review_book.js"></script>
-        <script src="js/rate_book.js"></script>
+        <script src="js/RateReviewBook.js"></script>
         <script>
                         window.onscroll = function () {
                             myFunction();
