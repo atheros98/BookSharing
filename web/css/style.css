@@ -171,6 +171,30 @@ body {
     display: block;
 }
 
+/*===================== For not yet login =====================*/
+.authen{
+    display: flex;
+    padding: 10px 5px;
+}
+
+.authen a{
+    display: block;
+    padding: 6px 8px;
+    margin-right: 1px;
+    background: #F4F1EA;
+    color: #372213;
+    text-decoration: none;
+    font-size: 17px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.authen a :hover{
+    background: #372213;
+    color: #F4F1EA;
+    /*transition-duration: 1s;*/
+}
 /* ====================== For main content ========================= */
 
 .content {

@@ -7,6 +7,7 @@ package com.controller;
 
 import com.dao.UserDAO;
 import com.entity.User;
+import com.service.getDate;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,7 +34,7 @@ import javax.servlet.http.Part;
         maxRequestSize = 1024 * 1024 * 100
 )
 public class UpdateProfileController extends HttpServlet {
-
+    
     public static final String UPLOAD_DIR = "avatar";
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,11 +70,23 @@ public class UpdateProfileController extends HttpServlet {
         try {
             UserDAO userdao = new UserDAO();
             User user = (User) session.getAttribute("currentUser");
+            User u; // new constructor
 
             switch (command) {
                 // cập nhật thông tin cá nhân người dùng
                 case "update-info":
-
+                    u = new User();
+                    u.setId(user.getId());
+                    u.setFullName(request.getParameter("fullname"));
+                    u.setBirthday(new getDate().convertDate(request.getParameter("birthday")));
+                    u.setEmail(request.getParameter("email"));
+                    u.setAddress(request.getParameter("address"));
+                    u.setPhoneNumber(request.getParameter("phonenumber"));
+                    u.setLinkFacebook(request.getParameter("linkfacebook"));
+                    
+                    userdao.updateInfo(u);
+                    session.setAttribute("currentUser", userdao.getUserById(user.getId() + ""));
+                    
                     request.getRequestDispatcher("/profile.jsp").forward(request, response);
                     break;
                 // cập nhật ảnh đại diện
@@ -90,7 +103,7 @@ public class UpdateProfileController extends HttpServlet {
                             request.setAttribute("error", "No images uploaded. Try again !.");
                             request.getRequestDispatcher("/profile.jsp").forward(request, response);
                         } else { // Cập nhật ảnh đại diện của người dùng
-                            User u = new User(user.getId(), locationAva);
+                            u = new User(user.getId(), locationAva);
                             userdao.updateAvatar(u);
                             System.out.println(locationAva);
                             // update current user add new avatar
@@ -131,7 +144,7 @@ public class UpdateProfileController extends HttpServlet {
             // Xóa file ảnh avatar cũ của người dùng
             System.out.println("Delete old file: ");
             deleteOldAvatar(basePath, user.getUserName());
-
+            
             InputStream inputStream = null;
             OutputStream outputStream = null;
             try {
@@ -143,7 +156,7 @@ public class UpdateProfileController extends HttpServlet {
                 while ((read = inputStream.read(bytes)) != -1) {
                     outputStream.write(bytes, 0, read);
                 }
-
+                
             } catch (Exception ex) {
                 Logger.getLogger(UpdateProfileController.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
@@ -155,7 +168,7 @@ public class UpdateProfileController extends HttpServlet {
                     outputStream.close();
                 }
             }
-
+            
         } catch (IOException | ServletException e) {
             System.out.println("Error upload avatar2 !");
             return null; // Lỗi
@@ -176,7 +189,7 @@ public class UpdateProfileController extends HttpServlet {
             }
         }
     }
-
+    
     private String getFileName(Part part) {
         // form-data; name="file"; filename="C:\file1.zip"
         // form-data; name="file"; filename="C:\Note\file2.zip"
@@ -207,5 +220,5 @@ public class UpdateProfileController extends HttpServlet {
             return null;
         }
     }
-
+    
 }

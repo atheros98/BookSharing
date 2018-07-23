@@ -52,6 +52,7 @@ public class UploadBookController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("upload_book.jsp").forward(request, response);
     }
 
     /**
@@ -68,7 +69,7 @@ public class UploadBookController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("currentUser");
-        int idTrading;
+        int idTrading = 0;
 
         try {
             BookDAO bookDAO = new BookDAO();
@@ -102,16 +103,16 @@ public class UploadBookController extends HttpServlet {
                 Trading trading = new Trading();
                 trading.setIdOwner(user.getId());
                 trading.setIdBook(Integer.parseInt(request.getParameter("idBook")));
-                
+
                 idTrading = tradingDAO.insertTrading(trading);
             }
-            
-            request.setAttribute("idTrading", idTrading);
-            request.getRequestDispatcher("/DetailsBookController").forward(request, response);
+
         } catch (Exception ex) {
             Logger.getLogger(UploadBookController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        request.setAttribute("idTrading", idTrading);
+        request.getRequestDispatcher("/DetailsBookController").forward(request, response);
     }
 
     private String uploadCoverBook(HttpServletRequest request, String namePart, int idBook) {

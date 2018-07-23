@@ -53,7 +53,7 @@ public class Authenticate implements Filter {
             chain.doFilter(request, response);
         } else if (requestPath.endsWith("LogoutController")) {
             chain.doFilter(request, response);
-        } else if (requestPath.endsWith("index.jsp")) {
+        } else if (requestPath.endsWith("bookshare/") || requestPath.endsWith("HomeController")) {
             chain.doFilter(request, response);
         } else {
             HttpSession session = req.getSession();

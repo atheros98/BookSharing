@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : header
     Created on : Jul 11, 2018, 11:11:54 PM
@@ -9,7 +10,7 @@
     <div class="main-header">
         <div class="logo">
             <!--<a href="HomeController">-->
-                <b>Book</b>Share
+            <b>Book</b>Share
             <!--</a>-->
         </div> 
         <div class="menu">
@@ -18,7 +19,7 @@
                     <a href="HomeController">Home</a>
                 </li>
                 <li>
-                    <a href="#">Manage Book</a>
+                    <a href="UploadBookController">Upload Book</a>
                 </li>
                 <li>
                     <a href="#">Trading</a>
@@ -35,20 +36,32 @@
                 </form>
             </div>
         </div>
-        <div class="notifications">
-            <button>
-                <i class="fas fa-bell"></i>
-            </button>
-        </div>
-        <div class="dropdown">
-            <button>
-                <i class="fas fa-user"></i>
-            </button>
-            <div class="dropdown-content">
-                <a href="UpdateProfileController">Profile</a>
-                <a href="#">Settings</a>
-                <a href="LogoutController">Logout</a>
-            </div>
-        </div>
+        <c:choose>
+            <c:when test="${sessionScope.username!=null}">
+                <div class="notifications">
+                    <button>
+                        <i class="fas fa-bell"></i>
+                    </button>
+                </div>
+                <div class="dropdown">
+                    <button>
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="UpdateProfileController">Profile</a>
+                        <a href="#">Change Password</a>
+                        <a href="LogoutController">Logout</a>
+                    </div>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="authen">
+                    <a href="LoginController">Login</a>
+                </div>
+                <div class="authen">
+                    <a href="register.jsp">Register</a>
+                </div>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
