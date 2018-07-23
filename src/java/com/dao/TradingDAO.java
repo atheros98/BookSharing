@@ -27,6 +27,11 @@ public class TradingDAO {
     private final ConnectionDB db;
     private final Close close;
     private final int pageSize = 10;
+    private final int NOT_AVAILABLE = -1;
+    private final int AVAILABLE = 0;
+    private final int PENDING = 1;
+    private final int LENDING = 2;
+    private final int COMPLETE = 3;
 
     public TradingDAO() throws Exception {
         db = new ConnectionDB();
@@ -415,7 +420,7 @@ public class TradingDAO {
         }
         return trading;
     }
-    
+
     public List<Trading> getTradingByBookId(String idBook) {
         List<Trading> tradings = new ArrayList<>();
         String sqlCommand = "SELECT * FROM Trading where idBook = ?";
@@ -449,5 +454,181 @@ public class TradingDAO {
         }
         return tradings;
     }
+
+    public List<Trading> getAvailableTrading(int idOwner) {
+        List<Trading> tradings = new ArrayList<>();
+        String sqlCommand = "SELECT * FROM Trading where statusBook = ? and idOwner = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sqlCommand);
+            ps.setInt(1, AVAILABLE);
+            ps.setInt(2, idOwner);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Trading trading = new Trading();
+                trading.setId(rs.getInt(1));
+                trading.setIdOwner(rs.getInt(2));
+                trading.setIdBorrower(rs.getInt(3));
+                trading.setIdBook(rs.getInt(4));
+                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusComplete(rs.getBoolean(6));
+                trading.setCreateDate(rs.getDate(7));
+                trading.setCompleteDate(rs.getDate(7));
+                tradings.add(trading);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+            close.closeResultSet(rs);
+        }
+        return tradings;
+    }
+
+    public List<Trading> getOwnerPedingTrading(int idOwner) {
+        List<Trading> tradings = new ArrayList<>();
+        String sqlCommand = "SELECT * FROM Trading where statusBook = ? and idOwner = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sqlCommand);
+            ps.setInt(1, PENDING);
+            ps.setInt(2, idOwner);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Trading trading = new Trading();
+                trading.setId(rs.getInt(1));
+                trading.setIdOwner(rs.getInt(2));
+                trading.setIdBorrower(rs.getInt(3));
+                trading.setIdBook(rs.getInt(4));
+                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusComplete(rs.getBoolean(6));
+                trading.setCreateDate(rs.getDate(7));
+                trading.setCompleteDate(rs.getDate(7));
+                tradings.add(trading);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+            close.closeResultSet(rs);
+        }
+        return tradings;
+    }
+
+    public List<Trading> getBorrowerPedingTrading(int idBorrower) {
+        List<Trading> tradings = new ArrayList<>();
+        String sqlCommand = "SELECT * FROM Trading where statusBook = ? and idBorrower = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sqlCommand);
+            ps.setInt(1, PENDING);
+            ps.setInt(2, idBorrower);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Trading trading = new Trading();
+                trading.setId(rs.getInt(1));
+                trading.setIdOwner(rs.getInt(2));
+                trading.setIdBorrower(rs.getInt(3));
+                trading.setIdBook(rs.getInt(4));
+                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusComplete(rs.getBoolean(6));
+                trading.setCreateDate(rs.getDate(7));
+                trading.setCompleteDate(rs.getDate(7));
+                tradings.add(trading);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+            close.closeResultSet(rs);
+        }
+        return tradings;
+    }
+
+    public List<Trading> getLendingTrading(int idOwner) {
+        List<Trading> tradings = new ArrayList<>();
+        String sqlCommand = "SELECT * FROM Trading where statusBook = ? and idOwner = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sqlCommand);
+            ps.setInt(1, LENDING);
+            ps.setInt(2, idOwner);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Trading trading = new Trading();
+                trading.setId(rs.getInt(1));
+                trading.setIdOwner(rs.getInt(2));
+                trading.setIdBorrower(rs.getInt(3));
+                trading.setIdBook(rs.getInt(4));
+                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusComplete(rs.getBoolean(6));
+                trading.setCreateDate(rs.getDate(7));
+                trading.setCompleteDate(rs.getDate(7));
+                tradings.add(trading);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+            close.closeResultSet(rs);
+        }
+        return tradings;
+    }
+
+    public List<Trading> getBorrowingTrading(int idBorrower) {
+        List<Trading> tradings = new ArrayList<>();
+        String sqlCommand = "SELECT * FROM Trading where statusBook = ? and idBorrower = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sqlCommand);
+            ps.setInt(1, LENDING);
+            ps.setInt(2, idBorrower);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Trading trading = new Trading();
+                trading.setId(rs.getInt(1));
+                trading.setIdOwner(rs.getInt(2));
+                trading.setIdBorrower(rs.getInt(3));
+                trading.setIdBook(rs.getInt(4));
+                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusComplete(rs.getBoolean(6));
+                trading.setCreateDate(rs.getDate(7));
+                trading.setCompleteDate(rs.getDate(7));
+                tradings.add(trading);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+            close.closeResultSet(rs);
+        }
+        return tradings;
+    }
+    
 
 }
