@@ -415,5 +415,39 @@ public class TradingDAO {
         }
         return trading;
     }
+    
+    public List<Trading> getTradingByBookId(String idBook) {
+        List<Trading> tradings = new ArrayList<>();
+        String sqlCommand = "SELECT * FROM Trading where idBook = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sqlCommand);
+            ps.setString(1, idBook);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Trading trading = new Trading();
+                trading.setId(rs.getInt(1));
+                trading.setIdOwner(rs.getInt(2));
+                trading.setIdBorrower(rs.getInt(3));
+                trading.setIdBook(rs.getInt(4));
+                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusComplete(rs.getBoolean(6));
+                trading.setCreateDate(rs.getDate(7));
+                trading.setCompleteDate(rs.getDate(7));
+                tradings.add(trading);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+            close.closeResultSet(rs);
+        }
+        return tradings;
+    }
 
 }

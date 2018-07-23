@@ -534,3 +534,17 @@ body {
 }
 
 
+/* ====================== Book detail css ========================= */
+
+
+.book-title > h2 {
+    margin-top: 5px;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    color: #000;
+    font-size: 25px;
+    max-width: 35vw;
+    word-wrap: break-word;
+    padding: 10px;
+    padding-bottom: 5px;
+}
+

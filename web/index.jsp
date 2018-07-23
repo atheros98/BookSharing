@@ -39,7 +39,7 @@
                             </div>
                             <div class="book-item">
                                 <c:url var="BookDetail" value="DetailsBookController">
-                                    <c:param name="idTrading" value="${t.id}"/>
+                                    <c:param name="id" value="${t.book.id}"/>
                                 </c:url> 
                                 <a href="${BookDetail}" class="book-link">
                                     <div class="img">
