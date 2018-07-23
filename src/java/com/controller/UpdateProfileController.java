@@ -12,7 +12,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -65,7 +64,6 @@ public class UpdateProfileController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String command = request.getParameter("command");
-        System.out.println(command);
         try {
             UserDAO userdao = new UserDAO();
             User user = (User) session.getAttribute("currentUser");

@@ -21,7 +21,7 @@
                     <a href="#">Manage Book</a>
                 </li>
                 <li>
-                    <a href="#">Trading</a>
+                    <a href="TradingController">Trading</a>
                 </li>
             </ul>
         </div>

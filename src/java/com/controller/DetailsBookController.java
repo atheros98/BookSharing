@@ -6,9 +6,7 @@
 package com.controller;
 
 import com.dao.BookDAO;
-import com.dao.ImageBookDAO;
 import com.dao.TradingDAO;
-import com.dao.UserDAO;
 import com.entity.Book;
 import com.entity.Trading;
 import com.service.getDate;

@@ -5,7 +5,9 @@
  */
 package com.entity;
 
+import com.dao.TradingDAO;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -49,6 +51,26 @@ public class User {
         this.createDate = createDate;
     }
 
+    public List<Trading> getAvailable() throws Exception{
+        return new TradingDAO().getAvailableTrading(id);
+    }
+    
+    public List<Trading> getOwnerPending() throws Exception{
+        return new TradingDAO().getOwnerPedingTrading(id);
+    }
+    
+    public List<Trading> getBorrowerPending() throws Exception{
+        return new TradingDAO().getBorrowerPedingTrading(id);
+    }
+    
+    public List<Trading> getBorrowing() throws Exception{
+        return new TradingDAO().getBorrowingTrading(id);
+    }
+    
+    public List<Trading> getLending() throws Exception{
+        return new TradingDAO().getLendingTrading(id);
+    }
+    
     public int getId() {
         return id;
     }

@@ -93,6 +93,7 @@
                                 </div>
                             </div>
                             <div class="submit-info">
+                                <input type="hidden" name="command" value="update-avatar">
                                 <button type="submit">Change Information</button>
                             </div>
                         </div>

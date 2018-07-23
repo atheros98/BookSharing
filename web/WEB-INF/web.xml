@@ -52,6 +52,10 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>com.controller.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TradingController</servlet-name>
+        <servlet-class>com.controller.TradingController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TradingController</servlet-name>
+        <url-pattern>/TradingController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
