@@ -1,0 +1,63 @@
+.smpSortableTable--nav {
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.smpSortableTable--sortable,
+.smpSortableTable--nav-links {
+    cursor: pointer;
+    color: #3b8ede;
+}
+
+.smpSortableTable--sortable.desc::after {
+    content: '\25B2';
+}
+
+.smpSortableTable--sortable.asc::after {
+    content: '\25BC';
+}
+
+.smpSortableTable--nav-links.smpSortableTable--disabled {
+    cursor: not-allowed;
+    color: lightgrey;
+}
+
+.smpSortableTable--prev {
+    float: left;
+}
+
+.smpSortableTable--next {
+    float: right;
+}
+
+#people-table{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+}
+
+#people-table td, #people-table th {
+    width: 25%;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#people-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#people-table tr:hover {background-color: #ddd;}
+
+#people-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #372213;
+    color: white;
+}
+
+#people-table img{
+    width: 100%;
+}

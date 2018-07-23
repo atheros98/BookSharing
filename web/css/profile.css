@@ -1,0 +1,67 @@
+
+.avatar{
+    float: left;
+    max-width: 33%;
+    margin-top: 20px;
+    padding: 0px 5px;
+    text-align: center;
+}
+
+.info{
+    float: right;
+    width: 65%;
+    margin-top: 20px;
+}
+
+.avatar img{
+    width: 80%;
+    border-radius: 50%;
+}
+
+.avatar button{
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #372213;
+    color: #fff;
+    font-size: 17px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.fullname{
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 100%;
+    background: #F9F7F4;
+    padding: 9px 0;
+    border: none;
+}
+
+.info p{
+    margin-bottom: 15px;
+}
+
+.info .rate{
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #b3b3b3;
+}
+
+.submit-info{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.submit-info button{
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #372213;
+    color: #fff;
+    font-size: 17px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}

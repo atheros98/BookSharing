@@ -29,6 +29,11 @@ public class User {
     public User() {
     }
 
+    public User(int id, String avatar) {
+        this.id = id;
+        this.avatar = avatar;
+    }
+
     public User(int id, String fullName, Date birthday, String avatar, String userName, String password, String email, String address, String phoneNumber, String linkFacebook, int userPoint, Date createDate) {
         this.id = id;
         this.fullName = fullName;

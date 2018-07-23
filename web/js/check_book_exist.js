@@ -55,8 +55,10 @@ document.getElementById("isbn").addEventListener("input", debounce(function () {
                 document.getElementById('tag').value = data.tag;
                 document.getElementById('language').value = data.language;
                 document.getElementById('description').value = data.description;
+                document.getElementById('idBook').value = data.id;
             } else {
                 disableInput(false);
+                document.getElementById('idBook').value = "empty";
             }
         },
         error: function () {

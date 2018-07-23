@@ -6,7 +6,7 @@
 package com.controller;
 
 import com.dao.ReviewBookDAO;
-import com.dao.StarPoint;
+import com.entity.StarPoint;
 import com.entity.RateBook;
 import com.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -41,6 +41,7 @@ public class SearchBookController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String query = request.getParameter("query");
+            System.out.print(query);
             if (query == null || query.trim().isEmpty()) {
                 response.sendRedirect(".");
                 return;

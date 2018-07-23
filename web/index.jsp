@@ -29,7 +29,7 @@
                             <div class="section-center-header">
                                 <div class="user">
                                     <a href="#">
-                                        <img src="${t.user.avatar}">
+                                        <img src="<%=request.getContextPath()%>${t.user.avatar}">
                                         <p>${t.user.fullName}</p>
                                     </a>
                                 </div>
@@ -43,7 +43,7 @@
                                 </c:url> 
                                 <a href="${BookDetail}" class="book-link">
                                     <div class="img">
-                                        <img src="${t.book.image}" alt=""/>
+                                        <img src="<%=request.getContextPath()%>/${t.book.image}" alt=""/>
                                     </div>
                                     <div class="book-content">
                                         <h2>${t.book.title}</h2>

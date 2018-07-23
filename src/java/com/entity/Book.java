@@ -109,6 +109,11 @@ public class Book {
     }
 
     @Override
+    public String toString() {
+        return "Book{" + "id=" + id + ", idUser=" + idUser + ", title=" + title + ", author=" + author + ", iSBN=" + iSBN + ", language=" + language + ", description=" + description + ", tag=" + tag + ", status=" + status + '}';
+    }
+
+    @Override
     public int hashCode() {
         return this.id; //To change body of generated methods, choose Tools | Templates.
     }

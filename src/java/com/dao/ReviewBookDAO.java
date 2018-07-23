@@ -207,14 +207,18 @@ public class ReviewBookDAO {
             close.closePreparedStatement(ps);
             close.closeResultSet(rs);
         }
-        return point / count;
+        if (count == 0) {
+            return 5;
+        } else {
+            return point / count;
+        }
     }
 
     public static void main(String[] args) {
         try {
             ReviewBookDAO r = new ReviewBookDAO();
-            System.out.println(r.getRate(3, 1));
-            System.out.println(r.getRateOfBook(3));
+            System.out.println(r.getRate(1005, 1));
+            System.out.println(r.getRateOfBook(1005));
         } catch (Exception ex) {
             Logger.getLogger(ReviewBookDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

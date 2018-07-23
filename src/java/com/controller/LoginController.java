@@ -89,7 +89,7 @@ public class LoginController extends HttpServlet {
                     } else { // TH đăng nhập thành công
                         session.setAttribute("currentUser", user);
                         session.setAttribute("username", user.getUserName());
-                        response.sendRedirect("index.jsp");
+                        response.sendRedirect("HomeController");
                     }
                     break;
             }

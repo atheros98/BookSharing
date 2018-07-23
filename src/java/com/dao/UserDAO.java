@@ -47,7 +47,7 @@ public class UserDAO {
                     user.setId(rs.getInt(1));
                     user.setFullName(rs.getString(2));
                     user.setBirthday(rs.getDate(3));
-                    user.setAvatar(rs.getString(4));
+                    user.setAvatar(db.getAvatarFolder()+ rs.getString(4));
                     user.setUserName(rs.getString(5));
                     user.setEmail(rs.getString(7));
                     user.setAddress(rs.getString(8));
@@ -140,7 +140,7 @@ public class UserDAO {
                 user.setId(rs.getInt(1));
                 user.setFullName(rs.getString(2));
                 user.setBirthday(rs.getDate(3));
-                user.setAvatar(rs.getString(4));
+                user.setAvatar(db.getAvatarFolder() + rs.getString(4));
                 user.setUserName(rs.getString(5));
                 user.setEmail(rs.getString(7));
                 user.setAddress(rs.getString(8));
@@ -176,7 +176,7 @@ public class UserDAO {
                 user.setId(rs.getInt(1));
                 user.setFullName(rs.getString(2));
                 user.setBirthday(rs.getDate(3));
-                user.setAvatar(rs.getString(4));
+                user.setAvatar(db.getAvatarFolder() + rs.getString(4));
                 user.setUserName(rs.getString(5));
                 user.setEmail(rs.getString(7));
                 user.setAddress(rs.getString(8));
@@ -194,5 +194,25 @@ public class UserDAO {
             close.closeResultSet(rs);
         }
         return user;
+    }
+
+    public boolean updateAvatar(User user) {
+        String sqlCommand = "UPDATE [User] set avatar = ? where id = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareCall(sqlCommand);
+            ps.setString(1, user.getAvatar());
+            ps.setInt(2, user.getId());
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+        }
+        return true;
     }
 }

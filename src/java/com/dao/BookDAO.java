@@ -10,6 +10,7 @@ import com.entity.Book;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,19 +21,52 @@ import java.util.logging.Logger;
  * @author Administrator
  */
 public class BookDAO {
-    
+
     private final ConnectionDB db;
     private final Close close;
     private final int pageSize = 15;
-    
+
     public BookDAO() throws Exception {
         db = new ConnectionDB();
         close = new Close();
     }
 
+    public int insertBook(Book book) {
+        int idBook = -1;
+        String sqlCommand = "INSERT INTO [Book](title, author, ISBN, language, description, tag, idUser) values(?, ?, ?, ?, ?, ?, ?)";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sqlCommand, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, book.getTitle());
+            ps.setString(2, book.getAuthor());
+            ps.setString(3, book.getiSBN());
+            ps.setString(4, book.getLanguage());
+            ps.setString(5, book.getDescription());
+            ps.setString(6, book.getTag());
+            ps.setInt(7, book.getIdUser());
+            int row = ps.executeUpdate();
+            if (row != 0) {
+                rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    idBook = rs.getInt(1);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            close.closeResultSet(rs);
+            close.closePreparedStatement(ps);
+            close.closeConnection(conn);
+        }
+        return idBook;
+    }
+
     //Statement must start wiht "Select * from book"
     private List<Book> getBooksByStatement(String statement) {
-        
+
         List<Book> bookList = new ArrayList<>();
         Connection conn = null;
         PreparedStatement prepareStatement = null;
@@ -51,9 +85,9 @@ public class BookDAO {
                 String tag = rs.getString(7);
                 boolean status = rs.getBoolean(8);
                 int idUser = rs.getInt(9);
-                
+
                 Book tmp = new Book(id, idUser, title, author, ISBN, language, description, tag, status);
-                
+
                 bookList.add(tmp);
             }
         } catch (Exception ex) {
@@ -63,10 +97,10 @@ public class BookDAO {
             close.closePreparedStatement(prepareStatement);
             close.closeConnection(conn);
         }
-        
+
         return bookList;
     }
-    
+
     public Book getBookByISBN(String xISBN) {
         //Main function is in try block.
         try {
@@ -80,7 +114,7 @@ public class BookDAO {
         //If any exceptions occur, return null.
         return null;
     }
-    
+
     public boolean isBookExisted(String xISBN) {
         boolean result = true;
         if (getBookByISBN(xISBN) == null) {
@@ -88,7 +122,7 @@ public class BookDAO {
         }
         return result;
     }
-    
+
     public List<Book> getLastedBook(int page) throws Exception {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
@@ -98,7 +132,7 @@ public class BookDAO {
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
-    
+
     public Book getBookByBookID(String idBook) {
         Book book = null;
         String query = "select * from Book where id='" + idBook + "'";
@@ -119,7 +153,7 @@ public class BookDAO {
                 String tag = rs.getString(7);
                 boolean status = rs.getBoolean(8);
                 int idUser = rs.getInt(9);
-                
+
                 book = new Book(id, idUser, title, author, ISBN, language, description, tag, status);
             }
         } catch (Exception ex) {
@@ -129,10 +163,10 @@ public class BookDAO {
             close.closePreparedStatement(ps);
             close.closeConnection(conn);
         }
-        
+
         return book;
     }
-    
+
     public List<Book> getBooksByName(String name, int page) throws Exception {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
@@ -142,7 +176,7 @@ public class BookDAO {
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
-    
+
     public List<Book> getBooksByISBN(String ISBN, int page) throws Exception {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
@@ -152,7 +186,7 @@ public class BookDAO {
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
-    
+
     public List<Book> getBooksByAuthor(String author, int page) throws Exception {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
@@ -162,7 +196,7 @@ public class BookDAO {
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
-    
+
     public List<Book> getBooksByTag(String tag, int page) throws Exception {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
@@ -172,7 +206,7 @@ public class BookDAO {
                 + " where result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
-    
+
     public List<Book> getBook(String queryStr, int page) throws Exception {
         int from = (page - 1) * pageSize + 1;
         int to = page * pageSize;
@@ -185,11 +219,11 @@ public class BookDAO {
                 + " where final_result.row between " + from + " and " + to;
         return getBooksByStatement(query);
     }
-    
+
     public int getRowCount(String type, String queryStr) {
         int pages = 0;
         String query = "";
-        
+
         switch (type) {
             case "lasted":
                 query = "select count(*) from Book";
@@ -214,7 +248,7 @@ public class BookDAO {
                 query = "select count (*) from Book where tag LIKE '%" + queryStr + "%'";
                 break;
         }
-        
+
         Connection conn = null;
         ResultSet rs = null;
         try {
@@ -229,13 +263,13 @@ public class BookDAO {
             close.closeResultSet(rs);
             close.closeConnection(conn);
         }
-        
+
         return pages;
     }
-    
+
     public int getPages(String type, String queryStr) throws Exception {
         int rows = getRowCount(type, queryStr);
         return rows / (pageSize) + ((rows % pageSize) != 0 ? 1 : 0);
     }
-    
+
 }
