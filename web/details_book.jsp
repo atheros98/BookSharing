@@ -94,16 +94,14 @@
                         </c:forEach>
                     </div>
                     <div class="indicator">
-                        <button class="" onclick="plusSlides(-1)">&#10094; Prev</button>
-                        <button class="" onclick="plusSlides(1)">Next &#10095;</button>
+                        <button id="prev" onclick="plusSlides(-1)">&#10094; Prev</button>
+                        <button id="next" onclick="plusSlides(1)">Next &#10095;</button>
                     </div>
                 </div>
                 <div class="cover-book">
+                    <c:set var="images" value="${book.images}"/>
                     <c:forEach var="image" items="${images}">
-                        <img src="${image}"/>
-                    </c:forEach>
-                    <c:forEach begin="${images.size()}" end="4">
-                        <img src="img/empty.jpg"/>
+                        <img src="<%=request.getContextPath()%>${image}"/>
                     </c:forEach>
                 </div>
                 <div class="info-book">
@@ -140,7 +138,7 @@
                     <div class="elements">
                         <div class="title"><i class="fas fa-pen"></i>Description</div>
                         <div class="input">
-                            <textarea id="description" readonly="true" style="border: none;">${book.getDescription()}</textarea>
+                            <textarea  id="description" readonly="true" style="border: none;">${book.getDescription()}</textarea>
                         </div>
                     </div>
                 </div>
@@ -195,15 +193,23 @@
             function showSlides(n) {
                 var i;
                 var slides = document.getElementsByClassName("info-book");
-                var length = slides.length - 2;
+                var length = slides.length - 1;
                 console.log(slideIndex);
-                if (n > length) {
-                    slideIndex = 0;
+                var prev = document.getElementById("prev");
+                var next = document.getElementById("next");
+                if (n === length - 1) {
+                    next.disabled = true;
+                    next.style.d
+                } else {
+                    next.disabled = false;
                 }
-                if (n < 0) {
-                    slideIndex = length;
+                if (n === 0) {
+                    prev.disabled = true;
+                } else {
+                    prev.disabled = false;
                 }
                 for (i = 0; i < length; i++) {
+                    
                     slides[i].style.display = "none";
                 }
                 console.log(slideIndex);

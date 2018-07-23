@@ -106,7 +106,7 @@ public class UploadBookController extends HttpServlet {
                 idTrading = tradingDAO.insertTrading(trading);
             }
             
-            request.setAttribute("idTrading", idTrading);
+            request.setAttribute("id", idTrading);
             request.getRequestDispatcher("/DetailsBookController").forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(UploadBookController.class.getName()).log(Level.SEVERE, null, ex);

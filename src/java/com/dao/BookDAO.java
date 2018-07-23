@@ -24,7 +24,7 @@ public class BookDAO {
 
     private final ConnectionDB db;
     private final Close close;
-    private final int pageSize = 15;
+    private final int pageSize = 5;
 
     public BookDAO() throws Exception {
         db = new ConnectionDB();

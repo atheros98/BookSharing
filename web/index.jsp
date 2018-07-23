@@ -43,7 +43,7 @@
                                 </c:url> 
                                 <a href="${BookDetail}" class="book-link">
                                     <div class="img">
-                                        <img src="<%=request.getContextPath()%>/${t.book.image}" alt=""/>
+                                        <img src="<%=request.getContextPath()%>${t.book.image}" alt=""/>
                                     </div>
                                     <div class="book-content">
                                         <h2>${t.book.title}</h2>

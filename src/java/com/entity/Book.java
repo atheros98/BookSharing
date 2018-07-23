@@ -6,6 +6,7 @@
 package com.entity;
 
 import com.dao.ImageBookDAO;
+import java.util.List;
 
 /**
  *
@@ -32,10 +33,13 @@ public class Book {
         this.status = status;
     }
 
-    public String getImage() throws Exception {
+    public String getImage() throws Exception{
         return new ImageBookDAO().getImageByBookID(String.valueOf(id));
     }
 
+    public List<String> getImages() throws Exception{
+        return new ImageBookDAO().getBookImages(id);
+    }
     public int getId() {
         return id;
     }

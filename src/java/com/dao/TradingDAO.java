@@ -27,7 +27,7 @@ public class TradingDAO {
 
     private final ConnectionDB db;
     private final Close close;
-    private final int pageSize = 10;
+    private final int pageSize = 5;
     private final int NOT_AVAILABLE = -1;
     private final int AVAILABLE = 0;
     private final int PENDING = 1;

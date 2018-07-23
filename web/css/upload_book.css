@@ -74,9 +74,12 @@
 }
 
 .elements textarea{
-    width: 100%;
+    width: 98%;
     background: #F9F7F4;
     padding: 7px 7px;
+    min-height: 200px;
+    resize: none;
+    overflow:auto
 }
 
 .indicator {
@@ -99,7 +102,7 @@
 }
 
 .indicator button:hover {
-    background-color: #ccc!important;
+    /*    background-color: #ccc!important;*/
 }
 
 .slides-container {
@@ -184,7 +187,6 @@ a.borrow-book {
     flex-flow: row;
     justify-content: center;
     border: 2px dashed #0099E2;
-    overflow: scroll;
 }
 
 .cover-book img{

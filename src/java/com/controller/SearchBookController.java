@@ -43,7 +43,7 @@ public class SearchBookController extends HttpServlet {
             String query = request.getParameter("query");
             System.out.print(query);
             if (query == null || query.trim().isEmpty()) {
-                response.sendRedirect(".");
+                response.sendRedirect("./HomeController");
                 return;
             }
             String filter = request.getParameter("filter");

@@ -59,7 +59,7 @@
                         <div class="book-item" id="search">
                             <a href="${BookDetail}" class="book-link">
                                 <div class="img">
-                                    <img src="${b.image}" alt=""/>
+                                    <img src="<%=request.getContextPath()%>${b.image}" alt=""/>
                                 </div>
                                 <div class="book-content">
                                     <h2>${b.title}</h2>
