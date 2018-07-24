@@ -95,6 +95,24 @@ body {
     color: #fff;
 }
 
+.user-area a{
+    min-width: 90px;
+    text-decoration: none;
+    color: #372213;
+    display: inline-block;
+}
+
+a.login {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+a.login:hover{
+    background: #372213;
+    color: #fff;
+}
+
 /* ====================== For search ========================= */
 
 .search {
@@ -151,7 +169,7 @@ body {
     position: absolute;
     left: 0;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 140px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
