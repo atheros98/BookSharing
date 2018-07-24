@@ -6,7 +6,6 @@
 package com.dao;
 
 import com.connect.ConnectionDB;
-import com.entity.Trading;
 import com.entity.TradingDetail;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +24,6 @@ public class TradingDetailDAO {
 
     private final ConnectionDB db;
     private final Close close;
-    private final int pageSize = 5;
     private final int NOT_AVAILABLE = -1;
     private final int AVAILABLE = 0;
     private final int PENDING = 1;
@@ -39,10 +37,10 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getAvailableTrading(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
-                + " INNER JOIN [User] u on u.id = t.idOwner"
+                + " LEFT JOIN [User] u on u.id = t.idBorrower"
                 + " where t.statusBook = ? and t.idOwner = ? ";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -54,13 +52,15 @@ public class TradingDetailDAO {
             ps.setInt(2, idOwner);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int bookID = rs.getInt(1);
-                String title = rs.getString(2);
-                Date createDate = rs.getDate(3);
-                int status = rs.getInt(4);
-                int userID = rs.getInt(5);
-                int username = rs.getInt(6);
-                TradingDetail trading = new TradingDetail(bookID, title, createDate, status, userID, username);
+                int id = rs.getInt(1);
+                int bookID = rs.getInt(2);
+                String title = rs.getString(3);
+                Date createDate = rs.getDate(4);
+                int status = rs.getInt(5);
+                int userID = rs.getInt(6);
+                int username = rs.getInt(7);
+                TradingDetail trading = new TradingDetail(id, bookID, title,
+                        createDate, status, userID, username);
                 tradings.add(trading);
             }
         } catch (Exception ex) {
@@ -76,10 +76,10 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getOwnerPedingTrading(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
-                + " INNER JOIN [User] u on u.id = t.idOwner"
+                + " INNER JOIN [User] u on u.id = t.idBorrower"
                 + " where t.statusBook = ? and t.idOwner = ? ";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -91,13 +91,15 @@ public class TradingDetailDAO {
             ps.setInt(2, idOwner);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int bookID = rs.getInt(1);
-                String title = rs.getString(2);
-                Date createDate = rs.getDate(3);
-                int status = rs.getInt(4);
-                int userID = rs.getInt(5);
-                int username = rs.getInt(6);
-                TradingDetail trading = new TradingDetail(bookID, title, createDate, status, userID, username);
+                int id = rs.getInt(1);
+                int bookID = rs.getInt(2);
+                String title = rs.getString(3);
+                Date createDate = rs.getDate(4);
+                int status = rs.getInt(5);
+                int userID = rs.getInt(6);
+                int username = rs.getInt(7);
+                TradingDetail trading = new TradingDetail(id, bookID, title,
+                        createDate, status, userID, username);
                 tradings.add(trading);
             }
         } catch (Exception ex) {
@@ -113,10 +115,10 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getBorrowerPedingTrading(int idBorrower) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
-                + " INNER JOIN [User] u on u.id = t.idBorrower"
+                + " INNER JOIN [User] u on u.id = t.idOwner"
                 + " where t.statusBook = ? and t.idBorrower = ? ";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -128,13 +130,15 @@ public class TradingDetailDAO {
             ps.setInt(2, idBorrower);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int bookID = rs.getInt(1);
-                String title = rs.getString(2);
-                Date createDate = rs.getDate(3);
-                int status = rs.getInt(4);
-                int userID = rs.getInt(5);
-                int username = rs.getInt(6);
-                TradingDetail trading = new TradingDetail(bookID, title, createDate, status, userID, username);
+                int id = rs.getInt(1);
+                int bookID = rs.getInt(2);
+                String title = rs.getString(3);
+                Date createDate = rs.getDate(4);
+                int status = rs.getInt(5);
+                int userID = rs.getInt(6);
+                int username = rs.getInt(7);
+                TradingDetail trading = new TradingDetail(id, bookID, title,
+                        createDate, status, userID, username);
                 tradings.add(trading);
             }
         } catch (Exception ex) {
@@ -150,10 +154,10 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getLendingTrading(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
-                + " INNER JOIN [User] u on u.id = t.idOwner"
+                + " INNER JOIN [User] u on u.id = t.idBorrower"
                 + " where t.statusBook = ? and t.idOwner = ?";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -165,13 +169,15 @@ public class TradingDetailDAO {
             ps.setInt(2, idOwner);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int bookID = rs.getInt(1);
-                String title = rs.getString(2);
-                Date createDate = rs.getDate(3);
-                int status = rs.getInt(4);
-                int userID = rs.getInt(5);
-                int username = rs.getInt(6);
-                TradingDetail trading = new TradingDetail(bookID, title, createDate, status, userID, username);
+                int id = rs.getInt(1);
+                int bookID = rs.getInt(2);
+                String title = rs.getString(3);
+                Date createDate = rs.getDate(4);
+                int status = rs.getInt(5);
+                int userID = rs.getInt(6);
+                int username = rs.getInt(7);
+                TradingDetail trading = new TradingDetail(id, bookID, title,
+                        createDate, status, userID, username);
                 tradings.add(trading);
             }
         } catch (Exception ex) {
@@ -187,10 +193,10 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getBorrowingTrading(int idBorrower) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
-                + " INNER JOIN [User] u on u.id = t.idBorrower"
+                + " INNER JOIN [User] u on u.id = t.idOwner"
                 + " where t.statusBook = ? and t.idBorrower = ?";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -202,13 +208,15 @@ public class TradingDetailDAO {
             ps.setInt(2, idBorrower);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int bookID = rs.getInt(1);
-                String title = rs.getString(2);
-                Date createDate = rs.getDate(3);
-                int status = rs.getInt(4);
-                int userID = rs.getInt(5);
-                int username = rs.getInt(6);
-                TradingDetail trading = new TradingDetail(bookID, title, createDate, status, userID, username);
+                int id = rs.getInt(1);
+                int bookID = rs.getInt(2);
+                String title = rs.getString(3);
+                Date createDate = rs.getDate(4);
+                int status = rs.getInt(5);
+                int userID = rs.getInt(6);
+                int username = rs.getInt(7);
+                TradingDetail trading = new TradingDetail(id, bookID, title,
+                        createDate, status, userID, username);
                 tradings.add(trading);
             }
         } catch (Exception ex) {
@@ -224,10 +232,10 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getCompleteLending(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
-                + " INNER JOIN [User] u on u.id = t.idOwner"
+                + " INNER JOIN [User] u on u.id = t.idBorrower"
                 + " where t.statusBook = ? and t.idOwner = ?";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -239,13 +247,15 @@ public class TradingDetailDAO {
             ps.setInt(2, idOwner);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int bookID = rs.getInt(1);
-                String title = rs.getString(2);
-                Date createDate = rs.getDate(3);
-                int status = rs.getInt(4);
-                int userID = rs.getInt(5);
-                int username = rs.getInt(6);
-                TradingDetail trading = new TradingDetail(bookID, title, createDate, status, userID, username);
+                int id = rs.getInt(1);
+                int bookID = rs.getInt(2);
+                String title = rs.getString(3);
+                Date createDate = rs.getDate(4);
+                int status = rs.getInt(5);
+                int userID = rs.getInt(6);
+                int username = rs.getInt(7);
+                TradingDetail trading = new TradingDetail(id, bookID, title,
+                        createDate, status, userID, username);
                 tradings.add(trading);
             }
         } catch (Exception ex) {
@@ -261,10 +271,10 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getCompleteBorrowing(int idBorrower) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
-                + " INNER JOIN [User] u on u.id = t.idBorrower"
+                + " INNER JOIN [User] u on u.id = t.idOwner"
                 + " where t.statusBook = ? and t.idBorrower = ?";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -276,13 +286,15 @@ public class TradingDetailDAO {
             ps.setInt(2, idBorrower);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int bookID = rs.getInt(1);
-                String title = rs.getString(2);
-                Date createDate = rs.getDate(3);
-                int status = rs.getInt(4);
-                int userID = rs.getInt(5);
-                int username = rs.getInt(6);
-                TradingDetail trading = new TradingDetail(bookID, title, createDate, status, userID, username);
+                int id = rs.getInt(1);
+                int bookID = rs.getInt(2);
+                String title = rs.getString(3);
+                Date createDate = rs.getDate(4);
+                int status = rs.getInt(5);
+                int userID = rs.getInt(6);
+                int username = rs.getInt(7);
+                TradingDetail trading = new TradingDetail(id, bookID, title,
+                        createDate, status, userID, username);
                 tradings.add(trading);
             }
         } catch (Exception ex) {

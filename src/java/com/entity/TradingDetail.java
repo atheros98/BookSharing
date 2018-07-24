@@ -13,6 +13,7 @@ import java.util.Date;
  * @author Atheros
  */
 public class TradingDetail implements Serializable{
+    private int id;
     private int bookID;
     private String title;
     private Date createDate;
@@ -23,7 +24,18 @@ public class TradingDetail implements Serializable{
     public TradingDetail() {
     }
 
-    public TradingDetail(int bookID, String title, Date createDate, int status, int userID, int username) {
+    public TradingDetail(int id, int bookID, String title, Date createDate, int status) {
+        this.id = id;
+        this.bookID = bookID;
+        this.title = title;
+        this.createDate = createDate;
+        this.status = status;
+        }
+
+    
+  
+    public TradingDetail(int id, int bookID, String title, Date createDate, int status, int userID, int username) {
+        this.id = id;
         this.bookID = bookID;
         this.title = title;
         this.createDate = createDate;
@@ -31,6 +43,16 @@ public class TradingDetail implements Serializable{
         this.userID = userID;
         this.username = username;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+   
 
     public int getBookID() {
         return bookID;
