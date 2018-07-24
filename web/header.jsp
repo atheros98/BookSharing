@@ -5,24 +5,26 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="cover"></div>
+<div class="cover">
+    <img src="<%=request.getContextPath()%>/img/cover.jpg"/>
+</div>
 <div class="header" id="myheader">
     <div class="main-header">
         <div class="logo">
-            <!--<a href="HomeController">-->
+            <a href="HomeController">
             <b>Book</b>Share
-            <!--</a>-->
+            </a>
         </div> 
         <div class="menu">
             <ul>
                 <li>
-                    <a href="HomeController">Home</a>
+                    <b><a href="HomeController">Home</a></b>
                 </li>
                 <li>
-                    <a href="upload_book.jsp">Upload Book</a>
+                    <b><a href="upload_book.jsp">Upload Book</a></b>
                 </li>
                 <li>
-                    <a href="TradingController">Trading</a>
+                    <b><a href="TradingController">Trading</a></b>
                 </li>
             </ul>
         </div>
