@@ -9,6 +9,7 @@ import com.dao.BookDAO;
 import com.dao.TradingDAO;
 import com.entity.Book;
 import com.entity.Trading;
+import com.entity.User;
 import com.service.getDate;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,13 +41,16 @@ public class DetailsBookController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idBook = request.getParameter("id");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("currentUser");
         if (idBook != null) {
             try {
                 TradingDAO tradingdao = new TradingDAO();
                 BookDAO bookdao = new BookDAO();
                 //
                 Book book = bookdao.getBookByBookID(idBook);
-                List<Trading> tradings = tradingdao.getTradingByBookId(idBook);
+                List<Trading> tradings = tradingdao.
+                        getTradingByBookId(idBook, user.getId());
                 List<String> images = new ArrayList<>();
                 //
                 request.setAttribute("tradings", tradings);

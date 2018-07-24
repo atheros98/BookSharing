@@ -405,9 +405,10 @@ public class TradingDAO {
         return trading;
     }
 
-    public List<Trading> getTradingByBookId(String idBook) {
+    public List<Trading> getTradingByBookId(String idBook, int idUser) {
         List<Trading> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT * FROM Trading where idBook = ? and statusBook = ?";
+        String sqlCommand = "SELECT * FROM Trading where idBook = ? "
+                + "and statusBook = ? and idOwner != ?";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -416,6 +417,7 @@ public class TradingDAO {
             ps = conn.prepareStatement(sqlCommand);
             ps.setString(1, idBook);
             ps.setInt(2, AVAILABLE);
+            ps.setInt(3, idUser);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Trading trading = new Trading();
