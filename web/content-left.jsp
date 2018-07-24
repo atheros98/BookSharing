@@ -4,6 +4,7 @@
     Author     : Administrator
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="content-left">
     <section class="section-left">
         <h3>CURRENTLY READING</h3>
@@ -14,12 +15,13 @@
                 <br> to find?</p>
         </div>
     </section>
-    <section class="section-left">
+    <c:if test="${username != null}">
+        <section class="section-left">
         <h3>YOUR BOOK UPLOAD</h3>
         <div class="section-left-content">
             <div class="book-color"></div>
             <div class="book-color-content">
-                <h2>0</h2>
+                <h2>${currentUser.numberBooks}</h2>
                 <span>books upload</span>
                 <br>
                 <span class="fa fa-star checked"></span>
@@ -31,7 +33,9 @@
                 <a href="upload_book.jsp">Upload book now</a>
             </div>
         </div>
-    </section>
+        </section>
+    </c:if>
+    
     <section class="section-left">
         <h3>#CATEGORY</h3>
         <div class="section-left-content">

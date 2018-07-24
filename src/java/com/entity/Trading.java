@@ -57,8 +57,6 @@ public class Trading {
         this.id = id;
     }
     
-  
-
     public int getIdOwner() {
         return idOwner;
     }

@@ -50,7 +50,7 @@ public class TradingDAO {
         List<Trading> tradings = new ArrayList<>();
 
         String query = "select * from"
-                + " (select *, row_number() over (order by createDate DESC)"
+                + " (select *, row_number() over (order by createDate DESC, id DESC)"
                 + " as row from Trading) result"
                 + " where result.row between " + from + " and " + to;
         Connection conn = null;
@@ -106,6 +106,30 @@ public class TradingDAO {
         return pages;
     }
 
+    public int getNumberBookUpload(int idOwner) {
+        String sqlCommand = "SELECT COUNT(*) FROM Trading where idOwner = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int number = 0;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sqlCommand);
+            ps.setInt(1, idOwner);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                number = rs.getInt(1);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+            close.closeResultSet(rs);
+        }
+        return number;
+    }
+
     public int getPages() throws Exception {
         int rows = getRowCount();
         return rows / (pageSize) + ((rows % pageSize) != 0 ? 1 : 0);
@@ -113,8 +137,8 @@ public class TradingDAO {
 
     public int insertTrading(Trading trading) {
         int idTrading = -1;
-        String sql = "INSERT INTO Trading (idOwner, idBook, createDate)\n"
-                + "VALUES (?, ?, ?);";
+        String sql = "INSERT INTO Trading (idOwner, idBook, createDate)"
+                + " VALUES (?, ?, ?);";
         Connection conn = null;
         PreparedStatement ps = null;
         try {

@@ -97,6 +97,8 @@ body {
 
 .user-area a{
     min-width: 90px;
+    padding-left: 8px;
+    padding-right: 8px;
     text-decoration: none;
     color: #372213;
     display: inline-block;

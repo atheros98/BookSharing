@@ -79,6 +79,10 @@ public class User {
         return new TradingDAO().getCompleteBorrowing(id);
     }
     
+    public int getNumberBooks() throws Exception{
+        return new TradingDAO().getNumberBookUpload(id);
+    }
+    
     public int getId() {
         return id;
     }
