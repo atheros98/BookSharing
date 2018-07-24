@@ -36,10 +36,10 @@
     </nav>
     <nav class="nav-right">
         <div class="heading">
-            <h4>Create a website</h4>
+            <h4>Share a book</h4>
         </div>
         <div class="nav-right-content">
-            <p>Everybody can create a website, it's easy.</p>
+            <p>Everybody can share their books, it's easy.</p>
         </div>
     </nav>
 </div>

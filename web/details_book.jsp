@@ -169,6 +169,7 @@
             <!--Kết thúc-->
             <jsp:include page="content-right.jsp"></jsp:include>
         </div>
+        <jsp:include page="footer.jsp"></jsp:include>
         <script src="js/RateReviewBook.js"></script>
         <script>
                         window.onscroll = function () {

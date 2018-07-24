@@ -118,6 +118,7 @@
             <!--Kết thúc-->
             <jsp:include page="content-right.jsp"></jsp:include>
         </div>
+        <jsp:include page="footer.jsp"></jsp:include>
         <script>
             window.onscroll = function () {
                 myFunction();

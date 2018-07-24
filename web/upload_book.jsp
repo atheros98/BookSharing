@@ -115,6 +115,7 @@
             <!--Kết thúc-->
             <jsp:include page="content-right.jsp"></jsp:include>
         </div>
+        <jsp:include page="footer.jsp"></jsp:include>
         <script src="js/checkFileUpload.js"></script>
         <script src="js/check_book_exist.js"></script>
         <script>
