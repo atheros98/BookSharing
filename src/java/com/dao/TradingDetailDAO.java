@@ -22,6 +22,7 @@ import java.util.logging.Logger;
  * @author Atheros
  */
 public class TradingDetailDAO {
+
     private final ConnectionDB db;
     private final Close close;
     private final int pageSize = 5;
@@ -35,10 +36,11 @@ public class TradingDetailDAO {
         db = new ConnectionDB();
         close = new Close();
     }
-    
+
     public List<TradingDetail> getAvailableTrading(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
         String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
+                + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idOwner"
                 + " where t.statusBook = ? and t.idOwner = ? ";
@@ -71,10 +73,10 @@ public class TradingDetailDAO {
         }
         return tradings;
     }
-    
+
     public List<TradingDetail> getOwnerPedingTrading(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand =  "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
+        String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idOwner"
@@ -108,7 +110,7 @@ public class TradingDetailDAO {
         }
         return tradings;
     }
-    
+
     public List<TradingDetail> getBorrowerPedingTrading(int idBorrower) {
         List<TradingDetail> tradings = new ArrayList<>();
         String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
@@ -145,7 +147,7 @@ public class TradingDetailDAO {
         }
         return tradings;
     }
-    
+
     public List<TradingDetail> getLendingTrading(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
         String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
@@ -182,7 +184,7 @@ public class TradingDetailDAO {
         }
         return tradings;
     }
-    
+
     public List<TradingDetail> getBorrowingTrading(int idBorrower) {
         List<TradingDetail> tradings = new ArrayList<>();
         String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
@@ -219,7 +221,7 @@ public class TradingDetailDAO {
         }
         return tradings;
     }
-    
+
     public List<TradingDetail> getCompleteLending(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
         String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
@@ -256,7 +258,7 @@ public class TradingDetailDAO {
         }
         return tradings;
     }
-    
+
     public List<TradingDetail> getCompleteBorrowing(int idBorrower) {
         List<TradingDetail> tradings = new ArrayList<>();
         String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
