@@ -71,6 +71,14 @@ public class User {
         return new TradingDAO().getLendingTrading(id);
     }
     
+    public List<Trading> getCompleteLending() throws Exception{
+        return new TradingDAO().getCompleteLending(id);
+    }
+    
+    public List<Trading> getCompleteBorrowing() throws Exception {
+        return new TradingDAO().getCompleteBorrowing(id);
+    }
+    
     public int getId() {
         return id;
     }

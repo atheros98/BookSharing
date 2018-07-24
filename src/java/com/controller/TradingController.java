@@ -6,12 +6,14 @@
 package com.controller;
 
 import com.dao.TradingDAO;
+import com.entity.Trading;
 import com.entity.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,40 +25,6 @@ import javax.servlet.http.HttpSession;
  * @author Atheros
  */
 public class TradingController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("currentUser");
-            TradingDAO t = new TradingDAO(); 
-            
-            
-            String method = request.getParameter("method");
-            switch (method){
-                case "Borrow":
-                    int idTrading = Integer.valueOf(request.getParameter("idTrading"));
-                    int idBorrower = Integer.valueOf(request.getParameter("idBorrower"));
-                    t.requestTrading(idTrading, idBorrower);
-                    break;
-            }
-            
-            request.setAttribute("user", user);
-            RequestDispatcher rd = request.getRequestDispatcher("trading.jsp");
-            rd.forward(request, response);
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -71,7 +39,34 @@ public class TradingController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("currentUser");
+            TradingDAO t = new TradingDAO();
+
+            String method = request.getParameter("method");
+            if (method != null) {
+                int idTrading = Integer.valueOf(request.getParameter("idTrading"));
+                int idBorrower = Integer.valueOf(request.getParameter("idBorrower"));
+                switch (method) {
+                    case "Delete":
+                        t.deleteTradingBook(idTrading);
+                        break;
+                    case "Borrow":
+                        t.requestTrading(idTrading, idBorrower);
+                        break;
+                    case "Accept":
+                        t.acceptTrading(idTrading);
+                        break;
+                    case "Reject":
+                        t.rejectTrading(idTrading);
+                        break;
+                    case "Complete":
+                        t.completeTrading(idTrading);
+                        break;
+                }
+            }
+            response.sendRedirect("borrowing.jsp");
+           
         } catch (Exception ex) {
             Logger.getLogger(TradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -88,11 +83,7 @@ public class TradingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(TradingController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
 
     /**
