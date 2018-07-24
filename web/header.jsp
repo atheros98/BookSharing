@@ -18,7 +18,7 @@
                     <a href="HomeController">Home</a>
                 </li>
                 <li>
-                    <a href="#">Manage Book</a>
+                    <a href="upload_book.jsp">Upload Book</a>
                 </li>
                 <li>
                     <a href="TradingController">Trading</a>
@@ -46,7 +46,7 @@
             </button>
             <div class="dropdown-content">
                 <a href="UpdateProfileController">Profile</a>
-                <a href="#">Settings</a>
+                <a href="#">Change password</a>
                 <a href="LogoutController">Logout</a>
             </div>
         </div>

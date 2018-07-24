@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.controller;
 
 import com.dao.BookDAO;
@@ -52,6 +47,7 @@ public class UploadBookController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("upload_book.jsp").forward(request, response);
     }
 
     /**
@@ -68,7 +64,7 @@ public class UploadBookController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("currentUser");
-        int idTrading;
+        int idBook = 0;
 
         try {
             BookDAO bookDAO = new BookDAO();
@@ -84,7 +80,7 @@ public class UploadBookController extends HttpServlet {
                 book.setDescription(request.getParameter("description"));
                 book.setTag(request.getParameter("tag"));
                 book.setIdUser(user.getId());
-                int idBook = bookDAO.insertBook(book);
+                idBook = bookDAO.insertBook(book);
 
                 // save cover book
                 for (int i = 1; i <= 5; i++) {
@@ -96,22 +92,23 @@ public class UploadBookController extends HttpServlet {
                 trading.setIdOwner(user.getId());
                 trading.setIdBook(idBook);
 
-                idTrading = tradingDAO.insertTrading(trading);
+                tradingDAO.insertTrading(trading);
 
             } else { // create new trading
                 Trading trading = new Trading();
                 trading.setIdOwner(user.getId());
+                idBook = Integer.parseInt(request.getParameter("idBook"));
                 trading.setIdBook(Integer.parseInt(request.getParameter("idBook")));
-                
-                idTrading = tradingDAO.insertTrading(trading);
+
+                tradingDAO.insertTrading(trading);
             }
-            
-            request.setAttribute("id", idTrading);
-            request.getRequestDispatcher("/DetailsBookController").forward(request, response);
+
         } catch (Exception ex) {
             Logger.getLogger(UploadBookController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        System.out.print(idBook);
+        response.sendRedirect("DetailsBookController?id=" + idBook);
+//        request.getRequestDispatcher("DetailsBookController?id=" + idBook).forward(request, response);
     }
 
     private String uploadCoverBook(HttpServletRequest request, String namePart, int idBook) {

@@ -47,7 +47,7 @@ public class UserDAO {
                     user.setId(rs.getInt(1));
                     user.setFullName(rs.getString(2));
                     user.setBirthday(rs.getDate(3));
-                    user.setAvatar(db.getAvatarFolder()+ rs.getString(4));
+                    user.setAvatar(db.getAvatarFolder() + rs.getString(4));
                     user.setUserName(rs.getString(5));
                     user.setEmail(rs.getString(7));
                     user.setAddress(rs.getString(8));
@@ -205,6 +205,31 @@ public class UserDAO {
             ps = conn.prepareCall(sqlCommand);
             ps.setString(1, user.getAvatar());
             ps.setInt(2, user.getId());
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+        }
+        return true;
+    }
+
+    public boolean updateInfo(User user) {
+        String sqlCommand = "Update [User] set fullName = ?, birthday = ?, email = ?, address = ?, phoneNumber = ?, linkFacebook = ? where id = ? ";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareCall(sqlCommand);
+            ps.setString(1, user.getFullName());
+            ps.setString(2, new getDate().convertString(user.getBirthday()));
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getAddress());
+            ps.setString(5, user.getPhoneNumber());
+            ps.setString(6, user.getLinkFacebook());
+            ps.setInt(7, user.getId());
             ps.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);

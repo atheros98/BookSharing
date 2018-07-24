@@ -77,34 +77,42 @@
                         <div class="info-book">
                             <div class="elements">
                                 <div class="title"><i class="fas fa-envelope"></i>Email</div>
-                                <div class="input"><input type="email" name="email" placeholder="Email" readonly="true"></div>
-                            </div>
-                            <div class="elements">
-                                <div class="title"><i class="fas fa-address-card"></i>Address</div>
-                                <div class="input"><input type="text" name="address" placeholder="Address" readonly="true"></div>
-                            </div>
-                            <div class="elements">
-                                <div class="title"><i class="fas fa-phone-square"></i>Phone number</div>
-                                <div class="input"><input type="text" name="phonenumber" placeholder="Phone Number" readonly="true"></div>
-                            </div>
-                            <div class="elements">
-                                <div class="title"><i class="fab fa-facebook"></i>Link facebook</div>
-                                <div class="input"><input type="text" name="linkFacebook" placeholder="Link Facebook" readonly="true"></div>
-                            </div>
-                            <div class="elements" style="border: none;">
-                                <div class="title"><i class="fas fa-gavel"></i>Rules</div>
                                 <div class="input">
-                                    <textarea rows="6" cols="50" name="rules" readonly="true"></textarea><br>
-                                    <div class="check-rules"><input id="checkRules" type="checkbox">I have read, and agree to abide by the bookshare.com website rules.</div>
-                                </div>
+                                    <input type="email" name="email" placeholder="Email" value="${sessionScope.currentUser.getEmail()}" readonly="true">
                             </div>
                         </div>
-                        <div class="uploadBtn">
-                            <input id="uploadBtn" type="submit" value="Upload" disabled="">
+                        <div class="elements">
+                            <div class="title"><i class="fas fa-address-card"></i>Address</div>
+                            <div class="input">
+                                <input type="text" name="address" placeholder="Address" value="${sessionScope.currentUser.getAddress()}" readonly="true">
+                            </div>
                         </div>
-                    </form>
-                </div>
-                <!--Kết thúc-->
+                        <div class="elements">
+                            <div class="title"><i class="fas fa-phone-square"></i>Phone number</div>
+                            <div class="input">
+                                <input type="text" name="phonenumber" placeholder="Phone Number" value="${sessionScope.currentUser.getPhoneNumber()}" readonly="true">
+                            </div>
+                        </div>
+                        <div class="elements">
+                            <div class="title"><i class="fab fa-facebook"></i>Link facebook</div>
+                            <div class="input">
+                                <input type="text" name="linkFacebook" placeholder="Link Facebook" value="${sessionScope.currentUser.getLinkFacebook()}" readonly="true">
+                            </div>
+                        </div>
+                        <div class="elements" style="border: none;">
+                            <div class="title"><i class="fas fa-gavel"></i>Rules</div>
+                            <div class="input">
+                                <textarea rows="6" cols="50" name="rules" readonly="true"></textarea><br>
+                                <div class="check-rules"><input id="checkRules" type="checkbox">I have read, and agree to abide by the bookshare.com website rules.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadBtn">
+                        <input id="uploadBtn" type="submit" value="Upload" disabled="">
+                    </div>
+                </form>
+            </div>
+            <!--Kết thúc-->
             <jsp:include page="content-right.jsp"></jsp:include>
         </div>
         <script src="js/checkFileUpload.js"></script>

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : profile
-    Created on : Jul 22, 2018, 5:37:44 PM
-    Author     : Chi Nguyen
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -93,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="submit-info">
-                                <input type="hidden" name="command" value="update-avatar">
+                                <input type="hidden" name="command" value="update-info">
                                 <button type="submit">Change Information</button>
                             </div>
                         </div>
@@ -102,11 +97,6 @@
                 <div class="book-recently">
                     <h1>Top recently book's user</h1>
                     <div class="items">
-                        <selection>
-                            <h3>How to Win Friends and Influence People</h3>
-                            <p>Create Date: 22/07/2018</p>
-                            <img src="img/1006_cover1.jpg">
-                        </selection>
                         <selection>
                             <h3>How to Win Friends and Influence People</h3>
                             <p>Create Date: 22/07/2018</p>
@@ -132,10 +122,8 @@
             window.onscroll = function () {
                 myFunction();
             };
-
             var header = document.getElementById("myheader");
             var sticky = header.offsetTop;
-
             function myFunction() {
                 if (window.pageYOffset > sticky) {
                     header.classList.add("sticky");

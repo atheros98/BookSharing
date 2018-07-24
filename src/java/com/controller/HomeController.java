@@ -57,7 +57,7 @@ public class HomeController extends HttpServlet {
             System.out.print(numberPages);
             request.setAttribute("pages", numberPages);
             request.setAttribute("tradings", tradings);
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
             rd.forward(request, response);
         }
     }

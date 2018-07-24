@@ -9,12 +9,12 @@
 
 .info{
     float: right;
-    width: 65%;
+    width: 60%;
     margin-top: 20px;
 }
 
 .avatar img{
-    width: 80%;
+    width: 75%;
     border-radius: 50%;
 }
 
@@ -47,6 +47,10 @@
 .info .rate{
     padding-bottom: 10px;
     border-bottom: 1px dotted #b3b3b3;
+}
+
+.info-book > .elements > .title {
+    margin-top: 3px;
 }
 
 .submit-info{

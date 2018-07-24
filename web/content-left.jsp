@@ -28,7 +28,7 @@
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
                 <br>
-                <a href="#">Upload book now</a>
+                <a href="upload_book.jsp">Upload book now</a>
             </div>
         </div>
     </section>
