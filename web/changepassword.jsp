@@ -21,9 +21,9 @@
                             <input id="re-pass" type="password" name="re-pass" required="required" placeholder="Confirm Password" onkeyup='check()' />
                         <%
                             if (null != request.getAttribute("error")) {
-                                out.print("<h4 style=\"color: red;\">" + request.getAttribute("error") + "</h4>");
+                                out.print("<h4 id='message' style=\"color: red;\">" + request.getAttribute("error") + "</h4>");
                             } else if (null != request.getAttribute("success")) {
-                                out.print("<h4 style=\"color: green;\">" + request.getAttribute("error") + "</h4>");
+                                out.print("<h4 id='message' style=\"color: green;\">" + request.getAttribute("success") + "</h4>");
                             } else {
                                 out.print("<h4 id='message'></h4>");
                             }
