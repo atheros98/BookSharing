@@ -22,7 +22,7 @@
                     <a href="upload_book.jsp">Upload Book</a>
                 </li>
                 <li>
-                    <a href="TradingController">Trading</a>
+                    <a href="trading.jsp">Trading</a>
                 </li>
             </ul>
         </div>
