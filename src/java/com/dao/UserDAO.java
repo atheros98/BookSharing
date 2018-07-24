@@ -8,9 +8,7 @@ package com.dao;
 import com.connect.ConnectionDB;
 import com.entity.User;
 import com.service.getDate;
-import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -217,7 +215,7 @@ public class UserDAO {
         }
         return true;
     }
-    
+
     public boolean updateInfo(User user) {
         String sqlCommand = "Update [User] set fullName = ?, birthday = ?, email = ?, address = ?, phoneNumber = ?, linkFacebook = ? where id = ? ";
         Connection conn = null;
@@ -232,6 +230,52 @@ public class UserDAO {
             ps.setString(5, user.getPhoneNumber());
             ps.setString(6, user.getLinkFacebook());
             ps.setInt(7, user.getId());
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+        }
+        return true;
+    }
+
+    public boolean isCorrectPassword(int idUser, String password) {
+        User user = new User();
+        String sqlCommand = "SELECT * FROM [User] where id = ? and password = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sqlCommand);
+            ps.setInt(1, idUser);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+            close.closeResultSet(rs);
+        }
+        return false;
+    }
+
+    public boolean changePassword(int idUser, String password) {
+        String sqlCommand = "UPDATE [User] set password = ? where id = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareCall(sqlCommand);
+            ps.setString(1, password);
+            ps.setInt(2, idUser);
             ps.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);

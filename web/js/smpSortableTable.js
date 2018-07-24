@@ -1,27 +1,72 @@
 (function ($) {
-    $.fn.smpSortableTable = function (data, max) {
+    $.fn.smpSortableTable = function (jmthuong, data, max) {
 
         var checkStatus = function (status) {
-            if (status === 0) { // đang cho mượn
-                return 'Borrowing';
-            } else if (status === 1) {
-                return 'Confirming';
-            } else if (status === 2) {
-                return 'Books borrowed';
-            } else if (status === 3) {
-                return 'Finished';
+            if (jmthuong === 'borrow') {
+                switch (status) {
+                    case 0:
+                        return 'Borrowing';
+                        break;
+                    case 1:
+                        return 'Confirming';
+                        break;
+                    case 2:
+                        return 'Books borrowed';
+                        break;
+                    case 3:
+                        return 'Finished';
+                        break;
+                }
+            } else {
+                switch (status) {
+                    case 0:
+                        return 'Borrowing';
+                        break;
+                    case 1:
+                        return 'Confirming';
+                        break;
+                    case 2:
+                        return 'Books borrowed';
+                        break;
+                    case 3:
+                        return 'Finished';
+                        break;
+                }
             }
         };
 
-        var checkAction = function (action) {
-            if (action === 0) {
-                return '<a href="TradingController">Cancel</a>';
-            } else if (action === 1) {
-                return '<a href="TradingController">Cancel</a><br><a href="TradingController">Confirm</a>';
-            } else if (action === 2) {
-                return '<a href="TradingController">Get the book back</a>';
+        var checkAction = function (action, idTrading) {
+            if (jmthuong === 'borrow') {
+                switch (action) {
+                    case 0:
+                        return 'Borrowing';
+                        break;
+                    case 1:
+                        return 'Confirming';
+                        break;
+                    case 2:
+                        return 'Books borrowed';
+                        break;
+                    case 3:
+                        return 'Finished';
+                        break;
+                }
             } else {
-                return '<a href="TradingController">Rate the borrower</a>';
+                switch (action) {
+                    case 0:
+                        return '<a data-action="Delete" data-idtrading="' + idTrading + '" href="#">Delete</a>';
+                        break;
+                    case 1:
+                        return '<a data-action="Delete" data-idtrading="' + idTrading +
+                                '" href="#">Cancel</a><br><a data-action="Accept" data-idtrading="' + idTrading + '" href="#">Confirm</a>';
+                        break;
+                    case 2:
+                        return '<a data-action="Complete" data-idtrading="' + idTrading + '" href="#">Get the book back</a>';
+                        break;
+                    case 3:
+                        return '<a data-action="rate" href="#">Rate the borrower</a>';
+                        break;
+                }
             }
         };
 
@@ -29,21 +74,31 @@
             var returnHTML = '';
             for (var i = start; i < Math.min(end, max); i++) {
                 returnHTML += '<tr>';
+                returnHTML += '<td  id="no">' + i + '</td>';
                 for (var key in data[i]) {
-                    if (data[i].hasOwnProperty(key)) {
-                        if (typeof data[i][key] !== 'object') {
-                            if (key === 'title') {
-                                returnHTML += '<td>' + (data[i][key] ? data[i][key] : 'N/A') + '</td>';
-                            } else if (key === 'avatar')
-                                returnHTML += '<td><img src="' + data[i][key] + '"></td>';
-                            else if (key === 'statusBook') {
-                                returnHTML += '<td>' + checkStatus(data[i][key]) + '</td>';
-                            } else if (key === 'action') {
-                                returnHTML += '<td>' + checkAction(data[i][key]) + '</td>';
-                            }
-                        } else
-                            returnHTML += '<td>' + (data[i][key].text ? data[i][key].text : 'N/A') + '</td>';
+//                    console.log(data[i].id);
+                    switch (key) {
+                        case 'title':
+                            returnHTML += '<td  id="title">' + (data[i][key] ? data[i][key] : 'N/A') + '</td>';
+                            break;
+                        case 'createDate':
+                            returnHTML += '<td  id="createdate">' + (data[i][key] ? data[i][key] : 'N/A') + '</td>';
+                            break;
+                        case 'username':
+                            if (data[i][key])
+                                returnHTML += '<td  id="username"><a href="UpdateProfileController?id=' + data[i].userID + '">' + data[i][key] + '</a></td>';
+                            else
+                                returnHTML += '<td  id="username">N/A</td>';
+                            break;
+                        case 'status':
+                            returnHTML += '<td  id="status">' + checkStatus(data[i][key]) + '</td>';
+                            returnHTML += '<td  id="action">' + checkAction(data[i][key], data[i].id) + '</td>';
+                            break;
+                        default:
+                            returnHTML += '';
+                            break;
                     }
+
                 }
                 returnHTML += '</tr>';
             }

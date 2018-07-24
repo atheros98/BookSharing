@@ -5,12 +5,13 @@
     Author     : Administrator
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>${book.getTitle()} - BookShare</title>
         <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="css/upload_book.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
@@ -23,12 +24,10 @@
             <jsp:include page="content-left.jsp"></jsp:include>
                 <!--Đây là đoạn code nội dung cho page-->
                 <div class="content-center">
-                    <div class="title-upload">
-                        <i class="fas fa-user"><b><a href="#">${userOwner.getUserName()}</a></b></i>
-                    <p>${tradingdate}</p>
+                    <div class="book-title">
+                        <h2>${book.getTitle()}</h2>
                 </div>
-                <h2>${book.getTitle()}</h2>
-                <div class="borrow-book">
+                <div class="rate-book">
                     <div class="rate">
                         <select id="rate" onchange="getSelectRate()">
                             <option value="1">1 Star</option>
@@ -45,41 +44,68 @@
                             <span class="fa fa-star"></span>
                         </div>
                     </div>
-                    <a href="#">Borrow</a>
                 </div>
                 <div class="title-upload" style="background: #F9F7F4;">
-                    <i class="fas fa-info"><b>Information of lender</b></i>
-                    <div style="clear: both;"></div>
-                    <div class="info-book">
-                        <div class="elements">
-                            <div class="title"><i class="fas fa-envelope"></i>Email</div>
-                            <div class="input">
-                                <input type="email" name="email" value="${userOwner.getEmail()}" readonly="">
-                            </div>
-                        </div>
-                        <div class="elements">
-                            <div class="title"><i class="fas fa-address-card"></i>Address</div>
-                            <div class="input">
-                                <input type="text" value="${userOwner.getAddress()}" readonly="">
-                            </div>
-                        </div>
-                        <div class="elements">
-                            <div class="title"><i class="fas fa-phone-square"></i>Phone number</div>
-                            <div class="input">
-                                <input type="text" value="${userOwner.getPhoneNumber()}" readonly="">
-                            </div>
-                        </div>
-                        <div class="elements">
-                            <div class="title"><i class="fab fa-facebook"></i>Facebook</div>
-                            <div class="input">
-                                <input type="text" value="${userOwner.getLinkFacebook()}" readonly="">
-                            </div>
-                        </div>
+                    <i class="fas fa-info"><b>List of lenders</b></i>
+                    <div style="clear: both;">
+                    </div>
+                    <div class="slides-container">
+                        <c:forEach var="t" items="${tradings}">
+                            <c:set var="user" value="${t.user}"/>
+                            <div class="info-book">
+                                <div class="elements">
+                                    <div class="title"><i class="fas fa-user"></i>Name</div>
+                                    <div class="input">
+                                        <a href="#"><input type="text" value="${user.fullName}" readonly></a>
+                                    </div>
+                                    <form action="TradingController" method="POST">
+                                        <input type="hidden" name="idTrading" value="${t.id}">
+                                        <input type="hidden" name="idBorrower" value="${sessionScope.currentUser.id}">
+                                        <input class="borrow-book" name="method" type="submit" value="Borrow">
+                                    </form>
+                                </div>
+                                <div class="elements">
+                                    <div class="title"><i class="fas fa-envelope"></i>Email</div>
+                                    <div class="input">
+                                        <input type="email" name="email" value="${user.email}" readonly>
+                                    </div>
+                                </div>
+                                <div class="elements">
+                                    <div class="title"><i class="fas fa-address-card"></i>Address</div>
+                                    <div class="input">
+                                        <input type="text" value="${user.address}" readonly>
+                                    </div>
+                                </div>
+                                <div class="elements">
+                                    <div class="title"><i class="fas fa-phone-square"></i>Phone number</div>
+                                    <div class="input">
+                                        <input type="text" value="${user.phoneNumber}" readonly>
+                                    </div>
+                                </div>
+                                <div class="elements">
+                                    <div class="title"><i class="fab fa-facebook"></i>Facebook</div>
+                                    <div class="input">
+                                        <input type="text" value="${user.linkFacebook}" readonly>
+                                    </div>
+                                </div>
+                                <div class="elements">
+                                    <div class="title"><i class="fa fa-calendar"></i>Upload date</div>
+                                    <div class="input">
+                                        <input type="text" value="${t.createDate}" readonly>
+                                    </div>
+                                </div>   
+                            </div> 
+                        </c:forEach>
+                    </div>
+                    <div class="indicator">
+                        <button id="prev" onclick="plusSlides(-1)">&#10094; Prev</button>
+                        <button id="next" onclick="plusSlides(1)">Next &#10095;</button>
                     </div>
                 </div>
                 <div class="cover-book">
-                    <c:forEach var="cover" items="${coverBooks}">
-                        <img src="<%=request.getContextPath()%>${cover.getUrlImage()}" alt="${cover}">
+                    <c:set var="images" value="${book.images}"/>
+                    <c:forEach var="image" items="${images}">
+                        <img src="<%=request.getContextPath()%>${image}"/>
                     </c:forEach>
                 </div>
                 <div class="info-book">
@@ -116,7 +142,7 @@
                     <div class="elements">
                         <div class="title"><i class="fas fa-pen"></i>Description</div>
                         <div class="input">
-                            <textarea id="description" readonly="true" style="border: none;">${book.getDescription()}</textarea>
+                            <textarea  id="description" readonly="true" style="border: none;">${book.getDescription()}</textarea>
                         </div>
                     </div>
                 </div>
@@ -134,7 +160,7 @@
                             <p>${currentDate}</p>
                             <form id="sendReivew">
                                 <textarea id="content-review" placeholder="Write reivew here..." required=""></textarea>
-                                <input type="submit" value="Send - Click here">
+                                <input type="submit" value="Submit">
                             </form>
                         </div>
                     </div>
@@ -159,6 +185,40 @@
                                 header.classList.remove("sticky");
                             }
                         }
+        </script>
+        <script>
+            var slideIndex = 0;
+            showSlides(slideIndex);
+
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+            function showSlides(n) {
+                var i;
+                var slides = document.getElementsByClassName("info-book");
+                var length = slides.length - 1;
+                console.log(slideIndex);
+                var prev = document.getElementById("prev");
+                var next = document.getElementById("next");
+                if (n === length - 1) {
+                    next.disabled = true;
+                    next.style.d
+                } else {
+                    next.disabled = false;
+                }
+                if (n === 0) {
+                    prev.disabled = true;
+                } else {
+                    prev.disabled = false;
+                }
+                for (i = 0; i < length; i++) {
+                    
+                    slides[i].style.display = "none";
+                }
+                console.log(slideIndex);
+                slides[slideIndex].style.display = "block";
+            }
         </script>
     </body>
 </html>

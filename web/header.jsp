@@ -4,7 +4,8 @@
     Created on : Jul 11, 2018, 11:11:54 PM
     Author     : Administrator
 --%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="cover"></div>
 <div class="header" id="myheader">
     <div class="main-header">
@@ -19,10 +20,10 @@
                     <a href="HomeController">Home</a>
                 </li>
                 <li>
-                    <a href="UploadBookController">Upload Book</a>
+                    <a href="upload_book.jsp">Upload Book</a>
                 </li>
                 <li>
-                    <a href="#">Trading</a>
+                    <a href="trading.jsp">Trading</a>
                 </li>
             </ul>
         </div>
@@ -36,32 +37,24 @@
                 </form>
             </div>
         </div>
-        <c:choose>
-            <c:when test="${sessionScope.username!=null}">
-                <div class="notifications">
-                    <button>
-                        <i class="fas fa-bell"></i>
-                    </button>
-                </div>
+        <div class="user-area">
+            <c:if test="${username == null}">
+                <a class="login" href="LoginController">Login</a>
+                <a class="login" href="register.jsp">Register</a>
+            </c:if>
+            <c:if test="${username != null}">
                 <div class="dropdown">
-                    <button>
-                        <i class="fas fa-user"></i>
-                    </button>
+                    <a class="login" href="UpdateProfileController">               
+                        <i class="fas fa-user"> ${username}</i>
+                    </a>
                     <div class="dropdown-content">
                         <a href="UpdateProfileController">Profile</a>
-                        <a href="#">Change Password</a>
+                        <a href="changepassword.jsp">Change password</a>
                         <a href="LogoutController">Logout</a>
                     </div>
                 </div>
-            </c:when>
-            <c:otherwise>
-                <div class="authen">
-                    <a href="LoginController">Login</a>
-                </div>
-                <div class="authen">
-                    <a href="register.jsp">Register</a>
-                </div>
-            </c:otherwise>
-        </c:choose>
+            </c:if>
+        </div>
+
     </div>
 </div>

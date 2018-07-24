@@ -52,9 +52,36 @@ public class ImageBookDAO {
             close.closeConnection(conn);
         }
 
-        return imageURL;
+        return db.getCoverBookFolder() + imageURL;
     }
 
+    public ArrayList<String> getBookImages(int bookID) {
+        String query = "select * from ImageBook"
+                + " where idBook='" + bookID + "'";
+        ArrayList<String> images = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                images.add(db.getCoverBookFolder() + rs.getString(2));
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(ImageBookDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            close.closeResultSet(rs);
+            close.closePreparedStatement(ps);
+            close.closeConnection(conn);
+        }
+
+        return images;
+    }
+    
     public ArrayList<ImageBook> getCoverBooks(int bookID) {
         String query = "select * from ImageBook"
                 + " where idBook='" + bookID + "'";

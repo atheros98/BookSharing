@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.controller;
 
 import com.dao.UserDAO;
@@ -49,8 +44,23 @@ public class UpdateProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("profile.jsp");
-//        request.getRequestDispatcher("/profile.jsp").forward(request, response);
+        try {
+            String id = request.getParameter("id");
+            UserDAO userdao = new UserDAO();
+
+            User user = userdao.getUserById(id);
+            if (id != null) {
+                request.setAttribute("viewuser", user);
+                request.getRequestDispatcher("/profile.jsp").forward(request, response);
+            } else {
+                HttpSession session = request.getSession();
+                User currentUser = (User) session.getAttribute("currentUser");
+                request.setAttribute("viewuser", currentUser);
+                request.getRequestDispatcher("/profile.jsp").forward(request, response);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UpdateProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -83,10 +93,10 @@ public class UpdateProfileController extends HttpServlet {
                     u.setAddress(request.getParameter("address"));
                     u.setPhoneNumber(request.getParameter("phonenumber"));
                     u.setLinkFacebook(request.getParameter("linkfacebook"));
-                    
+
                     userdao.updateInfo(u);
                     session.setAttribute("currentUser", userdao.getUserById(user.getId() + ""));
-                    
+
                     request.getRequestDispatcher("/profile.jsp").forward(request, response);
                     break;
                 // cập nhật ảnh đại diện

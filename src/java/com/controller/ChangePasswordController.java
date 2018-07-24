@@ -5,11 +5,10 @@
  */
 package com.controller;
 
-import com.dao.TradingDAO;
-import com.entity.Trading;
+import com.dao.UserDAO;
+import com.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -17,12 +16,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Atheros
  */
-public class HomeController extends HttpServlet {
+public class ChangePasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,27 +37,32 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String pageStr = request.getParameter("page");
-            if (pageStr == null || pageStr.trim().isEmpty()) {
-                pageStr = "1";
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("currentUser");
+            String oldPass = request.getParameter("old-password");
+            UserDAO u = new UserDAO();
+            String error = "";
+            if (u.isCorrectPassword(user.getId(), oldPass)){
+                String newpass = request.getParameter("password");
+                String repass = request.getParameter("re-pass");
+                //verify two pass add server side 
+                if (!newpass.equals(repass)){
+                    error = "The confirm password does not correct.";
+                } else if (newpass.equals(oldPass)){
+                    error = "The new password must be different old password.";
+                } else {
+                    u.changePassword(user.getId(), newpass);
+                }
+            } else {
+                error = "The old password does not correct";
             }
-            int page = 1;
-            try {
-                page = Integer.parseInt(pageStr);
-            } catch (NumberFormatException e) {
-
+            if (!error.trim().isEmpty()){
+                request.setAttribute("error", error);
+            } else {
+                String success = "The password has been changed";
+                request.setAttribute("success", success);
             }
-            TradingDAO t = new TradingDAO();
-            int numberPages = t.getPages();
-            if (page > numberPages) {
-                page = numberPages;
-            }
-            List<Trading> tradings = t.getLastedTrading(page);
-            System.out.println(tradings.get(0).getIdBook());
-            System.out.print(numberPages);
-            request.setAttribute("pages", numberPages);
-            request.setAttribute("tradings", tradings);
-            RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("changepassword.jsp");
             rd.forward(request, response);
         }
     }
@@ -77,7 +82,7 @@ public class HomeController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangePasswordController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -95,7 +100,7 @@ public class HomeController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangePasswordController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

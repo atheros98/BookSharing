@@ -54,7 +54,7 @@
                 <section class="section-center">
                     <c:forEach items="${books}" var="b">
                         <c:url var="BookDetail" value="DetailsBookController">
-                            <c:param name="idTrading" value="${b.id}"/>
+                            <c:param name="id" value="${b.id}"/>
                         </c:url> 
                         <div class="book-item" id="search">
                             <a href="${BookDetail}" class="book-link">

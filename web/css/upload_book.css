@@ -64,15 +64,51 @@
 .elements input{
     width: 100%;
     background: #F9F7F4;
-    padding: 9px 0;
+    padding: 6px 0;
     border: none;
 }
 
+.elements >.input > a > input{
+    cursor: pointer !important;
+    font-weight: bold !important;
+}
+
 .elements textarea{
-    width: 100%;
+    width: 98%;
     background: #F9F7F4;
     padding: 7px 7px;
+    min-height: 200px;
+    resize: none;
+    overflow:auto
 }
+
+.indicator {
+    margin-top: 10px!important;
+    text-align: center!important;
+    font-family: Verdana,sans-serif;
+}
+
+.indicator button {
+    background-color: #e1e1e1!important;
+    border: none;
+    display: inline-block;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.indicator button:hover {
+    /*    background-color: #ccc!important;*/
+}
+
+.slides-container {
+    position: relative;
+}
+
 
 .check-rules{
     text-align: left;
@@ -115,12 +151,13 @@
     padding: 7px 7px;
 }
 
-.borrow-book{
+.rate-book{
     display: flow-root;
     margin-top: 5px;
+    margin-left: 10px;
 }
 
-.borrow-book .rate{
+.rate-book .rate{
     margin-top: 7px;
     float: left;
 }
@@ -130,16 +167,15 @@
     margin-left: 5px;
 }
 
-.borrow-book a{
-    float: right;
-    text-decoration: none;
-    padding: 6px 30px;
-    text-align: center;
-    background: #372213;
-    color: #fff;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
+input.borrow-book {
+    float: right !important;
+    padding: 6px 30px !important;
+    text-align: center !important;
+    background: #372213 !important;
+    color: #fff !important;
+    font-size: 17px !important;
+    border: none !important;
+    cursor: pointer !important;
 }
 
 .cover-book{
@@ -150,7 +186,6 @@
     flex-flow: row;
     justify-content: center;
     border: 2px dashed #0099E2;
-    overflow: scroll;
 }
 
 .cover-book img{

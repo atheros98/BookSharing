@@ -6,16 +6,12 @@
 package com.filter;
 
 import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,7 +32,7 @@ public class Authenticate implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         String requestPath = req.getRequestURI();
-
+        System.out.print(requestPath);
         if (requestPath.matches(".*(css|jpg|png|gif|js)")) {
             chain.doFilter(request, response);
             return;
@@ -53,7 +49,11 @@ public class Authenticate implements Filter {
             chain.doFilter(request, response);
         } else if (requestPath.endsWith("LogoutController")) {
             chain.doFilter(request, response);
-        } else if (requestPath.endsWith("bookshare/") || requestPath.endsWith("HomeController")) {
+        } else if (requestPath.endsWith("HomeController")) {
+            chain.doFilter(request, response);
+        } else if (requestPath.endsWith("index.jsp")) {
+            chain.doFilter(request, response);
+        } else if (requestPath.endsWith("/bookshare/")) {
             chain.doFilter(request, response);
         } else {
             HttpSession session = req.getSession();

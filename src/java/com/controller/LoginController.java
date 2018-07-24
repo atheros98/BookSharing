@@ -9,7 +9,6 @@ import com.dao.UserDAO;
 import com.entity.User;
 import com.service.getDate;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -53,6 +52,7 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(-1);
             String command = request.getParameter("command");
             UserDAO userDao = new UserDAO();
             switch (command) {

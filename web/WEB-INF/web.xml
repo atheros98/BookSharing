@@ -55,6 +55,22 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>com.controller.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TradingController</servlet-name>
+        <servlet-class>com.controller.TradingController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LendingController</servlet-name>
+        <servlet-class>com.controller.LendingController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BorrowingController</servlet-name>
+        <servlet-class>com.controller.BorrowingController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>com.controller.ChangePasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -99,9 +115,25 @@
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/LogoutController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TradingController</servlet-name>
+        <url-pattern>/TradingController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LendingController</servlet-name>
+        <url-pattern>/LendingController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BorrowingController</servlet-name>
+        <url-pattern>/BorrowingController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/ChangePasswordController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            -1
         </session-timeout>
     </session-config>
 </web-app>

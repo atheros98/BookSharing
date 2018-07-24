@@ -44,11 +44,11 @@ public class ConnectionDB {
         return DriverManager.getConnection("jdbc:sqlserver://" + serverName + ":" + port + ";databaseName=" + dbName, username, pwd);
     }
 
-    public String getCoverBookFolder() throws Exception {
+    public String getCoverBookFolder() {
         return coverBookFolder;
     }
 
-    public String getAvatarFolder() throws Exception {
+    public String getAvatarFolder(){
         return avatarFolder;
     }
 
