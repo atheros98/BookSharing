@@ -32,7 +32,7 @@ public class Authenticate implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         String requestPath = req.getRequestURI();
-
+        System.out.print(requestPath);
         if (requestPath.matches(".*(css|jpg|png|gif|js)")) {
             chain.doFilter(request, response);
             return;
@@ -50,6 +50,10 @@ public class Authenticate implements Filter {
         } else if (requestPath.endsWith("LogoutController")) {
             chain.doFilter(request, response);
         } else if (requestPath.endsWith("HomeController")) {
+            chain.doFilter(request, response);
+        } else if (requestPath.endsWith("index.jsp")) {
+            chain.doFilter(request, response);
+        } else if (requestPath.endsWith("/bookshare/")) {
             chain.doFilter(request, response);
         } else {
             HttpSession session = req.getSession();
