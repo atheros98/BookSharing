@@ -65,10 +65,7 @@ public class TradingDAO {
                 int idOwn = rs.getInt(2);
                 int idBorrower = rs.getInt(3);
                 int idBook = rs.getInt(4);
-                boolean sb = false;
-                if (rs.getInt(5) == 1) {
-                    sb = true;
-                }
+                int sb = rs.getInt(5);
                 boolean sc = false;
                 if (rs.getInt(6) == 1) {
                     sc = true;
@@ -306,10 +303,7 @@ public class TradingDAO {
                 int idOwn = rs.getInt(2);
                 int idBorrower = rs.getInt(3);
                 int idBook = rs.getInt(4);
-                boolean sb = false;
-                if (rs.getInt(5) == 1) {
-                    sb = true;
-                }
+                int sb = rs.getInt(5);
                 boolean sc = false;
                 if (rs.getInt(6) == 1) {
                     sc = true;
@@ -350,10 +344,7 @@ public class TradingDAO {
                 int idOwner = rs.getInt(2);
                 int idBorrower = rs.getInt(3);
                 int idBook = rs.getInt(4);
-                boolean sb = false;
-                if (rs.getInt(5) == 1) {
-                    sb = true;
-                }
+                int sb = rs.getInt(5);
                 boolean sc = false;
                 if (rs.getInt(6) == 1) {
                     sc = true;
@@ -389,7 +380,7 @@ public class TradingDAO {
                 trading.setIdOwner(rs.getInt(2));
                 trading.setIdBorrower(rs.getInt(3));
                 trading.setIdBook(rs.getInt(4));
-                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusBook(rs.getInt(5));
                 trading.setStatusComplete(rs.getBoolean(6));
                 trading.setCreateDate(rs.getDate(7));
                 trading.setCompleteDate(rs.getDate(7));
@@ -425,7 +416,7 @@ public class TradingDAO {
                 trading.setIdOwner(rs.getInt(2));
                 trading.setIdBorrower(rs.getInt(3));
                 trading.setIdBook(rs.getInt(4));
-                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusBook(rs.getInt(5));
                 trading.setStatusComplete(rs.getBoolean(6));
                 trading.setCreateDate(rs.getDate(7));
                 trading.setCompleteDate(rs.getDate(7));
@@ -460,7 +451,7 @@ public class TradingDAO {
                 trading.setIdOwner(rs.getInt(2));
                 trading.setIdBorrower(rs.getInt(3));
                 trading.setIdBook(rs.getInt(4));
-                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusBook(rs.getInt(5));
                 trading.setStatusComplete(rs.getBoolean(6));
                 trading.setCreateDate(rs.getDate(7));
                 trading.setCompleteDate(rs.getDate(7));
@@ -495,7 +486,7 @@ public class TradingDAO {
                 trading.setIdOwner(rs.getInt(2));
                 trading.setIdBorrower(rs.getInt(3));
                 trading.setIdBook(rs.getInt(4));
-                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusBook(rs.getInt(5));
                 trading.setStatusComplete(rs.getBoolean(6));
                 trading.setCreateDate(rs.getDate(7));
                 trading.setCompleteDate(rs.getDate(7));
@@ -530,7 +521,7 @@ public class TradingDAO {
                 trading.setIdOwner(rs.getInt(2));
                 trading.setIdBorrower(rs.getInt(3));
                 trading.setIdBook(rs.getInt(4));
-                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusBook(rs.getInt(5));
                 trading.setStatusComplete(rs.getBoolean(6));
                 trading.setCreateDate(rs.getDate(7));
                 trading.setCompleteDate(rs.getDate(7));
@@ -565,7 +556,7 @@ public class TradingDAO {
                 trading.setIdOwner(rs.getInt(2));
                 trading.setIdBorrower(rs.getInt(3));
                 trading.setIdBook(rs.getInt(4));
-                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusBook(rs.getInt(5));
                 trading.setStatusComplete(rs.getBoolean(6));
                 trading.setCreateDate(rs.getDate(7));
                 trading.setCompleteDate(rs.getDate(7));
@@ -600,7 +591,7 @@ public class TradingDAO {
                 trading.setIdOwner(rs.getInt(2));
                 trading.setIdBorrower(rs.getInt(3));
                 trading.setIdBook(rs.getInt(4));
-                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusBook(rs.getInt(5));
                 trading.setStatusComplete(rs.getBoolean(6));
                 trading.setCreateDate(rs.getDate(7));
                 trading.setCompleteDate(rs.getDate(7));
@@ -635,7 +626,7 @@ public class TradingDAO {
                 trading.setIdOwner(rs.getInt(2));
                 trading.setIdBorrower(rs.getInt(3));
                 trading.setIdBook(rs.getInt(4));
-                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusBook(rs.getInt(5));
                 trading.setStatusComplete(rs.getBoolean(6));
                 trading.setCreateDate(rs.getDate(7));
                 trading.setCompleteDate(rs.getDate(7));
@@ -670,7 +661,7 @@ public class TradingDAO {
                 trading.setIdOwner(rs.getInt(2));
                 trading.setIdBorrower(rs.getInt(3));
                 trading.setIdBook(rs.getInt(4));
-                trading.setStatusBook(rs.getBoolean(5));
+                trading.setStatusBook(rs.getInt(5));
                 trading.setStatusComplete(rs.getBoolean(6));
                 trading.setCreateDate(rs.getDate(7));
                 trading.setCompleteDate(rs.getDate(7));

@@ -20,17 +20,17 @@ public class Trading {
     private int idOwner;
     private int idBorrower;
     private int idBook;
-    private boolean statusBook;
+    private int statusBook;
     private boolean statusComplete;
     private Date createDate;
     private Date completeDate;
     
     public Trading() {
-        statusBook = true;
+        statusBook = 0;
         statusComplete = true;
     }
 
-    public Trading(int ID, int idOwner, int idBorrower, int idBook, boolean statusBook, boolean statusComplete, Date createDate, Date completeDate) {
+    public Trading(int ID, int idOwner, int idBorrower, int idBook, int statusBook, boolean statusComplete, Date createDate, Date completeDate) {
         this.id = ID;
         this.idOwner = idOwner;
         this.idBorrower = idBorrower;
@@ -83,11 +83,11 @@ public class Trading {
         this.idBook = idBook;
     }
 
-    public boolean isStatusBook() {
+    public int getStatusBook() {
         return statusBook;
     }
 
-    public void setStatusBook(boolean statusBook) {
+    public void setStatusBook(int statusBook) {
         this.statusBook = statusBook;
     }
 
