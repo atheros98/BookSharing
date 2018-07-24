@@ -407,7 +407,7 @@ public class TradingDAO {
 
     public List<Trading> getTradingByBookId(String idBook) {
         List<Trading> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT * FROM Trading where idBook = ?";
+        String sqlCommand = "SELECT * FROM Trading where idBook = ? and statusBook = ?";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -415,6 +415,7 @@ public class TradingDAO {
             conn = db.getConnection();
             ps = conn.prepareStatement(sqlCommand);
             ps.setString(1, idBook);
+            ps.setInt(2, AVAILABLE);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Trading trading = new Trading();
@@ -613,7 +614,117 @@ public class TradingDAO {
         }
         return tradings;
     }
-    
 
+    public boolean deleteTradingBook(int idTrading) {
+        String sql = "UPDATE Trading"
+                + " SET statusBook = ?"
+                + " WHERE id = ?";
+        Connection conn;
+        PreparedStatement ps = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, NOT_AVAILABLE);
+            ps.setInt(2, idTrading);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(TradingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            close.closePreparedStatement(ps);
+            close.closePreparedStatement(ps);
+        }
+        return false;
+    }
+
+    public boolean requestTrading(int idTrading, int idBorrower) {
+        String sql = "UPDATE Trading"
+                + " SET idBorrower = ?,  statusBook = ?"
+                + " WHERE id = ?";
+        Connection conn;
+        PreparedStatement ps = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, idBorrower);
+            ps.setInt(2, PENDING);
+            ps.setInt(3, idTrading);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(TradingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            close.closePreparedStatement(ps);
+            close.closePreparedStatement(ps);
+        }
+        return false;
+    }
+
+    public boolean acceptTrading(int idTrading) {
+        String sql = "UPDATE Trading "
+                + " SET statusBook = ?"
+                + " WHERE id = ?";
+        Connection conn;
+        PreparedStatement ps = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, LENDING);
+            ps.setInt(2, idTrading);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(TradingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            close.closePreparedStatement(ps);
+            close.closePreparedStatement(ps);
+        }
+        return false;
+    }
+
+    public boolean rejectTrading(int idTrading) {
+        String sql = "UPDATE Trading "
+                + " SET statusBook = ?, idBorrower = null"
+                + " WHERE id = ?";
+        Connection conn;
+        PreparedStatement ps = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, AVAILABLE);
+            ps.setInt(2, idTrading);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(TradingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            close.closePreparedStatement(ps);
+            close.closePreparedStatement(ps);
+        }
+        return false;
+    }
+
+    public boolean completeTrading(int idTrading) {
+        String sql = "UPDATE Trading "
+                + " SET statusBook = ?"
+                + " WHERE id = ?";
+        Connection conn;
+        PreparedStatement ps = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, COMPLETE);
+            ps.setInt(2, idTrading);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(TradingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            close.closePreparedStatement(ps);
+            close.closePreparedStatement(ps);
+        }
+        return false;
+    }
+    
     
 }

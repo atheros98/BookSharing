@@ -5,9 +5,12 @@
  */
 package com.controller;
 
+import com.dao.TradingDAO;
 import com.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,12 +34,24 @@ public class TradingController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("currentUser");
+            TradingDAO t = new TradingDAO(); 
+            
+            
+            String method = request.getParameter("method");
+            switch (method){
+                case "Borrow":
+                    int idTrading = Integer.valueOf(request.getParameter("idTrading"));
+                    int idBorrower = Integer.valueOf(request.getParameter("idBorrower"));
+                    t.requestTrading(idTrading, idBorrower);
+                    break;
+            }
+            
             request.setAttribute("user", user);
             RequestDispatcher rd = request.getRequestDispatcher("trading.jsp");
             rd.forward(request, response);
@@ -55,7 +70,11 @@ public class TradingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(TradingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -69,7 +88,11 @@ public class TradingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(TradingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

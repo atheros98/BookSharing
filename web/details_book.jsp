@@ -58,7 +58,11 @@
                                     <div class="input">
                                         <a href="#"><input type="text" value="${user.fullName}" readonly></a>
                                     </div>
-                                    <a class="borrow-book" href="#">Borrow</a>
+                                    <form action="TradingController" method="POST">
+                                        <input type="hidden" name="idTrading" value="${t.id}">
+                                        <input type="hidden" name="idBorrower" value="${sessionScope.currentUser.id}">
+                                        <input class="borrow-book" name="method" type="submit" value="Borrow">
+                                    </form>
                                 </div>
                                 <div class="elements">
                                     <div class="title"><i class="fas fa-envelope"></i>Email</div>

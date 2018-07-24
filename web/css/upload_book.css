@@ -167,16 +167,15 @@
     margin-left: 5px;
 }
 
-a.borrow-book {
-    float: right;
-    text-decoration: none;
-    padding: 6px 30px;
-    text-align: center;
-    background: #372213;
-    color: #fff;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
+input.borrow-book {
+    float: right !important;
+    padding: 6px 30px !important;
+    text-align: center !important;
+    background: #372213 !important;
+    color: #fff !important;
+    font-size: 17px !important;
+    border: none !important;
+    cursor: pointer !important;
 }
 
 .cover-book{
