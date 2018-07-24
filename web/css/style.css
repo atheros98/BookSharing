@@ -13,11 +13,13 @@ body {
 }
 
 .cover {
+    padding: 0;
     margin: 0px auto;
     width: 100%;
 }
 
 .cover img{
+    padding: 0;
     width: 100%;
     height: 250px;
     background: #EDEAE1;
@@ -82,7 +84,7 @@ body {
 }
 
 .menu li {
-    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #f1f1f1;
     display: inline-block;
     width: 120px;
@@ -113,9 +115,11 @@ body {
 }
 
 a.login {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     height: 50px;
     line-height: 50px;
     text-align: center;
+    font-size: 15px;
 }
 
 a.login:hover{

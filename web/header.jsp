@@ -40,8 +40,8 @@
         </div>
         <div class="user-area">
             <c:if test="${username == null}">
-                <a class="login" href="LoginController">Login</a>
-                <a class="login" href="register.jsp">Register</a>
+                <b><a class="login" href="LoginController">Login</a></b>
+                <b><a class="login" href="register.jsp">Register</a></b>
             </c:if>
             <c:if test="${username != null}">
                 <div class="dropdown">

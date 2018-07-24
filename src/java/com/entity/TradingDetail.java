@@ -19,7 +19,7 @@ public class TradingDetail implements Serializable{
     private Date createDate;
     private int status;
     private int userID;
-    private int username;
+    private String username;
 
     public TradingDetail() {
     }
@@ -34,7 +34,7 @@ public class TradingDetail implements Serializable{
 
     
   
-    public TradingDetail(int id, int bookID, String title, Date createDate, int status, int userID, int username) {
+    public TradingDetail(int id, int bookID, String title, Date createDate, int status, int userID, String username) {
         this.id = id;
         this.bookID = bookID;
         this.title = title;
@@ -94,11 +94,11 @@ public class TradingDetail implements Serializable{
         this.userID = userID;
     }
 
-    public int getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(int username) {
+    public void setUsername(String username) {
         this.username = username;
     }
     

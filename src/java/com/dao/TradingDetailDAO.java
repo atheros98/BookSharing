@@ -37,8 +37,8 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getAvailableTrading(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
-                + " FROM Trading t"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, t.status,"
+                + " u.id, u.username FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " LEFT JOIN [User] u on u.id = t.idBorrower"
                 + " where t.statusBook = ? and t.idOwner = ? ";
@@ -58,7 +58,7 @@ public class TradingDetailDAO {
                 Date createDate = rs.getDate(4);
                 int status = rs.getInt(5);
                 int userID = rs.getInt(6);
-                int username = rs.getInt(7);
+                String username = rs.getString(7);
                 TradingDetail trading = new TradingDetail(id, bookID, title,
                         createDate, status, userID, username);
                 tradings.add(trading);
@@ -76,8 +76,8 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getOwnerPedingTrading(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
-                + " FROM Trading t"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, t.status,"
+                + " u.id, u.username FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idBorrower"
                 + " where t.statusBook = ? and t.idOwner = ? ";
@@ -97,7 +97,7 @@ public class TradingDetailDAO {
                 Date createDate = rs.getDate(4);
                 int status = rs.getInt(5);
                 int userID = rs.getInt(6);
-                int username = rs.getInt(7);
+                String username = rs.getString(7);
                 TradingDetail trading = new TradingDetail(id, bookID, title,
                         createDate, status, userID, username);
                 tradings.add(trading);
@@ -115,8 +115,8 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getBorrowerPedingTrading(int idBorrower) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
-                + " FROM Trading t"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, t.status,"
+                + " u.id, u.username FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idOwner"
                 + " where t.statusBook = ? and t.idBorrower = ? ";
@@ -136,7 +136,7 @@ public class TradingDetailDAO {
                 Date createDate = rs.getDate(4);
                 int status = rs.getInt(5);
                 int userID = rs.getInt(6);
-                int username = rs.getInt(7);
+                String username = rs.getString(7);
                 TradingDetail trading = new TradingDetail(id, bookID, title,
                         createDate, status, userID, username);
                 tradings.add(trading);
@@ -154,8 +154,8 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getLendingTrading(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
-                + " FROM Trading t"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, t.status,"
+                + " u.id, u.username FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idBorrower"
                 + " where t.statusBook = ? and t.idOwner = ?";
@@ -175,7 +175,7 @@ public class TradingDetailDAO {
                 Date createDate = rs.getDate(4);
                 int status = rs.getInt(5);
                 int userID = rs.getInt(6);
-                int username = rs.getInt(7);
+                String username = rs.getString(7);
                 TradingDetail trading = new TradingDetail(id, bookID, title,
                         createDate, status, userID, username);
                 tradings.add(trading);
@@ -193,8 +193,8 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getBorrowingTrading(int idBorrower) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
-                + " FROM Trading t"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, t.status,"
+                + " u.id, u.username FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idOwner"
                 + " where t.statusBook = ? and t.idBorrower = ?";
@@ -214,7 +214,7 @@ public class TradingDetailDAO {
                 Date createDate = rs.getDate(4);
                 int status = rs.getInt(5);
                 int userID = rs.getInt(6);
-                int username = rs.getInt(7);
+                String username = rs.getString(7);
                 TradingDetail trading = new TradingDetail(id, bookID, title,
                         createDate, status, userID, username);
                 tradings.add(trading);
@@ -232,8 +232,8 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getCompleteLending(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
-                + " FROM Trading t"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, t.status,"
+                + " u.id, u.username FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idBorrower"
                 + " where t.statusBook = ? and t.idOwner = ?";
@@ -253,7 +253,7 @@ public class TradingDetailDAO {
                 Date createDate = rs.getDate(4);
                 int status = rs.getInt(5);
                 int userID = rs.getInt(6);
-                int username = rs.getInt(7);
+                String username = rs.getString(7);
                 TradingDetail trading = new TradingDetail(id, bookID, title,
                         createDate, status, userID, username);
                 tradings.add(trading);
@@ -271,8 +271,8 @@ public class TradingDetailDAO {
 
     public List<TradingDetail> getCompleteBorrowing(int idBorrower) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, u.id, u.username"
-                + " FROM Trading t"
+        String sqlCommand = "SELECT t.id, t.idBook, b.title, t.createDate, t.status,"
+                + " u.id, u.username FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idOwner"
                 + " where t.statusBook = ? and t.idBorrower = ?";
@@ -292,7 +292,7 @@ public class TradingDetailDAO {
                 Date createDate = rs.getDate(4);
                 int status = rs.getInt(5);
                 int userID = rs.getInt(6);
-                int username = rs.getInt(7);
+                String username = rs.getString(7);
                 TradingDetail trading = new TradingDetail(id, bookID, title,
                         createDate, status, userID, username);
                 tradings.add(trading);
