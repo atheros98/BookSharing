@@ -240,4 +240,50 @@ public class UserDAO {
         }
         return true;
     }
+
+    public boolean isCorrectPassword(int idUser, String password) {
+        User user = new User();
+        String sqlCommand = "SELECT * FROM [User] where id = ? and password = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sqlCommand);
+            ps.setInt(1, idUser);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+            close.closeResultSet(rs);
+        }
+        return false;
+    }
+
+    public boolean changePassword(int idUser, String password) {
+        String sqlCommand = "UPDATE [User] set password = ? where id = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = db.getConnection();
+            ps = conn.prepareCall(sqlCommand);
+            ps.setString(1, password);
+            ps.setInt(2, idUser);
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+            close.closeConnection(conn);
+            close.closePreparedStatement(ps);
+        }
+        return true;
+    }
 }

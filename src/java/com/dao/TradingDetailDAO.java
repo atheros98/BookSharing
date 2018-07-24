@@ -38,10 +38,10 @@ public class TradingDetailDAO {
     
     public List<TradingDetail> getAvailableTrading(int idOwner) {
         List<TradingDetail> tradings = new ArrayList<>();
-        String sqlCommand = "SELECT * FROM Trading t"
+        String sqlCommand = "SELECT t.idBook, b.title, t.createDate, u.id, u.username"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idOwner"
-                + " where statusBook = ? and idOwner = ? ";
+                + " where t.statusBook = ? and t.idOwner = ? ";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -78,7 +78,7 @@ public class TradingDetailDAO {
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idOwner"
-                + " where statusBook = ? and idOwner = ? ";
+                + " where t.statusBook = ? and t.idOwner = ? ";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -115,7 +115,7 @@ public class TradingDetailDAO {
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idBorrower"
-                + " where statusBook = ? and idBorrower = ? ";
+                + " where t.statusBook = ? and t.idBorrower = ? ";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -152,7 +152,7 @@ public class TradingDetailDAO {
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idOwner"
-                + " where statusBook = ? and idBorrower = ? ";
+                + " where t.statusBook = ? and t.idOwner = ?";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -189,7 +189,7 @@ public class TradingDetailDAO {
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idBorrower"
-                + " where statusBook = ? and idBorrower = ? ";
+                + " where t.statusBook = ? and t.idBorrower = ?";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -226,7 +226,7 @@ public class TradingDetailDAO {
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idOwner"
-                + " where statusBook = ? and idBorrower = ? ";
+                + " where t.statusBook = ? and t.idOwner = ?";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -263,7 +263,7 @@ public class TradingDetailDAO {
                 + " FROM Trading t"
                 + " INNER JOIN Book b on b.id = t.idBook"
                 + " INNER JOIN [User] u on u.id = t.idBorrower"
-                + " where statusBook = ? and idBorrower = ? ";
+                + " where t.statusBook = ? and t.idBorrower = ?";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

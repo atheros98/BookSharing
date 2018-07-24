@@ -64,6 +64,10 @@
         <servlet-name>BorrowingController</servlet-name>
         <servlet-class>com.controller.BorrowingController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>com.controller.ChangePasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>BorrowingController</servlet-name>
         <url-pattern>/BorrowingController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/ChangePasswordController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

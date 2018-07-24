@@ -46,7 +46,7 @@
             </button>
             <div class="dropdown-content">
                 <a href="UpdateProfileController">Profile</a>
-                <a href="#">Change password</a>
+                <a href="changepassword.jsp">Change password</a>
                 <a href="LogoutController">Logout</a>
             </div>
         </div>
