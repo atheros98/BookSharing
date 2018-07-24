@@ -31,7 +31,7 @@
                     <div class="trading">
                         <ul>
                             <li>
-                                <a id="lending" onclick="changeManage('lending')" href="#">Lending</a>
+                                <a class="select-items" id="lending" onclick="changeManage('lending')" href="#">Lending</a>
                             </li>
                             <li>
                                 <a id="borrowing" onclick="changeManage('borrowing')" href="#">Borrowing</a>
