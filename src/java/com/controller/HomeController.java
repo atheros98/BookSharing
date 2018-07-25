@@ -44,12 +44,12 @@ public class HomeController extends HttpServlet {
             int page = 1;
             try {
                 page = Integer.parseInt(pageStr);
-            } catch (NumberFormatException e){
-                
+            } catch (NumberFormatException e) {
+
             }
             TradingDAO t = new TradingDAO();
             int numberPages = t.getPages();
-            if (page > numberPages){
+            if (page > numberPages) {
                 page = numberPages;
             }
             List<Trading> tradings = t.getLastedTrading(page);

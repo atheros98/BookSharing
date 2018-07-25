@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : header
     Created on : Jul 11, 2018, 11:11:54 PM
@@ -24,7 +25,7 @@
                     <b><a href="upload_book.jsp">Upload Book</a></b>
                 </li>
                 <li>
-                    <b><a href="TradingController">Trading</a></b>
+                    <b><a href="trading.jsp">Trading</a></b>
                 </li>
             </ul>
         </div>

@@ -102,6 +102,7 @@ function getReviewByTop(idBook, top) {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
+            console.log(result);
             var main = document.getElementById("content-article");
             for (var i in result) {
                 var article = document.createElement("article");

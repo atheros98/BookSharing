@@ -41,7 +41,7 @@ public class ImageBookDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                imageURL = rs.getString(1);
+                imageURL = db.getCoverBookFolder() + rs.getString(1);
             }
 
         } catch (Exception ex) {
@@ -52,7 +52,7 @@ public class ImageBookDAO {
             close.closeConnection(conn);
         }
 
-        return db.getCoverBookFolder() + imageURL;
+        return imageURL;
     }
 
     public ArrayList<String> getBookImages(int bookID) {

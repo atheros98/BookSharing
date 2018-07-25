@@ -27,25 +27,26 @@ import javax.servlet.http.HttpSession;
  */
 public class LendingController extends HttpServlet {
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        try {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("currentUser");
             TradingDetailDAO td = new TradingDetailDAO();
             List<TradingDetail> tradings = new ArrayList<>();
             ObjectMapper mapperObj = new ObjectMapper();
-
+            
             String type = request.getParameter("type");
             if (type == null || type.trim().isEmpty()) {
                 type = "Available";
@@ -69,23 +70,6 @@ public class LendingController extends HttpServlet {
             String arrJson = mapperObj.writeValueAsString(tradings);
             System.out.println(arrJson);
             response.getWriter().write(arrJson);
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            processRequest(request, response);
         } catch (Exception ex) {
             Logger.getLogger(LendingController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -102,21 +86,7 @@ public class LendingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(LendingController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    }
 
 }

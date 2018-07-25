@@ -20,10 +20,10 @@ import java.util.logging.Logger;
  * @author Administrator
  */
 public class UserDAO {
-
+    
     private final ConnectionDB db;
     private final Close close;
-
+    
     public UserDAO() throws Exception {
         db = new ConnectionDB();
         close = new Close();
@@ -160,7 +160,7 @@ public class UserDAO {
         }
         return users;
     }
-
+    
     public User getUserById(String idUser) {
         User user = new User();
         String sqlCommand = "SELECT * FROM [User] where id = ?";
@@ -195,7 +195,7 @@ public class UserDAO {
         }
         return user;
     }
-
+    
     public boolean updateAvatar(User user) {
         String sqlCommand = "UPDATE [User] set avatar = ? where id = ?";
         Connection conn = null;

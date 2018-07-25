@@ -10,10 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home - BookShare</title>
+        <title>Home Page</title>
         <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
               crossorigin="anonymous">
+
     </head>
     <body>
         <jsp:include page="header.jsp"></jsp:include>
@@ -27,18 +28,18 @@
                         <div class="new-book">
                             <div class="section-center-header">
                                 <div class="user">
-                                    <a href="UpdateProfileController?id=${t.user.id}">
+                                    <a href="#">
                                         <img src="<%=request.getContextPath()%>${t.user.avatar}">
                                         <p>${t.user.fullName}</p>
                                     </a>
                                 </div>
-                                    <div class="time">
+                                <div class="time">
                                     ${t.dateString}
                                 </div>
                             </div>
                             <div class="book-item">
                                 <c:url var="BookDetail" value="DetailsBookController">
-                                    <c:param name="id" value="${t.book.id}"/>
+                                    <c:param name="idTrading" value="${t.id}"/>
                                 </c:url> 
                                 <a href="${BookDetail}" class="book-link">
                                     <div class="img">
@@ -75,9 +76,7 @@
             </div>
             <!--Kết thúc-->
             <jsp:include page="content-right.jsp"></jsp:include>
-            </div>
-        <jsp:include page="footer.jsp"></jsp:include>
-
+        </div>
         <script>
             window.onscroll = function () {
                 myFunction();
