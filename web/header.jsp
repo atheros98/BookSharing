@@ -31,7 +31,7 @@
         </div>
         <div class="search">
             <div class="search-container">
-                <form action="SearchBookController">
+                <form action="SearchBookController" method="POST">
                     <input type="text" placeholder="Search.." name="query" autocomplete="off" value="${param.query}">
                     <button type="submit">
                         <i class="fa fa-search"></i>
